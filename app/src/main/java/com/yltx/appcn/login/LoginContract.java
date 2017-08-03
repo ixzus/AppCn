@@ -21,7 +21,7 @@ public class LoginContract {
         void getResult(String resultJson);
     }
 
-    interface ILoginModule extends BaseContract.IBaseModule {
+    interface ILoginModel extends BaseContract.IBaseModel {
         void toLogin(String postJson, ILoginPresenter iLoginPresenter);
     }
 }

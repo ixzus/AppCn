@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.yltx.appcn.R;
 import com.yltx.appcn.base.BaseActivity;
-import com.yltx.appcn.base.BaseModule;
+import com.yltx.appcn.base.BaseModel;
 
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter> implements LoginContract.ILoginView {
 
@@ -20,8 +20,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     }
 
     @Override
-    protected BaseModule initModule() {
-        return new LoginModule();
+    protected BaseModel initModule() {
+        return new LoginModel();
     }
 
     @Override

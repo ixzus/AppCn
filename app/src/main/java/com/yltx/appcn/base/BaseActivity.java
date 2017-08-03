@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends BasePresenter> extends AppCompatActivity implements BaseContract.IBaseView {
-    public P presenter;
+    protected P presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 
     protected abstract void initView();
 
-    protected abstract BaseModule initModule();
+    protected abstract BaseModel initModule();
 
     protected abstract P initPresenter();
 }

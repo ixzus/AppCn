@@ -5,5 +5,5 @@ package com.yltx.appcn.base;
  * Created by ixzus on 2017/8/3.
  */
 
-public class BaseModule implements BaseContract.IBaseModule {
+public class BaseModel implements BaseContract.IBaseModel {
 }

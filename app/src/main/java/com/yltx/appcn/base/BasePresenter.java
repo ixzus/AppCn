@@ -5,17 +5,17 @@ package com.yltx.appcn.base;
  * Created by ixzus on 2017/8/3.
  */
 
-public class BasePresenter<M extends BaseModule, V extends BaseContract.IBaseView> {
-    public M module;
-    public V view;
+public class BasePresenter<M extends BaseModel, V extends BaseContract.IBaseView> {
+    protected M model;
+    protected V view;
 
     void attatch(M m, V v) {
-        this.module = m;
+        this.model = m;
         this.view = v;
     }
 
     void detach() {
-        this.module = null;
+        this.model = null;
         this.view = null;
     }
 }
