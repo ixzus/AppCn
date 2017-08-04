@@ -17,7 +17,7 @@ android {
         //router
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
     }
@@ -40,6 +40,9 @@ dependencies {
     compile librarys.takephoto
     compile librarys.utilcode
     compile librarys.barlibrary
+//    compile librarys.glide
+//    compile librarys.glideimageview
+    compile librarys.dynamicanimation
     //router
     compile 'com.alibaba:arouter-api:1.2.1.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'

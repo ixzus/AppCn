@@ -1,16 +1,20 @@
 ext {
     android = [
-            compileSdkVersion: 26,
-            buildToolsVersion: "26.0.0",
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.2",
             minSdkVersion    : 19,
-            targetSdkVersion : 26,
+            targetSdkVersion : 25,
     ]
 
     dependencies = [
-            supportV7 : 'com.android.support:appcompat-v7:26.+',
-            constraint: 'com.android.support.constraint:constraint-layout:1.0.2',
-            takephoto : 'com.jph.takephoto:takephoto_library:4.0.3',
-            utilcode  : 'com.blankj:utilcode:1.8.1',
-            barlibrary: 'com.gyf.barlibrary:barlibrary:2.2.7',
+            supportV7       : 'com.android.support:appcompat-v7:25.3.1',
+            constraint      : 'com.android.support.constraint:constraint-layout:1.0.2',
+            takephoto       : 'com.jph.takephoto:takephoto_library:4.0.3',
+            utilcode        : 'com.blankj:utilcode:1.8.1',
+            barlibrary      : 'com.gyf.barlibrary:barlibrary:2.2.7',
+//            glide           : 'com.github.bumptech.glide:glide:4.0.0',
+//            glideimageview  : 'com.sunfusheng:glideimageview:1.0.0',
+            dynamicanimation: 'com.android.support:support-dynamic-animation:25.3.1',
+
     ]
 }
