@@ -2,10 +2,12 @@ package com.yltx.appcn.login;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yltx.appcn.R;
 import com.yltx.appcn.base.BaseActivity;
 import com.yltx.appcn.base.BaseModel;
 
+@Route(path = "/login/loginActivity")
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter> implements LoginContract.ILoginView {
 
     @Override
