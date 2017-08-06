@@ -1,16 +1,16 @@
 package com.yltx.appcn.base;
 
-import android.app.Application;
-
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.applibrary.base.BaseApplication;
 
 /**
  * 功能描述:
  * Created by ixzus on 2017/8/4.
  */
 
-public class App extends Application {
+public class App extends BaseApplication {
     private static App mApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();

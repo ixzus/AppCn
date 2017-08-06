@@ -35,14 +35,30 @@ dependencies {
 
     compile librarys.supportV7
     compile librarys.constraint
+
     compile librarys.takephoto
     compile librarys.utilcode
     compile librarys.barlibrary
     compile librarys.dynamicanimation
+    compile librarys.swipebackhelper
+    compile librarys.SuperTextView
+    compile librarys.SmartRefreshLayout
+    compile librarys.BaseRecyclerViewAdapterHelper
+    
+    compile librarys.okgo
+    compile librarys.okrx2
+
+// debug
+    debugCompile librarys.debugLeakcanary
+//    router
+    compile librarys.arouter
+    annotationProcessor librarys.aroutercompiler
 
     //router
-    compile 'com.alibaba:arouter-api:1.2.1.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
+//    compile 'com.alibaba:arouter-api:1.2.1.1'
+//    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
+
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
 }
 
 
