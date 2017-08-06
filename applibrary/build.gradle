@@ -1,13 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
 
-def siteUrl = 'https://github.com/Javen205/JPay'    // project homepage
-def gitUrl = 'https://github.com/Javen205/JPay.git' // project git
 
-version = "0.0.1"
 
 android {
     compileSdkVersion config.compileSdkVersion
@@ -35,7 +31,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
 
     compile librarys.supportV7
@@ -43,10 +38,11 @@ dependencies {
     compile librarys.takephoto
     compile librarys.utilcode
     compile librarys.barlibrary
-    compile librarys.bintray
-    compile librarys.maven
+    compile librarys.dynamicanimation
 
     //router
     compile 'com.alibaba:arouter-api:1.2.1.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
 }
+
+
