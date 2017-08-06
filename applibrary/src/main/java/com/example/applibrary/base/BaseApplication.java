@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.applibrary.ActivityManager;
 import com.example.applibrary.R;
 import com.example.applibrary.impl.IActivity;
 import com.example.applibrary.impl.ISwipeBack;
@@ -54,7 +55,7 @@ public class BaseApplication extends Application {
 
             @Override
             public void onActivityResumed(Activity activity) {
-
+                ActivityManager.getInstance().setCurrentActivity(activity);
             }
 
             @Override
