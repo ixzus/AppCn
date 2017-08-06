@@ -7,10 +7,10 @@ import android.support.annotation.LayoutRes;
  */
 
 public interface IActivity {
-    @LayoutRes
-    int initLayout();
-
-    void initView();
-
-    void initData();
+//    @LayoutRes
+//    int initLayout();
+//
+//    void initView();
+//
+//    void initData();
 }

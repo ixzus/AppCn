@@ -14,12 +14,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        //router
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [ moduleName : project.getName() ]
             }
         }
+
+
     }
     buildTypes {
         release {
@@ -36,5 +37,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':applibrary')
+    compile 'com.alibaba:arouter-api:1.2.1.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
 
 }

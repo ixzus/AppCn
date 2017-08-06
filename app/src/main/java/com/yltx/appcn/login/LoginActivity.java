@@ -1,32 +1,38 @@
 package com.yltx.appcn.login;
 
-import android.os.Bundle;
-import android.support.animation.DynamicAnimation;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yltx.appcn.R;
 import com.example.applibrary.base.BaseActivity;
 import com.example.applibrary.base.BaseModel;
+import com.example.applibrary.impl.IActivity;
+import com.example.applibrary.impl.ISwipeBack;
+import com.example.applibrary.impl.IToolbar;
+import com.yltx.appcn.R;
 
 @Route(path = "/login/loginActivity")
-public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter> implements LoginContract.ILoginView, View.OnClickListener {
+public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter> implements LoginContract.ILoginView, View.OnClickListener, IActivity,IToolbar,ISwipeBack {
 
     private Button mButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        mButton = (Button) findViewById(R.id.button);
-        mButton.setOnClickListener(this);
+    protected int initLayout() {
+        return R.layout.activity_login;
     }
 
     @Override
     protected void initView() {
+        mButton = (Button) findViewById(R.id.button);
+        mButton.setOnClickListener(this);
+        super.toolbar("菜单",true,"主页");
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override
@@ -66,11 +72,16 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 SpringForce spring = new SpringForce(0)
                         .setDampingRatio(0.05f)
                         .setStiffness(SpringForce.STIFFNESS_VERY_LOW);
-                final SpringAnimation anim = new SpringAnimation(mButton ,SpringAnimation.TRANSLATION_Y).setSpring(spring);
+                final SpringAnimation anim = new SpringAnimation(mButton, SpringAnimation.TRANSLATION_Y).setSpring(spring);
                 anim.cancel();
                 anim.setStartValue(-700);
                 anim.start();
                 break;
         }
+    }
+
+    @Override
+    public void toolbar(String centerText, boolean isBack, String backText) {
+        super.toolbar("菜单",true,"主页");
     }
 }
