@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.applibrary.R;
-import com.example.applibrary.impl.IActivity;
 import com.example.applibrary.impl.ISwipeBack;
 import com.example.applibrary.impl.IToolbar;
 import com.gyf.barlibrary.ImmersionBar;
@@ -35,12 +34,10 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
             presenter.attatch(initModule(), this);
         }
 
-        if (this instanceof IActivity) {
-            setContentView(initLayout());
-            initView();
-            initData();
-        }
-
+        setContentView(initLayout());
+        initView();
+        initData();
+        
         if (this instanceof IToolbar) {
             initToolbar(this);
         }
@@ -51,7 +48,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 
         mImmersionBar = ImmersionBar.with(this);
         if (null != mImmersionBar) {
-            if(null !=findViewById(R.id.toolbar)){
+            if (null != findViewById(R.id.toolbar)) {
                 mImmersionBar.titleBar(findViewById(R.id.toolbar));
             }
             mImmersionBar.init();

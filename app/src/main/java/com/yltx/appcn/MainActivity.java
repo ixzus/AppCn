@@ -11,8 +11,10 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.applibrary.widget.AbsDialog;
-import com.yltx.appcn.widget.dialog.ConfirmDialog;
 import com.example.applibrary.widget.ViewHolder;
+import com.yltx.appcn.widget.dialog.ConfirmDialog;
+
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void convertView(ViewHolder holder, AbsDialog dialog) {
 //                                Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                                Toasty.normal(MainActivity.this, "kkkkkkkkk").show();
                                 aaa();
                                 dialog.dismiss();
                             }

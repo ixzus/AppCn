@@ -51,7 +51,8 @@ dependencies {
     compile librarys.SuperTextView
     compile librarys.SmartRefreshLayout
     compile librarys.BaseRecyclerViewAdapterHelper
-    
+    compile librarys.Toasty
+
     compile librarys.okgo
     compile librarys.okrx2
     compile librarys.rxandroid

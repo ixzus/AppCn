@@ -5,5 +5,4 @@ package com.example.applibrary.impl;
  */
 
 public interface IToolbar {
-    void toolbar(String centerText, boolean isBack, String backText);
 }
