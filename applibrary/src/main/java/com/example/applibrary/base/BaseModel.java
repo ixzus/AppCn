@@ -1,4 +1,4 @@
-package com.yltx.appcn.base;
+package com.example.applibrary.base;
 
 /**
  * 功能描述:

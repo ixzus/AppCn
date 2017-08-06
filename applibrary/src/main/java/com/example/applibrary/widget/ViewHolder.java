@@ -1,4 +1,4 @@
-package com.yltx.appcn.widget.dialog;
+package com.example.applibrary.widget;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;

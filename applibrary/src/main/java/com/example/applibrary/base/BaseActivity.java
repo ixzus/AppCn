@@ -1,4 +1,4 @@
-package com.yltx.appcn.base;
+package com.example.applibrary.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

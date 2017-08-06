@@ -1,4 +1,4 @@
-package com.yltx.appcn.widget.dialog;
+package com.example.applibrary.widget;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.yltx.appcn.R;
+import com.example.applibrary.R;
 
 
 /**

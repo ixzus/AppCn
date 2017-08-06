@@ -9,8 +9,8 @@ import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yltx.appcn.R;
-import com.yltx.appcn.base.BaseActivity;
-import com.yltx.appcn.base.BaseModel;
+import com.example.applibrary.base.BaseActivity;
+import com.example.applibrary.base.BaseModel;
 
 @Route(path = "/login/loginActivity")
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter> implements LoginContract.ILoginView, View.OnClickListener {

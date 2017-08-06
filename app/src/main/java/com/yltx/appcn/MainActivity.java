@@ -7,9 +7,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.yltx.appcn.widget.dialog.AbsDialog;
+import com.example.applibrary.widget.AbsDialog;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
-import com.yltx.appcn.widget.dialog.ViewHolder;
+import com.example.applibrary.widget.ViewHolder;
 
 public class MainActivity extends AppCompatActivity {
 

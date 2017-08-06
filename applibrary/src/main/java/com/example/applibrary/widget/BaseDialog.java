@@ -1,4 +1,4 @@
-package com.yltx.appcn.widget.dialog;
+package com.example.applibrary.widget;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
