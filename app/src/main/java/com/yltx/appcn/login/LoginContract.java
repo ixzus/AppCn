@@ -1,6 +1,6 @@
 package com.yltx.appcn.login;
 
-import com.yltx.appcn.base.BaseContract;
+import com.example.applibrary.base.BaseContract;
 
 /**
  * 功能描述:

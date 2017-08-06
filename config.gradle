@@ -12,5 +12,7 @@ ext {
             takephoto : 'com.jph.takephoto:takephoto_library:4.0.3',
             utilcode  : 'com.blankj:utilcode:1.8.1',
             barlibrary: 'com.gyf.barlibrary:barlibrary:2.2.7',
+            bintray   : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0',
+            maven     : 'com.github.dcendents:android-maven-gradle-plugin:1.4.1',
     ]
 }

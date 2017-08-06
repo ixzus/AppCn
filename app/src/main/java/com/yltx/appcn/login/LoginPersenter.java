@@ -1,6 +1,6 @@
 package com.yltx.appcn.login;
 
-import com.yltx.appcn.base.BasePresenter;
+import com.example.applibrary.base.BasePresenter;
 
 /**
  * 功能描述:

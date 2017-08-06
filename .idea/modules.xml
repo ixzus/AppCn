@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppCn.iml" filepath="$PROJECT_DIR$/AppCn.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/applibrary/applibrary.iml" filepath="$PROJECT_DIR$/applibrary/applibrary.iml" />
     </modules>
   </component>
 </project>
