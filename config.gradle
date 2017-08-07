@@ -9,17 +9,19 @@ ext {
     dependencies = [
             supportV7                    : 'com.android.support:appcompat-v7:25.3.1',
             constraint                   : 'com.android.support.constraint:constraint-layout:1.0.2',
-            takephoto                    : 'com.jph.takephoto:takephoto_library:4.0.3',
-            utilcode                     : 'com.blankj:utilcode:1.8.1',
             barlibrary                   : 'com.gyf.barlibrary:barlibrary:2.2.7',
-            dynamicanimation             : 'com.android.support:support-dynamic-animation:25.3.1',
             swipebackhelper              : 'com.jude:swipebackhelper:3.1.2',
             SuperTextView                : 'com.github.chenBingX:SuperTextView:v1.4',
             SmartRefreshLayout           : 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3',
             BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22',
-
             arouter                      : 'com.alibaba:arouter-api:1.2.1.1',
             aroutercompiler              : 'com.alibaba:arouter-compiler:1.1.2.1',
+            Toasty                       : 'com.github.GrenderG:Toasty:1.2.5',
+
+            takephoto                    : 'com.jph.takephoto:takephoto_library:4.0.3',
+            utilcode                     : 'com.blankj:utilcode:1.8.1',
+            dynamicanimation             : 'com.android.support:support-dynamic-animation:25.3.1',
+
 
             debugLeakcanary              : 'com.squareup.leakcanary:leakcanary-android:1.5.1',
 
@@ -29,6 +31,5 @@ ext {
             rxandroid                    : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             rxjava                       : 'io.reactivex.rxjava2:rxjava:2.1.0',
 
-            Toasty                       : 'com.github.GrenderG:Toasty:1.2.5',
     ]
 }

@@ -41,17 +41,17 @@ dependencies {
 
     compile librarys.supportV7
     compile librarys.constraint
-
-    compile 'me.shaohui.advancedluban:library:1.3.5'
-    compile librarys.takephoto
-    compile librarys.utilcode
     compile librarys.barlibrary
-    compile librarys.dynamicanimation
     compile librarys.swipebackhelper
     compile librarys.SuperTextView
     compile librarys.SmartRefreshLayout
     compile librarys.BaseRecyclerViewAdapterHelper
     compile librarys.Toasty
+
+    compile 'me.shaohui.advancedluban:library:1.3.5'
+    compile librarys.takephoto
+    compile librarys.utilcode
+    compile librarys.dynamicanimation
 
     compile librarys.okgo
     compile librarys.okrx2

@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.ixzus.applibrary.R;
+import com.ixzus.applibrary.constant.ViewStatus;
+import com.ixzus.applibrary.impl.IReTry;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
-import com.gyf.barlibrary.ImmersionBar;
 import com.jude.swipbackhelper.SwipeBackHelper;
 
 /**
@@ -22,7 +25,7 @@ import com.jude.swipbackhelper.SwipeBackHelper;
 
 public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends BasePresenter>
         extends AppCompatActivity
-        implements BaseContract.IBaseView {
+        implements BaseContract.IBaseView, IReTry {
     protected P presenter;
     private ImmersionBar mImmersionBar;
 
@@ -37,7 +40,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         setContentView(initLayout());
         initView();
         initData();
-        
+
         if (this instanceof IToolbar) {
             initToolbar(this);
         }
@@ -119,8 +122,83 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
             findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
             findViewById(R.id.toolbar_line).setVisibility(View.VISIBLE);
         }
-        ((TextView) findViewById(R.id.toolbar_back_text)).setText(String.valueOf(backText));
-        ((TextView) findViewById(R.id.toolbar_title)).setText(String.valueOf(centerText));
+        if (!TextUtils.isEmpty(backText)) {
+            ((TextView) findViewById(R.id.toolbar_back_text)).setText(backText);
+        }
+        if (!TextUtils.isEmpty(centerText)) {
+            ((TextView) findViewById(R.id.toolbar_title)).setText(centerText);
+        }
 
+    }
+
+    protected void showStatus(final int status) {
+        hideStatus();
+        switch (status) {
+            case ViewStatus.STATUS:
+//                hideStatus();
+                break;
+            case ViewStatus.STATUS_ERR:
+                if (findViewById(R.id.viewErr) != null) {
+                    findViewById(R.id.viewErr).setVisibility(View.VISIBLE);
+                }
+
+                break;
+            case ViewStatus.STATUS_LOADING:
+                if (findViewById(R.id.viewLoading) != null) {
+                    findViewById(R.id.viewLoading).setVisibility(View.VISIBLE);
+                }
+                break;
+            case ViewStatus.STATUS_NO_DATA:
+                if (findViewById(R.id.viewNoData) != null) {
+                    findViewById(R.id.viewNoData).setVisibility(View.VISIBLE);
+                }
+                break;
+            case ViewStatus.STATUS_NO_NET:
+                if (findViewById(R.id.viewNoNet) != null) {
+                    findViewById(R.id.viewNoNet).setVisibility(View.VISIBLE);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void hideStatus() {
+        if (findViewById(R.id.viewErr) != null) {
+            findViewById(R.id.viewErr).setVisibility(View.GONE);
+            findViewById(R.id.viewErr).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    retry();
+                }
+            });
+        }
+        if (findViewById(R.id.viewLoading) != null) {
+            findViewById(R.id.viewLoading).setVisibility(View.GONE);
+            findViewById(R.id.viewLoading).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    retry();
+                }
+            });
+        }
+        if (findViewById(R.id.viewNoData) != null) {
+            findViewById(R.id.viewNoData).setVisibility(View.GONE);
+            findViewById(R.id.viewNoData).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    retry();
+                }
+            });
+        }
+        if (findViewById(R.id.viewNoNet) != null) {
+            findViewById(R.id.viewNoNet).setVisibility(View.GONE);
+            findViewById(R.id.viewNoNet).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    retry();
+                }
+            });
+        }
     }
 }

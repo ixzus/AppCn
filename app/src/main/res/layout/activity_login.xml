@@ -14,4 +14,8 @@
         android:text="button"
         android:id="@+id/button"/>
 
+    <include layout="@layout/view_err"/>
+
+
+
 </android.support.constraint.ConstraintLayout>

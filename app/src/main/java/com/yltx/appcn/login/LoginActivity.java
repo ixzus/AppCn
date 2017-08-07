@@ -8,13 +8,18 @@ import android.widget.Button;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.constant.ViewStatus;
 import com.ixzus.applibrary.impl.IActivity;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.yltx.appcn.R;
+import com.yltx.appcn.base.App;
+
+import es.dmoral.toasty.Toasty;
 
 @Route(path = "/login/loginActivity")
-public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter> implements LoginContract.ILoginView, View.OnClickListener, IActivity,IToolbar,ISwipeBack {
+public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter>
+        implements LoginContract.ILoginView, View.OnClickListener, IActivity, IToolbar, ISwipeBack {
 
     private Button mButton;
 
@@ -27,7 +32,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     protected void initView() {
         mButton = (Button) findViewById(R.id.button);
         mButton.setOnClickListener(this);
-        super.toolbar("菜单",true,"主页");
+        toolbar("菜单", true, "主页");
+        showStatus(ViewStatus.STATUS_LOADING);
     }
 
     @Override
@@ -80,8 +86,9 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
         }
     }
 
+
     @Override
-    public void toolbar(String centerText, boolean isBack, String backText) {
-        super.toolbar("菜单",true,"主页");
+    public void retry() {
+        Toasty.normal(App.getApplication(), "重试").show();
     }
 }
