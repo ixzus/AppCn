@@ -47,14 +47,19 @@ dependencies {
     compile librarys.SmartRefreshLayout
     compile librarys.BaseRecyclerViewAdapterHelper
     compile librarys.Toasty
+    compile librarys.gson
+
+    compile librarys.retrofit2
+    compile librarys.convertergson
+    compile librarys.adapterrxjava2
 
     compile 'me.shaohui.advancedluban:library:1.3.5'
     compile librarys.takephoto
     compile librarys.utilcode
     compile librarys.dynamicanimation
 
-    compile librarys.okgo
-    compile librarys.okrx2
+//    compile librarys.okgo
+//    compile librarys.okrx2
     compile librarys.rxandroid
     compile librarys.rxjava
 

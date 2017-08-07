@@ -17,6 +17,11 @@ ext {
             arouter                      : 'com.alibaba:arouter-api:1.2.1.1',
             aroutercompiler              : 'com.alibaba:arouter-compiler:1.1.2.1',
             Toasty                       : 'com.github.GrenderG:Toasty:1.2.5',
+            gson                         : 'com.google.code.gson:gson:2.8.1',
+
+            retrofit2                    : 'com.squareup.retrofit2:retrofit:2.3.0',
+            convertergson                : 'com.squareup.retrofit2:converter-gson:2.3.0',
+            adapterrxjava2               : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
 
             takephoto                    : 'com.jph.takephoto:takephoto_library:4.0.3',
             utilcode                     : 'com.blankj:utilcode:1.8.1',
@@ -25,8 +30,8 @@ ext {
 
             debugLeakcanary              : 'com.squareup.leakcanary:leakcanary-android:1.5.1',
 
-            okgo                         : 'com.lzy.net:okgo:3.0.4',
-            okrx2                        : 'com.lzy.net:okrx2:2.0.2',
+//            okgo                         : 'com.lzy.net:okgo:3.0.4',
+//            okrx2                        : 'com.lzy.net:okrx2:2.0.2',
 
             rxandroid                    : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             rxjava                       : 'io.reactivex.rxjava2:rxjava:2.1.0',

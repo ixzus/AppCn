@@ -7,23 +7,40 @@ import android.os.Bundle;
 
 import com.ixzus.applibrary.ActivityManager;
 
+import java.util.concurrent.TimeUnit;
+
 import es.dmoral.toasty.Toasty;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by xoutl on 2017/8/6.
  */
 
 public class BaseApplication extends Application {
+    private static BaseApplication baseApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        baseApplication = this;
         init();
+    }
+
+    public static BaseApplication getBaseApplication() {
+        return baseApplication;
     }
 
     private void init() {
         initLifecycle();
         initToast();
     }
+
+    public void setTimeOut(long timeOut) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.readTimeout(timeOut, TimeUnit.MILLISECONDS);
+
+    }
+
 
     private void initToast() {
         Toasty.Config.getInstance()
