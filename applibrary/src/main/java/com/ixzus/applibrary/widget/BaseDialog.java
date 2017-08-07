@@ -1,4 +1,4 @@
-package com.example.applibrary.widget;
+package com.ixzus.applibrary.widget;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

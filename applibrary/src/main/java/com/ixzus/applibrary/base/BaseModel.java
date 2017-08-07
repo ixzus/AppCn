@@ -1,4 +1,4 @@
-package com.example.applibrary.base;
+package com.ixzus.applibrary.base;
 
 /**
  * 功能描述:

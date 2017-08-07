@@ -1,4 +1,4 @@
-package com.example.applibrary;
+package com.ixzus.applibrary;
 
 import android.app.Activity;
 import android.os.Build;

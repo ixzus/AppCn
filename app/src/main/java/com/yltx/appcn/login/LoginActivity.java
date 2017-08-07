@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.applibrary.base.BaseActivity;
-import com.example.applibrary.base.BaseModel;
-import com.example.applibrary.impl.IActivity;
-import com.example.applibrary.impl.ISwipeBack;
-import com.example.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.base.BaseActivity;
+import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.impl.IActivity;
+import com.ixzus.applibrary.impl.ISwipeBack;
+import com.ixzus.applibrary.impl.IToolbar;
 import com.yltx.appcn.R;
 
 @Route(path = "/login/loginActivity")

@@ -1,4 +1,4 @@
-package com.example.applibrary.base;
+package com.ixzus.applibrary.base;
 
 import android.app.Activity;
 import android.os.Build;
@@ -9,9 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.applibrary.R;
-import com.example.applibrary.impl.ISwipeBack;
-import com.example.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.R;
+import com.ixzus.applibrary.impl.ISwipeBack;
+import com.ixzus.applibrary.impl.IToolbar;
 import com.gyf.barlibrary.ImmersionBar;
 import com.jude.swipbackhelper.SwipeBackHelper;
 

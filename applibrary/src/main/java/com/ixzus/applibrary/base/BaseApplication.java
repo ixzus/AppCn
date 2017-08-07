@@ -1,11 +1,11 @@
-package com.example.applibrary.base;
+package com.ixzus.applibrary.base;
 
 import android.app.Activity;
 import android.app.Application;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.example.applibrary.ActivityManager;
+import com.ixzus.applibrary.ActivityManager;
 
 import es.dmoral.toasty.Toasty;
 

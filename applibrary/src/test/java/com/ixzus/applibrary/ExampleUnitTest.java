@@ -1,4 +1,4 @@
-package com.example.applibrary;
+package com.ixzus.applibrary;
 
 import org.junit.Test;
 

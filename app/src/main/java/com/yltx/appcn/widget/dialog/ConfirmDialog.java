@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.example.applibrary.widget.AbsDialog;
-import com.example.applibrary.widget.ViewHolder;
+import com.ixzus.applibrary.widget.AbsDialog;
+import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.R;
 
 import java.io.Serializable;

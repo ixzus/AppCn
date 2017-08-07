@@ -1,4 +1,4 @@
-package com.example.applibrary;
+package com.ixzus.applibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

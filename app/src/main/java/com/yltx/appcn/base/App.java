@@ -1,7 +1,7 @@
 package com.yltx.appcn.base;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.applibrary.base.BaseApplication;
+import com.ixzus.applibrary.base.BaseApplication;
 
 /**
  * 功能描述:

@@ -1,4 +1,4 @@
-package com.example.applibrary.widget;
+package com.ixzus.applibrary.widget;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
