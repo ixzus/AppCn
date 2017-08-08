@@ -1,10 +1,17 @@
 package com.yltx.appcn.net;
 
+import com.yltx.appcn.bean.CartMemberBean;
+import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.Member;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
+import io.rx_cache2.LifeCache;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 
 /**
@@ -24,15 +31,18 @@ public interface ApiService {
 //                .adapt(new ObservableBody<String>());
 //}
 
-//    public static Observable<Response<String>> getMember(String memgerId){
+    //    public static Observable<Response<String>> getMember(String memgerId){
 //        return OkGo.get(BASEURL+"member/getMember")
 //                .params("memgerId",memgerId)
 //                .converter(new StringConvert())
 //                .adapt(new ObservableResponse<String>());
 //
 //    }
-
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("member/login")
-    Observable<Member> getMemger(@Body String json);
+    Observable<Member> login(@Body LoginInfo loginInfo);
+
+    @GET("member/getMember")
+    Observable<CartMemberBean> getMemger(@Query("memgerId") String memgerId);
 
 }

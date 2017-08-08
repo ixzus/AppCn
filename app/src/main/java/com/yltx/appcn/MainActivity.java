@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ixzus.applibrary.widget.AbsDialog;
@@ -15,7 +16,7 @@ import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import es.dmoral.toasty.Toasty;
-
+@Route(path = "/app/MainActivity")
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextView;

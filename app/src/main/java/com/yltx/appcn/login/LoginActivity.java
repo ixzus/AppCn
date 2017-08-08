@@ -14,16 +14,15 @@ import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.yltx.appcn.R;
 import com.yltx.appcn.base.App;
-import com.yltx.appcn.bean.Member;
+import com.yltx.appcn.bean.CartMemberBean;
+import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.net.ApiService;
+import com.yltx.appcn.net.BaseObserver;
 
 import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -119,7 +118,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 "                                         \"reference\":\"cheguanjia\", \n" +
                 "                                         \"uuid\":\"865276021651906\", \n" +
                 "                                         \"version\":\"Huawei\"} ";
-
+        LoginInfo loginInfo = new Gson().fromJson(json, LoginInfo.class);
         String BASEURL = "http://192.168.3.49:21014/mdm-rs/";
         final int TIME_OUT = 4;
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -131,29 +130,58 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        apiService.getMemger(json).subscribeOn(Schedulers.io())
+        apiService.getMemger("5206").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Member>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
+                .subscribe(new BaseObserver<CartMemberBean>(LoginActivity.this, "TAG", 0, true) {
 
                     @Override
-                    public void onNext(@NonNull Member member) {
+                    public void onSuccess(int whichRequest, CartMemberBean member) {
                         textView.setText(new Gson().toJson(member));
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                    public void onError(int whichRequest, Throwable e) {
+                        textView.setText(e.toString());
                     }
                 });
+//        apiService.getMemger(loginInfo).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new RxObserver<Member>(LoginActivity.this,"TAG",0,true) {
+//                    @Override
+//                    public void onSuccess(int whichRequest, Member member) {
+//                        textView.setText(new Gson().toJson(member));
+//                    }
+//
+//                    @Override
+//                    public void onError(int whichRequest, Throwable e) {
+//                        textView.setText(e.toString());
+//                    }
+//                });
+//        apiService.getMemger(loginInfo).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<Member>() {
+//                    @Override
+//                    public void onSubscribe(@NonNull Disposable d) {
+//                        Toasty.normal(LoginActivity.this,"onSubscribe").show();
+//                    }
+//
+//                    @Override
+//                    public void onNext(@NonNull Member member) {
+//                        Toasty.normal(LoginActivity.this,"onNext").show();
+//                        textView.setText(new Gson().toJson(member));
+//                    }
+//
+//                    @Override
+//                    public void onError(@NonNull Throwable e) {
+//                        Log.e("AAA", "" + e.toString());
+//                        Toasty.normal(LoginActivity.this,"onError"+e.toString()).show();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        Toasty.normal(LoginActivity.this,"onComplete").show();
+//                    }
+//                });
     }
 
 
