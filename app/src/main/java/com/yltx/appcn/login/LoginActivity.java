@@ -17,13 +17,12 @@ import com.yltx.appcn.base.App;
 import com.yltx.appcn.bean.CartMemberBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.net.ApiService;
-import com.yltx.appcn.net.BaseObserver;
+import com.yltx.appcn.net.NetObserver;
+import com.ixzus.applibrary.net.RxSchedulers;
 
 import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -130,9 +129,9 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        apiService.getMemger("5206").subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<CartMemberBean>(LoginActivity.this, "TAG", 0, true) {
+        apiService.getMemger("5206")
+                .compose(RxSchedulers.<CartMemberBean>io_main())
+                .subscribe(new NetObserver<CartMemberBean>(LoginActivity.this, TAG, 0, true) {
 
                     @Override
                     public void onSuccess(int whichRequest, CartMemberBean member) {

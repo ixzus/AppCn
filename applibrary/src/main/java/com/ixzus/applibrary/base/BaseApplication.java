@@ -5,7 +5,7 @@ import android.app.Application;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.ixzus.applibrary.ActivityManager;
+import com.blankj.utilcode.util.Utils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +31,13 @@ public class BaseApplication extends Application {
     }
 
     private void init() {
+        initUtilCode();
         initLifecycle();
         initToast();
+    }
+
+    private void initUtilCode() {
+        Utils.init(baseApplication);
     }
 
     public void setTimeOut(long timeOut) {

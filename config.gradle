@@ -18,6 +18,8 @@ ext {
             aroutercompiler              : 'com.alibaba:arouter-compiler:1.1.2.1',
             Toasty                       : 'com.github.GrenderG:Toasty:1.2.5',
             gson                         : 'com.google.code.gson:gson:2.8.1',
+            utilcode                     : 'com.blankj:utilcode:1.8.1',
+            CommonUtil                   : 'com.abrahamcaijin.commonutil:CommonUtil:1.0.1',
             //retrofit2
             retrofit2                    : 'com.squareup.retrofit2:retrofit:2.3.0',
             convertergson                : 'com.squareup.retrofit2:converter-gson:2.3.0',

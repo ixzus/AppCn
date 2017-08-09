@@ -16,6 +16,7 @@ import com.ixzus.applibrary.constant.ViewStatus;
 import com.ixzus.applibrary.impl.IReTry;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.net.RxManager;
 import com.jude.swipbackhelper.SwipeBackHelper;
 
 /**
@@ -28,10 +29,12 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         implements BaseContract.IBaseView, IReTry {
     protected P presenter;
     private ImmersionBar mImmersionBar;
+    protected String TAG;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TAG = getPackageName() + "." + getClass().getSimpleName();
         presenter = initPresenter();
         if (null != presenter) {
             presenter.attatch(initModule(), this);
@@ -69,6 +72,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RxManager.getInstance().clear(TAG);
         if (this instanceof ISwipeBack) {
             SwipeBackHelper.onDestroy(this);
         }

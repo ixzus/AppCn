@@ -4,6 +4,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.ixzus.applibrary.net.RxManager;
+import com.yltx.appcn.base.App;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -16,7 +19,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
-public abstract class BaseObserver<T> implements Observer<T> {
+public abstract class NetObserver<T> implements Observer<T> {
 
     private final int RESPONSE_CODE_OK = 200;      //自定义的业务逻辑，成功返回积极数据
     private final int RESPONSE_CODE_FAILED = -1; //返回数据失败
@@ -30,7 +33,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     private Context mContext;
 
 
-    public BaseObserver(Context context, String key, int whichRequest, boolean isShowDialog) {
+    public NetObserver(Context context, String key, int whichRequest, boolean isShowDialog) {
         this.mContext = context;
         this.mKey = key;
         this.isShowDialog = isShowDialog;
@@ -142,6 +145,20 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public abstract void onError(int whichRequest, Throwable e);
 
     public void onStart(int whichRequest) {
+//        if (!NetworkUtil.isNetworkAvailable(context)) {
+        if (!NetworkUtils.isAvailableByPing()) {
+
+            Toast.makeText(App.getApplication(), "当前网络不可用，请检查网络情况", Toast.LENGTH_SHORT).show();
+            NetworkUtils.openWirelessSettings();
+//            if (isNeedCahe) {
+//                //无网络已经读取缓存
+//            }
+            // **一定要主动调用下面这一句**
+            onComplete();
+            return;
+        }
+        // 显示进度条
+        mDialog.show();
 
     }
 

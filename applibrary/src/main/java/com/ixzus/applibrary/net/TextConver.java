@@ -1,6 +1,6 @@
-package com.yltx.appcn.net;
+package com.ixzus.applibrary.net;
 
-public class TextUtils {
+public class TextConver {
 
     /**
      * 把含有Unicode 的字符串可视化

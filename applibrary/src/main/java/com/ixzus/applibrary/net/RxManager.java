@@ -1,4 +1,4 @@
-package com.yltx.appcn.net;
+package com.ixzus.applibrary.net;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +37,7 @@ public class RxManager {
         }
     }
 
+    //BaseActivity
     public void clear(String key) {
         Set<String> keySet = map.keySet();
         if (keySet.contains(key)) {

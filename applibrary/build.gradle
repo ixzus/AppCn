@@ -48,6 +48,8 @@ dependencies {
     compile librarys.BaseRecyclerViewAdapterHelper
     compile librarys.Toasty
     compile librarys.gson
+    compile librarys.utilcode
+    compile librarys.CommonUtil
     //retrofit
     compile librarys.retrofit2
     compile librarys.convertergson

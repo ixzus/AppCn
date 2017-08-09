@@ -3,9 +3,12 @@ package com.yltx.appcn.net;
 import android.util.Log;
 
 import com.yltx.appcn.BuildConfig;
+import com.yltx.appcn.base.App;
 
 import java.util.concurrent.TimeUnit;
 
+import io.rx_cache2.internal.RxCache;
+import io.victoralbertos.jolyglot.GsonSpeaker;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,7 +26,10 @@ public class RxRetrofit {
     private Retrofit retrofit;
     private ApiService apiService;
     private static RxRetrofit instance;
-    public RxRetrofit() {}
+
+    public RxRetrofit() {
+    }
+
     public static RxRetrofit getInstance() {
         if (instance == null) {
             synchronized (RxRetrofit.class) {
@@ -63,6 +69,12 @@ public class RxRetrofit {
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .build();
+
+
+        CacheProviders cacheProviders = new RxCache.Builder()
+                .persistence(App.getApplication().getFilesDir(), new GsonSpeaker())
+                .using(CacheProviders.class);
+
         apiService = retrofit.create(ApiService.class);
 
     }
