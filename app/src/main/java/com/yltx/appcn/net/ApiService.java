@@ -3,6 +3,7 @@ package com.yltx.appcn.net;
 import com.yltx.appcn.bean.CartMemberBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.Member;
+import com.yltx.appcn.bean.WeatherInfo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +43,14 @@ public interface ApiService {
     @POST("member/login")
     Observable<Member> login(@Body LoginInfo loginInfo);
 
+
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("member/getMember")
     Observable<CartMemberBean> getMemger(@Query("memgerId") String memgerId);
+
+
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @GET("data/cityinfo/101010100.html")
+    Observable<WeatherInfo> getWeather();
 
 }

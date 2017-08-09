@@ -20,6 +20,7 @@ ext {
             gson                         : 'com.google.code.gson:gson:2.8.1',
             utilcode                     : 'com.blankj:utilcode:1.8.1',
             CommonUtil                   : 'com.abrahamcaijin.commonutil:CommonUtil:1.0.1',
+            logger                       : 'com.orhanobut:logger:2.1.1',
             //retrofit2
             retrofit2                    : 'com.squareup.retrofit2:retrofit:2.3.0',
             convertergson                : 'com.squareup.retrofit2:converter-gson:2.3.0',
@@ -37,11 +38,13 @@ ext {
 
             debugLeakcanary              : 'com.squareup.leakcanary:leakcanary-android:1.5.1',
 
-//            okgo                         : 'com.lzy.net:okgo:3.0.4',
-//            okrx2                        : 'com.lzy.net:okrx2:2.0.2',
 
             rxandroid                    : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             rxjava                       : 'io.reactivex.rxjava2:rxjava:2.1.0',
+            rxbinding                    : 'com.jakewharton.rxbinding2:rxbinding:2.0.0',
+            rxlifecycle                  : 'com.trello.rxlifecycle2:rxlifecycle:2.1.0',
+            rxlifecyclecomponents        : 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0',
+            rxpermissions                : 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar',
 
     ]
 }

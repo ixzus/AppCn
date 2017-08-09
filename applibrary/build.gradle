@@ -50,6 +50,7 @@ dependencies {
     compile librarys.gson
     compile librarys.utilcode
     compile librarys.CommonUtil
+    compile librarys.logger
     //retrofit
     compile librarys.retrofit2
     compile librarys.convertergson
@@ -69,6 +70,10 @@ dependencies {
 //    compile librarys.okrx2
     compile librarys.rxandroid
     compile librarys.rxjava
+    compile librarys.rxbinding
+    compile librarys.rxlifecycle
+    compile librarys.rxlifecyclecomponents
+    compile librarys.rxpermissions
 
 // debug
     debugCompile librarys.debugLeakcanary

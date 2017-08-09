@@ -90,7 +90,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onError(Throwable t) {
-        if (mDialog.isShowing()) {
+        if (isShowDialog && mDialog.isShowing()) {
             mDialog.dismiss();
         }
         int code = 0;
@@ -135,7 +135,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onComplete() {
-        if (mDialog.isShowing()) {
+        if (isShowDialog && mDialog.isShowing()) {
             mDialog.dismiss();
         }
     }
@@ -158,7 +158,9 @@ public abstract class NetObserver<T> implements Observer<T> {
             return;
         }
         // 显示进度条
-        mDialog.show();
+        if (isShowDialog && isShowDialog) {
+            mDialog.show();
+        }
 
     }
 

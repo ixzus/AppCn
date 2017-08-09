@@ -18,6 +18,7 @@ import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.net.RxManager;
 import com.jude.swipbackhelper.SwipeBackHelper;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
  * 功能描述:
@@ -25,7 +26,7 @@ import com.jude.swipbackhelper.SwipeBackHelper;
  */
 
 public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends BasePresenter>
-        extends AppCompatActivity
+        extends RxAppCompatActivity
         implements BaseContract.IBaseView, IReTry {
     protected P presenter;
     private ImmersionBar mImmersionBar;

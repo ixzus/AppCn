@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.Utils;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +36,11 @@ public class BaseApplication extends Application {
         initUtilCode();
         initLifecycle();
         initToast();
+        initLogger();
+    }
+
+    private void initLogger() {
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     private void initUtilCode() {

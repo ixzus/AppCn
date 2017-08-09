@@ -21,13 +21,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RxRetrofit {
-    private String BASE_URL = "http://192.168.3.49:21014/mdm-rs/";
+    private String BASE_URL = "http://192.168.3.49:11012/mdm-rs/";
+//    private String BASE_URL = "http://www.weather.com.cn/";
     private int DEFAULT_TIMEOUT = 3;
     private Retrofit retrofit;
+    private CacheProviders cacheProviders;
     private ApiService apiService;
     private static RxRetrofit instance;
 
     public RxRetrofit() {
+        doHttp();
     }
 
     public static RxRetrofit getInstance() {
@@ -39,6 +42,14 @@ public class RxRetrofit {
             }
         }
         return instance;
+    }
+
+    public ApiService getApiService() {
+        return apiService;
+    }
+
+    public CacheProviders getCacheProviders() {
+        return cacheProviders;
     }
 
     public void doHttp() {
@@ -71,7 +82,7 @@ public class RxRetrofit {
                 .build();
 
 
-        CacheProviders cacheProviders = new RxCache.Builder()
+        cacheProviders = new RxCache.Builder()
                 .persistence(App.getApplication().getFilesDir(), new GsonSpeaker())
                 .using(CacheProviders.class);
 
