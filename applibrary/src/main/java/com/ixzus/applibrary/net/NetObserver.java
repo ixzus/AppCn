@@ -1,12 +1,10 @@
-package com.yltx.appcn.net;
+package com.ixzus.applibrary.net;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.ixzus.applibrary.net.RxManager;
-import com.yltx.appcn.base.App;
+import com.ixzus.applibrary.base.BaseApplication;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -15,6 +13,7 @@ import java.net.UnknownHostException;
 import java.net.UnknownServiceException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
@@ -147,8 +146,8 @@ public abstract class NetObserver<T> implements Observer<T> {
     public void onStart(int whichRequest) {
 //        if (!NetworkUtil.isNetworkAvailable(context)) {
         if (!NetworkUtils.isAvailableByPing()) {
-
-            Toast.makeText(App.getApplication(), "当前网络不可用，请检查网络情况", Toast.LENGTH_SHORT).show();
+            Toasty.normal(BaseApplication.getBaseApplication(), "当前网络不可用，请检查网络情况").show();
+//            Toast.makeText(App.getApplication(), "当前网络不可用，请检查网络情况", Toast.LENGTH_SHORT).show();
             NetworkUtils.openWirelessSettings();
 //            if (isNeedCahe) {
 //                //无网络已经读取缓存

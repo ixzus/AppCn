@@ -20,7 +20,7 @@ import com.yltx.appcn.base.App;
 import com.yltx.appcn.bean.CartMemberBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.Member;
-import com.yltx.appcn.net.NetObserver;
+import com.ixzus.applibrary.net.NetObserver;
 import com.yltx.appcn.net.RxRetrofit;
 
 import java.util.concurrent.TimeUnit;
