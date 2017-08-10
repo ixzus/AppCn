@@ -1,7 +1,7 @@
 package com.yltx.appcn.net;
 
-import android.util.Log;
-
+import com.ixzus.applibrary.net.TextConver;
+import com.orhanobut.logger.Logger;
 import com.yltx.appcn.BuildConfig;
 import com.yltx.appcn.base.App;
 
@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RxRetrofit {
     private String BASE_URL = "http://192.168.3.49:11012/mdm-rs/";
-//    private String BASE_URL = "http://www.weather.com.cn/";
+    //    private String BASE_URL = "http://www.weather.com.cn/";
     private int DEFAULT_TIMEOUT = 3;
     private Retrofit retrofit;
     private CacheProviders cacheProviders;
@@ -65,7 +65,22 @@ public class RxRetrofit {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    Log.i("retrofit>>", message);
+                    StringBuilder mMessage = new StringBuilder();
+//                    Logger.i("retrofit", message);
+                    // 请求或者响应开始
+                    if (message.startsWith("--> POST")) {
+                        mMessage.setLength(0);
+                    }
+                    // 以{}或者[]形式的说明是响应结果的json数据，需要进行格式化
+                    if ((message.startsWith("{") && message.endsWith("}"))
+                            || (message.startsWith("[") && message.endsWith("]"))) {
+                        message = TextConver.formatJson(TextConver.convertUnicode(message));
+                    }
+                    mMessage.append(message.concat("\n"));
+                    // 响应结束，打印整条日志
+                    if (message.startsWith("<-- END HTTP")) {
+                        Logger.d(mMessage.toString());
+                    }
                 }
             });
             loggingInterceptor.setLevel(level);

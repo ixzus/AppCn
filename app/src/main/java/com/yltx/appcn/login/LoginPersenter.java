@@ -1,5 +1,7 @@
 package com.yltx.appcn.login;
 
+import android.content.Context;
+
 import com.ixzus.applibrary.base.BasePresenter;
 
 /**
@@ -13,7 +15,20 @@ public class LoginPersenter extends BasePresenter<LoginModel, LoginActivity> imp
         view.onLoginResult(resultJson);
     }
 
-    public void toLogin() {
-        model.toLogin(view.getPostJson(), this);
+    public void toLogin(Context contex, String tag) {
+        view.getName();
+        view.getPwd();
+        String json = " {\"accountName\":\"13510378755\", \n" +
+                "                                         \"cordova\":\"1.2.2\", \n" +
+                "                                         \"ip\":\"\", \n" +
+                "                                         \"loginChannel\":\"Android\", \n" +
+                "                                         \"loginType\":\"mobilePhone\", \n" +
+                "                                         \"model\":\"HUAWEI MT7-L09\", \n" +
+                "                                         \"password\":\"e10adc3949ba59abbe56e057f20f883e\", \n" +
+                "                                         \"platform\":\"Android\", \n" +
+                "                                         \"reference\":\"cheguanjia\", \n" +
+                "                                         \"uuid\":\"865276021651906\", \n" +
+                "                                         \"version\":\"Huawei\"} ";
+        model.toLogin(contex,tag, json, this);
     }
 }
