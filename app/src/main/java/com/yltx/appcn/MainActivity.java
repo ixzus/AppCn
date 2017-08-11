@@ -1,87 +1,52 @@
 package com.yltx.appcn;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.ixzus.applibrary.widget.AbsDialog;
-import com.ixzus.applibrary.widget.BaseDialog;
-import com.ixzus.applibrary.widget.ViewConvertListener;
-import com.ixzus.applibrary.widget.ViewHolder;
-import com.yltx.appcn.widget.dialog.ConfirmDialog;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.yltx.appcn.login.QuickAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-@Route(path = "/app/MainActivity")
-public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextView;
+import static android.support.v7.widget.RecyclerView.VERTICAL;
+
+@Route(path = "/app/MainActivity")
+public class MainActivity extends RxAppCompatActivity {
+
+    private RefreshLayout refreshLayout;
+    private RecyclerView recyclerView;
+    private QuickAdapter quickAdapter;
+    private View viewNoData;
+    private View viewErr;
+    private List<String> listData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                ConfirmDialog.newInstance("2")
-//                        .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
-//                            @Override
-//                            public void convertView(ViewHolder holder, AbsDialog dialog) {
-//                                Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                        .setConfirmOkListener(new ConfirmDialog.ConfirmOkListener() {
-//                            @Override
-//                            public void convertView(ViewHolder holder, AbsDialog dialog) {
-//                                Toasty.normal(MainActivity.this, "kkkkkkkkk").show();
-//                                aaa();
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                        .setMargin(60)
-//                        .setOutCancel(false)
-//                        .show(getSupportFragmentManager());
-
-                BaseDialog.init()
-                        .setLayoutId(R.layout.dialog_confirm)
-                        .setConvertListener(new ViewConvertListener() {
-                            @Override
-                            public void convertView(ViewHolder holder, final AbsDialog dialog) {
-                                holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                                holder.setOnClickListener(R.id.ok, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        aaa();
-                                        dialog.dismiss();
-                                    }
-                                });
-                            }
-                        })
-                        .setMargin(40)
-                        .setDimAmount(0.3f)
-                        .setAnimStyle(R.style.DialogAnimation)
-                        .show(getSupportFragmentManager());
-
-            }
-        });
+//
     }
 
-    private void aaa() {
+    private void next() {
         ARouter.getInstance().build("/login/loginActivity").navigation(this, new NavCallback() {
             @Override
             public void onFound(Postcard postcard) {
@@ -106,6 +71,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mTextView = (TextView) findViewById(R.id.textView);
+
+        refreshLayout = (SmartRefreshLayout) findViewById(R.id.refreshLayout);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        viewNoData = getLayoutInflater().inflate(R.layout.view_no_data, (ViewGroup) recyclerView.getParent(), false);
+        viewErr = getLayoutInflater().inflate(R.layout.view_err, (ViewGroup) recyclerView.getParent(), false);
+        viewNoData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quickAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
+                quickAdapter.setNewData(listData);
+            }
+        });
+        viewErr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+                quickAdapter.setNewData(listData);
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000);
+                quickAdapter.setNewData(null);
+                quickAdapter.setEmptyView(viewNoData);
+            }
+        });
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000);
+            }
+        });
+
+        refreshLayout.setEnableAutoLoadmore(true);
+        for (int i = 0; i < 15; ++i) {
+            listData.add("" + i);
+        }
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, VERTICAL));
+
+        quickAdapter = new QuickAdapter();
+        quickAdapter.addHeaderView(viewErr);
+        recyclerView.setAdapter(quickAdapter);
+        quickAdapter.setEmptyView(viewNoData);
+        quickAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
+
+        quickAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toasty.normal(MainActivity.this, "click " + position).show();
+            }
+        });
+
     }
+
+
 }
