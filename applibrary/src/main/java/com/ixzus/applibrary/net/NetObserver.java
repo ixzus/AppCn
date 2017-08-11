@@ -69,6 +69,7 @@ public abstract class NetObserver<T> implements Observer<T> {
     public void onFailure(int code, String message) {
         if (code == RESPONSE_CODE_FAILED && mContext != null) {
 //            HttpUiTips.alertTip(mContext, message, code);
+            Toasty.normal(mContext, message).show();
         } else {
             disposeEorCode(message, code);
         }
@@ -76,13 +77,13 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     private final void disposeEorCode(String message, int code) {
         switch (code) {
-            case 101:
-            case 112:
-            case 123:
+            case 302:
             case 401:
                 //退回到登录页面
                 ARouter.getInstance().build("/app/MainActivity").navigation();
                 break;
+            case 500:
+                Toasty.normal(mContext, "服务器开小差,努力抢修中...").show();
         }
 //        Toast.makeText(mContext, message + " # " + code, Toast.LENGTH_SHORT).show();
     }

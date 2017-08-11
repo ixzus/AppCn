@@ -3,7 +3,6 @@ package com.yltx.appcn.net;
 import android.text.TextUtils;
 
 import com.ixzus.applibrary.net.HttpLogger;
-import com.ixzus.applibrary.net.StringConverterFactory;
 import com.yltx.appcn.BuildConfig;
 import com.yltx.appcn.base.App;
 
@@ -102,9 +101,12 @@ public class RxRetrofit {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             if (timeout > 0) {
                 DEFAULT_TIMEOUT = timeout;
-                builder.readTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
-                builder.writeTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
-                builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+//                builder.readTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
+//                builder.writeTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
+//                builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+                builder.readTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.MILLISECONDS);
+                builder.writeTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.MILLISECONDS);
+                builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
             }
             if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
@@ -118,7 +120,6 @@ public class RxRetrofit {
 
     public void create() {
         retrofit = new Retrofit.Builder()
-                .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(BASE_URL)
@@ -134,8 +135,10 @@ public class RxRetrofit {
     }
 
     public void create(String baseurl, int timeout) {
+        if (TextUtils.isEmpty(baseurl)) {
+            baseurl = BASE_URL;
+        }
         retrofit = new Retrofit.Builder()
-                .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(baseurl)
