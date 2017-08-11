@@ -12,6 +12,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ixzus.applibrary.widget.AbsDialog;
+import com.ixzus.applibrary.widget.BaseDialog;
+import com.ixzus.applibrary.widget.ViewConvertListener;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
@@ -29,26 +31,52 @@ public class MainActivity extends AppCompatActivity {
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConfirmDialog.newInstance("2")
-                        .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
+
+//                ConfirmDialog.newInstance("2")
+//                        .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
+//                            @Override
+//                            public void convertView(ViewHolder holder, AbsDialog dialog) {
+//                                Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss();
+//                            }
+//                        })
+//                        .setConfirmOkListener(new ConfirmDialog.ConfirmOkListener() {
+//                            @Override
+//                            public void convertView(ViewHolder holder, AbsDialog dialog) {
+//                                Toasty.normal(MainActivity.this, "kkkkkkkkk").show();
+//                                aaa();
+//                                dialog.dismiss();
+//                            }
+//                        })
+//                        .setMargin(60)
+//                        .setOutCancel(false)
+//                        .show(getSupportFragmentManager());
+
+                BaseDialog.init()
+                        .setLayoutId(R.layout.dialog_confirm)
+                        .setConvertListener(new ViewConvertListener() {
                             @Override
-                            public void convertView(ViewHolder holder, AbsDialog dialog) {
-                                Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                            public void convertView(ViewHolder holder, final AbsDialog dialog) {
+                                holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                holder.setOnClickListener(R.id.ok, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        aaa();
+                                        dialog.dismiss();
+                                    }
+                                });
                             }
                         })
-                        .setConfirmOkListener(new ConfirmDialog.ConfirmOkListener() {
-                            @Override
-                            public void convertView(ViewHolder holder, AbsDialog dialog) {
-//                                Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_SHORT).show();
-                                Toasty.normal(MainActivity.this, "kkkkkkkkk").show();
-                                aaa();
-                                dialog.dismiss();
-                            }
-                        })
-                        .setMargin(60)
-                        .setOutCancel(false)
+                        .setMargin(40)
+                        .setDimAmount(0.3f)
+                        .setAnimStyle(R.style.DialogAnimation)
                         .show(getSupportFragmentManager());
+
             }
         });
     }

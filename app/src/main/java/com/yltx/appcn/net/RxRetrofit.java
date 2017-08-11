@@ -1,7 +1,9 @@
 package com.yltx.appcn.net;
 
-import com.ixzus.applibrary.net.TextConver;
-import com.orhanobut.logger.Logger;
+import android.text.TextUtils;
+
+import com.ixzus.applibrary.net.HttpLogger;
+import com.ixzus.applibrary.net.StringConverterFactory;
 import com.yltx.appcn.BuildConfig;
 import com.yltx.appcn.base.App;
 
@@ -21,28 +23,55 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RxRetrofit {
+    private static RxRetrofit instance;
+
     private String BASE_URL = "http://192.168.3.49:11012/mdm-rs/";
-    //    private String BASE_URL = "http://www.weather.com.cn/";
     private int DEFAULT_TIMEOUT = 3;
+    private static int change = 0;
+
     private Retrofit retrofit;
     private CacheProviders cacheProviders;
     private ApiService apiService;
-    private static RxRetrofit instance;
 
     public RxRetrofit() {
-        doHttp();
+        create();
     }
 
+    public RxRetrofit(String baseurl, int timeout) {
+        create(baseurl, timeout);
+    }
+
+
     public static RxRetrofit getInstance() {
+        if (1 != change) {
+            instance = null;
+        }
         if (instance == null) {
             synchronized (RxRetrofit.class) {
                 if (instance == null) {
+                    change = 1;
                     instance = new RxRetrofit();
                 }
             }
         }
         return instance;
     }
+
+    public static RxRetrofit getInstance(String baseurl, int timeout) {
+        if (2 != change) {
+            instance = null;
+        }
+        if (instance == null) {
+            synchronized (RxRetrofit.class) {
+                if (instance == null) {
+                    change = 2;
+                    instance = new RxRetrofit(baseurl, timeout);
+                }
+            }
+        }
+        return instance;
+    }
+
 
     public ApiService getApiService() {
         return apiService;
@@ -52,50 +81,66 @@ public class RxRetrofit {
         return cacheProviders;
     }
 
-    public void doHttp() {
-
+    private OkHttpClient okHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.readTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
         builder.writeTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-//        builder.retryOnConnectionFailure(true); //失败重试
-
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-                @Override
-                public void log(String message) {
-                    StringBuilder mMessage = new StringBuilder();
-//                    Logger.i("retrofit", message);
-                    // 请求或者响应开始
-                    if (message.startsWith("--> POST")) {
-                        mMessage.setLength(0);
-                    }
-                    // 以{}或者[]形式的说明是响应结果的json数据，需要进行格式化
-                    if ((message.startsWith("{") && message.endsWith("}"))
-                            || (message.startsWith("[") && message.endsWith("]"))) {
-                        message = TextConver.formatJson(TextConver.convertUnicode(message));
-                    }
-                    mMessage.append(message.concat("\n"));
-                    // 响应结束，打印整条日志
-                    if (message.startsWith("<-- END HTTP")) {
-                        Logger.d(mMessage.toString());
-                    }
-                }
-            });
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLogger());
             loggingInterceptor.setLevel(level);
             builder.addInterceptor(loggingInterceptor);
         }
+        return builder.build();
+    }
 
-        OkHttpClient okHttpClient = builder.build();
+    private OkHttpClient okHttpClient(String baseurl, int timeout) {
+        if (TextUtils.isEmpty(baseurl) && 0 == timeout) {
+            return okHttpClient();
+        } else {
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            if (timeout > 0) {
+                DEFAULT_TIMEOUT = timeout;
+                builder.readTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
+                builder.writeTimeout(DEFAULT_TIMEOUT + 1, TimeUnit.SECONDS);
+                builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+            }
+            if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
+                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLogger());
+                loggingInterceptor.setLevel(level);
+                builder.addInterceptor(loggingInterceptor);
+            }
+            return builder.build();
+        }
+    }
 
+    public void create() {
         retrofit = new Retrofit.Builder()
+                .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(BASE_URL)
-                .client(okHttpClient)
+                .client(okHttpClient())
                 .build();
 
+        cacheProviders = new RxCache.Builder()
+                .persistence(App.getApplication().getFilesDir(), new GsonSpeaker())
+                .using(CacheProviders.class);
+
+        apiService = retrofit.create(ApiService.class);
+
+    }
+
+    public void create(String baseurl, int timeout) {
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(StringConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(baseurl)
+                .client(okHttpClient(baseurl, timeout))
+                .build();
 
         cacheProviders = new RxCache.Builder()
                 .persistence(App.getApplication().getFilesDir(), new GsonSpeaker())

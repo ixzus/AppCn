@@ -1,7 +1,9 @@
 package com.ixzus.applibrary.widget;
+
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;
+
 public class ViewHolder {
 
     private SparseArray<View> views;

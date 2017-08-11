@@ -1,13 +1,11 @@
 package com.ixzus.applibrary.widget;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,15 +111,15 @@ public abstract class AbsDialog extends DialogFragment {
             }
             //设置dialog宽度
             if (width == 0) {
-                lp.width = getScreenWidth(getContext()) - 2 * dp2px(getContext(), margin);
+                lp.width = DialogWHUtil.getScreenWidth(getContext()) - 2 * DialogWHUtil.dp2px(getContext(), margin);
             } else {
-                lp.width = dp2px(getContext(), width);
+                lp.width = DialogWHUtil.dp2px(getContext(), width);
             }
             //设置dialog高度
             if (height == 0) {
                 lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
             } else {
-                lp.height = dp2px(getContext(), height);
+                lp.height = DialogWHUtil.dp2px(getContext(), height);
             }
 
             window.setAttributes(lp);
@@ -167,15 +165,5 @@ public abstract class AbsDialog extends DialogFragment {
     public AbsDialog show(FragmentManager manager) {
         super.show(manager, String.valueOf(System.currentTimeMillis()));
         return this;
-    }
-
-    public int dp2px(Context context, float dipValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dipValue * scale + 0.5f);
-    }
-
-    public int getScreenWidth(Context context) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        return displayMetrics.widthPixels;
     }
 }

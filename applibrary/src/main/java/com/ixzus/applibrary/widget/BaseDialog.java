@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
-import java.io.Serializable;
-
 public class BaseDialog extends AbsDialog {
     private ViewConvertListener convertListener;
 
-    public static AbsDialog init() {
+    public static BaseDialog init() {
         return new BaseDialog();
     }
 
@@ -55,9 +53,4 @@ public class BaseDialog extends AbsDialog {
         outState.putSerializable("convertListener", convertListener);
     }
 
-    public interface ViewConvertListener extends Serializable {
-        long serialVersionUID = System.currentTimeMillis();
-
-        void convertView(ViewHolder holder, AbsDialog dialog);
-    }
 }
