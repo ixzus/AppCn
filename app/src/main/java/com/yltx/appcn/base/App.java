@@ -16,6 +16,7 @@ public class App extends BaseApplication {
         super.onCreate();
         mApplication = this;
         initRouter();
+//        initLeakCanary();
     }
 
     public static App getApplication() {
@@ -30,4 +31,11 @@ public class App extends BaseApplication {
         }
         ARouter.init(mApplication); // 尽可能早，推荐在Application中初始化
     }
+
+//    private void initLeakCanary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        LeakCanary.install(this);
+//    }
 }

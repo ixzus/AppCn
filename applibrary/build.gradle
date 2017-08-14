@@ -88,6 +88,7 @@ dependencies {
 //    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
 
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+
 }
 
 

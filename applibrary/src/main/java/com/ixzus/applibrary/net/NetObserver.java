@@ -1,10 +1,14 @@
 package com.ixzus.applibrary.net;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ixzus.applibrary.R;
 import com.ixzus.applibrary.base.BaseApplication;
+import com.ixzus.applibrary.widget.AbsDialog;
+import com.ixzus.applibrary.widget.LoadingDialog;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -12,7 +16,6 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.net.UnknownServiceException;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -28,7 +31,7 @@ public abstract class NetObserver<T> implements Observer<T> {
     private String mKey;
 
     private boolean isShowDialog = true;
-    private SweetAlertDialog mDialog;
+    private AbsDialog mDialog;
     private Context mContext;
 
 
@@ -38,8 +41,11 @@ public abstract class NetObserver<T> implements Observer<T> {
         this.isShowDialog = isShowDialog;
         this.mWhichRequest = whichRequest;
         if (isShowDialog) {
-            mDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
-            mDialog.setTitleText("正在加载中...");
+            mDialog = LoadingDialog.init()
+                    .setMargin(60)
+                    .setDimAmount(0.3f)
+                    .setAnimStyle(R.style.DialoLoadinggAnimation);
+//            mDialog.setTitleText("正在加载中...");
             mDialog.setCancelable(false);
         }
 
@@ -50,8 +56,8 @@ public abstract class NetObserver<T> implements Observer<T> {
     @Override
     public final void onSubscribe(Disposable d) {
         mRxManager.add(mKey, d);
-        if (isShowDialog) {
-            mDialog.show();
+        if (isShowDialog && null != mDialog) {
+            mDialog.show(((AppCompatActivity) mContext).getSupportFragmentManager());
         }
         onStart(mWhichRequest);
     }
@@ -90,7 +96,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onError(Throwable t) {
-        if (isShowDialog && mDialog.isShowing()) {
+        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && !mDialog.getDialog().isShowing()) {
             mDialog.dismiss();
         }
         int code = 0;
@@ -135,7 +141,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onComplete() {
-        if (isShowDialog && mDialog.isShowing()) {
+        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && !mDialog.getDialog().isShowing()) {
             mDialog.dismiss();
         }
     }
@@ -159,8 +165,8 @@ public abstract class NetObserver<T> implements Observer<T> {
             return;
         }
         // 显示进度条
-        if (isShowDialog && !mDialog.isShowing()) {
-            mDialog.show();
+        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && !mDialog.getDialog().isShowing()) {
+            mDialog.show(((AppCompatActivity) mContext).getSupportFragmentManager());
         }
 
     }

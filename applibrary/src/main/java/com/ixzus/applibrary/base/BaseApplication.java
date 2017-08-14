@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.blankj.utilcode.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,19 +33,19 @@ public class BaseApplication extends Application {
     }
 
     private void init() {
-        initLeakCanary();
+//        initLeakCanary();
         initUtilCode();
         initLifecycle();
         initToast();
         initLogger();
     }
 
-    private void initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
-    }
+//    private void initLeakCanary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        LeakCanary.install(this);
+//    }
 
     private void initLogger() {
         Logger.addLogAdapter(new AndroidLogAdapter());
