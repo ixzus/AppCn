@@ -14,6 +14,7 @@ ext {
             swipebackhelper              : 'com.jude:swipebackhelper:3.1.2',
             SuperTextView                : 'com.github.lygttpod:SuperTextView:2.1.0',
             SmartRefreshLayout           : 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3',
+            gif                          : 'pl.droidsonroids.gif:android-gif-drawable:1.2.7',
             BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22',
             arouter                      : 'com.alibaba:arouter-api:1.2.1.1',
             aroutercompiler              : 'com.alibaba:arouter-compiler:1.1.2.1',

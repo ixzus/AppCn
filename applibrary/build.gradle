@@ -45,6 +45,7 @@ dependencies {
     compile librarys.swipebackhelper
     compile librarys.SuperTextView
     compile librarys.SmartRefreshLayout
+    compile librarys.gif
     compile librarys.BaseRecyclerViewAdapterHelper
     compile librarys.Toasty
     compile librarys.gson
