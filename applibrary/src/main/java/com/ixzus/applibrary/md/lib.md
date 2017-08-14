@@ -177,3 +177,8 @@
                                                             }
                                                         }
                                                 
+# YOYO
+                                                YoYo.with(Techniques.Tada)
+                                                    .duration(700)
+                                                    .repeat(5)
+                                                    .playOn(findViewById(R.id.edit_area));

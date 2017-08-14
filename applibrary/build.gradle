@@ -65,6 +65,8 @@ dependencies {
     compile librarys.utilcode
     compile librarys.dynamicanimation
     compile librarys.sweetalert
+    compile librarys.androidanimationslibrary
+    compile librarys.androidanimations
 
 //    compile librarys.okgo
 //    compile librarys.okrx2
@@ -76,7 +78,7 @@ dependencies {
     compile librarys.rxpermissions
 
 // debug
-    debugCompile librarys.debugLeakcanary
+    debugCompile librarys.leakcanaryDebug
 //    router
     compile librarys.arouter
     annotationProcessor librarys.aroutercompiler
