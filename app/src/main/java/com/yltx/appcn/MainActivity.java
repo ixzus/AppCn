@@ -14,9 +14,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.ixzus.applibrary.widget.CustomLoadMoreView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.login.QuickAdapter;
@@ -71,7 +72,6 @@ public class MainActivity extends RxAppCompatActivity {
     }
 
     private void initView() {
-
         refreshLayout = (SmartRefreshLayout) findViewById(R.id.refreshLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         viewNoData = getLayoutInflater().inflate(R.layout.view_no_data, (ViewGroup) recyclerView.getParent(), false);
@@ -79,37 +79,28 @@ public class MainActivity extends RxAppCompatActivity {
         viewNoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quickAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
                 quickAdapter.setNewData(listData);
             }
         });
         viewErr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quickAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
                 quickAdapter.setNewData(listData);
             }
         });
 
+        refreshLayout.autoRefresh();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                quickAdapter.setNewData(listData);
                 refreshlayout.finishRefresh(2000);
-                quickAdapter.setNewData(null);
-                quickAdapter.setEmptyView(viewNoData);
-            }
-        });
-        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000);
+//                quickAdapter.setNewData(null);
+//                quickAdapter.setEmptyView(viewNoData);
             }
         });
 
-        refreshLayout.setEnableAutoLoadmore(true);
-        for (int i = 0; i < 15; ++i) {
-            listData.add("" + i);
-        }
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -117,7 +108,6 @@ public class MainActivity extends RxAppCompatActivity {
 
         quickAdapter = new QuickAdapter();
         quickAdapter.addHeaderView(viewErr);
-        recyclerView.setAdapter(quickAdapter);
         quickAdapter.setEmptyView(viewNoData);
         quickAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 
@@ -128,6 +118,27 @@ public class MainActivity extends RxAppCompatActivity {
             }
         });
 
+        quickAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                List<String> list = new ArrayList<>();
+                for (int i = 0; i < 2; ++i) {
+                    list.add("" + i);
+                }
+                quickAdapter.addData(list);
+//                quickAdapter.loadMoreComplete();
+//                quickAdapter.loadMoreEnd();
+//                quickAdapter.loadMoreFail();
+            }
+        }, recyclerView);
+
+        quickAdapter.setLoadMoreView(new CustomLoadMoreView());
+        quickAdapter.isFirstOnly(false);
+        recyclerView.setAdapter(quickAdapter);
+
+        for (int i = 0; i < 20; ++i) {
+            listData.add("" + i);
+        }
     }
 
 
