@@ -39,6 +39,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
 
+    compile librarys.supportV4
     compile librarys.supportV7
     compile librarys.constraint
     compile librarys.barlibrary
@@ -68,6 +69,7 @@ dependencies {
     compile librarys.sweetalert
     compile librarys.androidanimationslibrary
     compile librarys.androidanimations
+    compile librarys.banner
 
 //    compile librarys.okgo
 //    compile librarys.okrx2

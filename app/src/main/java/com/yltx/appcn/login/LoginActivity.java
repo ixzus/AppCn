@@ -1,27 +1,19 @@
 package com.yltx.appcn.login;
 
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.google.gson.Gson;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.constant.ViewStatus;
 import com.ixzus.applibrary.impl.IActivity;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
-import com.ixzus.applibrary.net.RxSchedulers;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.base.App;
-import com.yltx.appcn.bean.CartMemberBean;
-import com.yltx.appcn.bean.LoginInfo;
-import com.yltx.appcn.bean.Member;
-import com.ixzus.applibrary.net.NetObserver;
-import com.yltx.appcn.net.RxRetrofit;
 
 import java.util.concurrent.TimeUnit;
 
@@ -46,7 +38,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     protected void initView() {
         mButton = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textview);
-        toolbar("菜单", true, "主页");
+        toolbar("首页", false, null,R.color.bg_view,R.color.grey);
         showStatus(ViewStatus.STATUS_LOADING);
         RxView.clicks(mButton)
                 .throttleFirst(1, TimeUnit.SECONDS)
@@ -55,7 +47,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        presenter.toLogin(LoginActivity.this,TAG);
+                        presenter.toLogin(LoginActivity.this, TAG);
                     }
                 });
     }

@@ -6,13 +6,15 @@
         <!--<item name="colorPrimary">@color/colorPrimary</item>-->
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
         <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="android:windowBackground">@color/bg_view</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
-    <!--<style name="SplashTheme" parent="AppTheme">-->
-    <!--<item name="android:windowBackground">@drawable/bg_splash</item>-->
-    <!--&lt;!&ndash;<item name="windowNoTitle">true</item>&ndash;&gt;-->
-    <!--<item name="android:windowFullscreen">true</item>-->
-    <!--</style>-->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <!--<item name="windowNoTitle">true</item>-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
     <style name="TextStyle">
         <item name="android:layout_width">wrap_content</item>

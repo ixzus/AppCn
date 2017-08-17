@@ -21,7 +21,6 @@ public class LoginModel extends BaseModel implements LoginContract.ILoginModel {
     @Override
     public void toLogin(Context context, final String TAG, final String json, final LoginContract.ILoginPresenter iLoginPresenter) {
         LoginInfo loginInfo = new Gson().fromJson(json, LoginInfo.class);
-//        RxRetrofit.getInstance(null,1).getApiService().login(loginInfo)
         RxRetrofit.getInstance().getApiService().login(loginInfo)
                 .compose(((RxAppCompatActivity)context).<Member>bindToLifecycle())
                 .compose(RxSchedulers.<Member>io_main())

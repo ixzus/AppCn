@@ -7,6 +7,7 @@ ext {
     ]
 
     dependencies = [
+            supportV4                    : 'com.android.support:support-v4:25.3.1',
             supportV7                    : 'com.android.support:appcompat-v7:25.3.1',
             constraint                   : 'com.android.support.constraint:constraint-layout:1.0.2',
 
@@ -52,6 +53,8 @@ ext {
 
             androidanimationslibrary     : 'com.daimajia.easing:library:2.0@aar',
             androidanimations            : 'com.daimajia.androidanimations:library:2.3@aar',
+
+            banner                       : 'cn.bingoogolapple:bga-banner:2.1.7@aar',
 
     ]
 }

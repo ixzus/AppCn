@@ -3,7 +3,9 @@ package com.ixzus.applibrary.base;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -122,15 +124,24 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 
     }
 
-    protected void toolbar(String centerText, boolean isBack, String backText) {
+    protected void toolbar(String centerText, boolean isBack, String backText, @ColorRes int bgColor, @ColorRes int tvColor) {
+        if (0 != bgColor) {
+            findViewById(R.id.toolbar).setBackgroundColor(ContextCompat.getColor(this, bgColor));
+        }
         if (isBack) {
             findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
             findViewById(R.id.toolbar_line).setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(backText)) {
+            if (0 != tvColor) {
+                ((TextView) findViewById(R.id.toolbar_back_text)).setTextColor(ContextCompat.getColor(this, tvColor));
+            }
             ((TextView) findViewById(R.id.toolbar_back_text)).setText(backText);
         }
         if (!TextUtils.isEmpty(centerText)) {
+            if (0 != tvColor) {
+                ((TextView) findViewById(R.id.toolbar_title)).setTextColor(ContextCompat.getColor(this, tvColor));
+            }
             ((TextView) findViewById(R.id.toolbar_title)).setText(centerText);
         }
 
