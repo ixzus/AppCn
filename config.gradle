@@ -11,7 +11,7 @@ ext {
             supportV7                    : 'com.android.support:appcompat-v7:25.3.1',
             constraint                   : 'com.android.support.constraint:constraint-layout:1.0.2',
 
-            barlibrary                   : 'com.gyf.barlibrary:barlibrary:2.2.7',
+            barlibrary                   : 'com.gyf.barlibrary:barlibrary:2.2.8',
             swipebackhelper              : 'com.jude:swipebackhelper:3.1.2',
             SuperTextView                : 'com.github.lygttpod:SuperTextView:2.1.0',
             SmartRefreshLayout           : 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3',

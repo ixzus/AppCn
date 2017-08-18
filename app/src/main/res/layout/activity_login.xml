@@ -22,4 +22,18 @@
         app:sUseSelector="true" />
 
 
+    <com.allen.library.SuperButton
+        android:id="@+id/button1"
+        style="@style/ButtonYesStyle"
+        android:layout_margin="10dp"
+        android:text="登录"
+        android:textColor="@color/base_color"
+        app:sCornersRadius="2dp"
+        app:sSelectorDisableColor="@color/button_no"
+        app:sSelectorNormalColor="@color/white"
+        app:sSelectorPressedColor="@color/button_no"
+        app:sStrokeColor="@color/base_color"
+        app:sStrokeWidth="1px"
+        app:sUseSelector="true" />
+
 </LinearLayout>

@@ -55,6 +55,8 @@ public class ConfirmDialog extends AbsDialog {
         } else if ("2".equals(type)) {
             viewHolder.setText(R.id.title, "警告");
             viewHolder.setText(R.id.message, "您的账号已被冻结！");
+            viewHolder.setText(R.id.ok, "立即修改");
+            viewHolder.setText(R.id.cancel, "取消");
         }
         viewHolder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
             @Override

@@ -13,13 +13,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gyf.barlibrary.ImmersionBar;
 import com.ixzus.applibrary.R;
 import com.ixzus.applibrary.constant.ViewStatus;
 import com.ixzus.applibrary.impl.IReTry;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.net.RxManager;
+import com.jaeger.library.StatusBarUtil;
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -34,7 +34,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         extends RxAppCompatActivity
         implements BaseContract.IBaseView, IReTry {
     protected P presenter;
-    private ImmersionBar mImmersionBar;
+    //    private ImmersionBar mImmersionBar;
     protected String TAG;
 
     @Override
@@ -46,6 +46,8 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
             presenter.attatch(initModule(), this);
         }
         setContentView(initLayout());
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
+        StatusBarUtil.setTranslucent(this);
         ButterKnife.bind(this);
         initView();
         initData();
@@ -58,13 +60,15 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
             SwipeBackHelper.onCreate(this);
         }
 
-        mImmersionBar = ImmersionBar.with(this);
-        if (null != mImmersionBar) {
-            if (null != findViewById(R.id.toolbar)) {
-                mImmersionBar.titleBar(findViewById(R.id.toolbar));
-            }
-            mImmersionBar.init();
-        }
+//        mImmersionBar = ImmersionBar.with(this);
+//        if (null != mImmersionBar) {
+////            if (null != findViewById(R.id.toolbar)) {
+////                mImmersionBar.titleBar(findViewById(R.id.toolbar));
+////            }
+//            mImmersionBar.fitsSystemWindows(true);  //使用该属性,必须指定状态栏颜色
+//            mImmersionBar.statusBarColor(R.color.white);
+//            mImmersionBar.init();
+//        }
     }
 
     @Override
@@ -85,9 +89,9 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         if (null != presenter) {
             presenter.detach();
         }
-        if (null != mImmersionBar) {
-            mImmersionBar.destroy();
-        }
+//        if (null != mImmersionBar) {
+//            mImmersionBar.destroy();
+//        }
     }
 
     protected abstract P initPresenter();
@@ -125,6 +129,20 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
                     onBackPressed();
                 }
             });
+        }
+
+    }
+
+    protected void toolbar(String centerText, boolean isBack, String backText) {
+        if (isBack) {
+            findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
+            findViewById(R.id.toolbar_line).setVisibility(View.VISIBLE);
+        }
+        if (!TextUtils.isEmpty(backText)) {
+            ((TextView) findViewById(R.id.toolbar_back_text)).setText(backText);
+        }
+        if (!TextUtils.isEmpty(centerText)) {
+            ((TextView) findViewById(R.id.toolbar_title)).setText(centerText);
         }
 
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dialog_white_round_corner_bg"
@@ -8,51 +9,46 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/TextStyle"
-        android:layout_marginTop="16dp"
-        android:text="--"
-        android:textColor="#333333" />
+        style="@style/DialogTitleStyle"
+        android:text="温馨提示" />
+
+    <include layout="@layout/line_base" />
 
     <TextView
         android:id="@+id/message"
-        style="@style/TextStyle"
-        android:layout_margin="16dp"
-        android:text="---" />
+        style="@style/DialogContentStyle"
+        android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:layout_marginTop="15dp"
-        android:background="#e6e6e6" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp">
 
-        <TextView
+        <com.allen.library.SuperButton
             android:id="@+id/cancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
+            style="@style/DialogButtonStyle"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="6dp"
             android:text="取消"
-            android:background="@drawable/bg_dialog_l"
-            android:textColor="#333333" />
+            app:sCornersRadius="2dp"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/button_no"
+            app:sSelectorPressedColor="@color/button_no_click"
+            app:sUseSelector="true" />
 
-        <View
-            android:layout_width="2px"
-            android:layout_height="match_parent"
-            android:background="#e6e6e6" />
 
-        <TextView
+        <com.allen.library.SuperButton
             android:id="@+id/ok"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/bg_dialog_r"
-            android:gravity="center"
-            android:text="确定"
-            android:textColor="#333333" />
+            style="@style/DialogButtonStyle"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="14dp"
+            android:text="登录"
+            app:sCornersRadius="2dp"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/button_yes"
+            app:sSelectorPressedColor="@color/button_yes_click"
+            app:sUseSelector="true" />
 
     </LinearLayout>
 
