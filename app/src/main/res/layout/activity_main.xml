@@ -10,6 +10,13 @@
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/line" />
+
+    <include
+        android:id="@+id/line"
+        layout="@layout/line_base"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
         android:layout_above="@+id/main_menu" />
 
     <LinearLayout
@@ -26,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/main_home_press"
             android:gravity="center"
             android:text="首页" />
 
@@ -35,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/main_my_normal"
             android:gravity="center"
             android:text="我的" />
     </LinearLayout>

@@ -2,17 +2,23 @@ package com.yltx.appcn.main;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.ixzus.applibrary.base.BaseFragment;
+import com.ixzus.applibrary.base.BaseModel;
+import com.orhanobut.logger.Logger;
 import com.yltx.appcn.R;
 
+import butterknife.BindView;
+import butterknife.Unbinder;
 
-public class HomeFragment extends Fragment {
+
+public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter> implements HomeContract.IView {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @BindView(R.id.hometext)
+    TextView hometext;
+    Unbinder unbinder;
 
     private String mParam1;
     private String mParam2;
@@ -40,10 +46,48 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public void fetchData() {
+        Logger.e("fetchData:");
     }
 
+
+    @Override
+    protected HomePersenter initPresenter() {
+        return new HomePersenter();
+    }
+
+    @Override
+    protected BaseModel initModule() {
+        return new HomeModel();
+    }
+
+    @Override
+    protected int initLayout() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected void initView() {
+        hometext.setText("kkkkkkkkkkkkkkkkkk");
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public String getPwd() {
+        return null;
+    }
+
+    @Override
+    public void onResult(String code) {
+
+    }
 }

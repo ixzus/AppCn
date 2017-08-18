@@ -15,6 +15,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.jude.swipbackhelper.SwipeBackHelper;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 功能描述:
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment<V extends BaseContract.IBaseView, P extends BasePresenter> extends LazyFragment implements BaseContract.IBaseView {
     protected P presenter;
     protected String TAG;
+    protected Unbinder unbinder;
 
     @Nullable
     @Override
@@ -45,7 +47,7 @@ public abstract class BaseFragment<V extends BaseContract.IBaseView, P extends B
         }
 //        StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
         StatusBarUtil.setTranslucent(getActivity());
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         initView();
         initData();
 
@@ -54,7 +56,11 @@ public abstract class BaseFragment<V extends BaseContract.IBaseView, P extends B
         }
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
     protected abstract P initPresenter();
 
     protected abstract BaseModel initModule();
