@@ -34,7 +34,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         extends RxAppCompatActivity
         implements BaseContract.IBaseView, IReTry {
     protected P presenter;
-    //    private ImmersionBar mImmersionBar;
+//    private ImmersionBar mImmersionBar;
     protected String TAG;
 
     @Override
