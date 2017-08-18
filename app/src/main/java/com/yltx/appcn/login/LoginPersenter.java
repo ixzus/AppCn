@@ -15,6 +15,7 @@ public class LoginPersenter extends BasePresenter<LoginModel, LoginActivity> imp
         view.onLoginResult(resultJson);
     }
 
+    @Override
     public void toLogin(Context contex, String tag) {
         view.getName();
         view.getPwd();
@@ -29,6 +30,6 @@ public class LoginPersenter extends BasePresenter<LoginModel, LoginActivity> imp
                 "                                         \"reference\":\"cheguanjia\", \n" +
                 "                                         \"uuid\":\"865276021651906\", \n" +
                 "                                         \"version\":\"Huawei\"} ";
-        model.toLogin(contex,tag, json, this);
+        model.doLogin(contex, tag, json, this);
     }
 }
