@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.net.NetObserver;
 import com.ixzus.applibrary.net.RxSchedulers;
-import com.trello.rxlifecycle2.components.RxActivity;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.Member;
@@ -28,12 +27,12 @@ public class LoginModel extends BaseModel implements LoginContract.ILoginModel {
 
                     @Override
                     public void onSuccess(int whichRequest, Member member) {
-                        iLoginPresenter.getResult(new Gson().toJson(member));
+                        iLoginPresenter.loginResult(new Gson().toJson(member));
                     }
 
                     @Override
                     public void onError(int whichRequest, Throwable e) {
-                        iLoginPresenter.getResult(e.toString());
+                        iLoginPresenter.loginResult(e.toString());
                     }
                 });
     }

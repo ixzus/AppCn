@@ -47,7 +47,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        presenter.toLogin(LoginActivity.this, TAG);
+                        presenter.login(LoginActivity.this, TAG);
                     }
                 });
     }

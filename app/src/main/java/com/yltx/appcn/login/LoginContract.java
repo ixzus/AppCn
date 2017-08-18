@@ -19,9 +19,9 @@ public class LoginContract {
     }
 
     interface ILoginPresenter extends BaseContract.IBasePresenter {
-        void toLogin(Context contex, String tag);
+        void login(Context contex, String tag);
 
-        void getResult(String resultJson);
+        void loginResult(String resultJson);
     }
 
     interface ILoginModel extends BaseContract.IBaseModel {

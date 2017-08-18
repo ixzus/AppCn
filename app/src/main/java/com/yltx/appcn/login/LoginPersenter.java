@@ -11,12 +11,12 @@ import com.ixzus.applibrary.base.BasePresenter;
 
 public class LoginPersenter extends BasePresenter<LoginModel, LoginActivity> implements LoginContract.ILoginPresenter {
     @Override
-    public void getResult(String resultJson) {
+    public void loginResult(String resultJson) {
         view.onLoginResult(resultJson);
     }
 
     @Override
-    public void toLogin(Context contex, String tag) {
+    public void login(Context contex, String tag) {
         view.getName();
         view.getPwd();
         String json = " {\"accountName\":\"13510378755\", \n" +
