@@ -96,7 +96,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onError(Throwable t) {
-        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && !mDialog.getDialog().isShowing()) {
+        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && mDialog.getDialog().isShowing()) {
             mDialog.dismiss();
         }
         int code = 0;
@@ -141,7 +141,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onComplete() {
-        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && !mDialog.getDialog().isShowing()) {
+        if (isShowDialog && null != mDialog && null != mDialog.getDialog() && mDialog.getDialog().isShowing()) {
             mDialog.dismiss();
         }
     }

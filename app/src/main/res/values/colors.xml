@@ -4,7 +4,22 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="bg_view">#F1F1F1</color>
+    //base
+    <color name="base_view">#F4F4F4</color>
+    <color name="base_color">#508CEE</color>
+    <color name="line">#EFEFEF</color>
+    <color name="input">#424242</color>
+    <color name="input_hint">#A3A3A3</color>
+    <color name="button_yes">#508CEE</color>
+    <color name="button_yes_click">#2077E0</color>
+    <color name="button_no">#C9C9C9</color>
+    <color name="button_no_click">#ADADAD</color>
+    <color name="text_blue">#508CEE</color>
+    <color name="text_orange">#FF801A</color>
+    <color name="text_black">#424242</color>
+    <color name="text_grey_medium">#616161</color>
+    <color name="text_grey_light">#A3A3A3</color>
+    //
     <color name="tv_menu_normal">#666666</color>
     <color name="tv_menu_press">#ff6c00</color>
 </resources>

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
 

@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.yltx.appcn.login.LoginActivity">
 
     <include layout="@layout/toolbar" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="button"
-        android:layout_marginTop="100dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/button"/>
 
-    <include layout="@layout/view_err"/>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.widget.SwipeRefreshLayout>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview"
-        android:textColor="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"/>
+    <com.allen.library.SuperButton
+        android:id="@+id/button"
+        style="@style/ButtonYesStyle"
+        android:layout_margin="10dp"
+        android:text="登录"
+        app:sCornersRadius="2dp"
+        app:sSelectorDisableColor="@color/button_no"
+        app:sSelectorNormalColor="@color/button_yes"
+        app:sSelectorPressedColor="@color/button_yes_click"
+        app:sUseSelector="true" />
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

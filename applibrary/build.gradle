@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.jakewharton.butterknife'
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
 
@@ -91,6 +91,9 @@ dependencies {
 //    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
 
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
 }
 

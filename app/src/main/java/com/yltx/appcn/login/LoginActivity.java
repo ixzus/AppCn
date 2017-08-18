@@ -1,9 +1,7 @@
 package com.yltx.appcn.login;
 
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.allen.library.SuperButton;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.constant.ViewStatus;
@@ -13,11 +11,10 @@ import com.ixzus.applibrary.impl.IToolbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
-import com.yltx.appcn.base.App;
 
 import java.util.concurrent.TimeUnit;
 
-import es.dmoral.toasty.Toasty;
+import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -26,8 +23,9 @@ import io.reactivex.functions.Consumer;
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter>
         implements LoginContract.ILoginView, IActivity, IToolbar, ISwipeBack {
 
-    private Button mButton;
-    private TextView textView;
+
+    @BindView(R.id.button)
+    SuperButton button;
 
     @Override
     protected int initLayout() {
@@ -36,11 +34,9 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     protected void initView() {
-        mButton = (Button) findViewById(R.id.button);
-        textView = (TextView) findViewById(R.id.textview);
-        toolbar("首页", false, null,R.color.bg_view,R.color.grey);
+        toolbar("首页", false, null, R.color.white, R.color.text_black);
         showStatus(ViewStatus.STATUS_LOADING);
-        RxView.clicks(mButton)
+        RxView.clicks(button)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -80,17 +76,10 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public void onLoginResult(String code) {
-        textView.setText(code);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override
     public void retry() {
-        Toasty.normal(App.getApplication(), "重试").show();
     }
 
 }

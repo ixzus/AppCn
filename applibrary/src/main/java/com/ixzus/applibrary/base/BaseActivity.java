@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.net.RxManager;
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import butterknife.ButterKnife;
 
 /**
  * 功能描述:
@@ -42,8 +45,8 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         if (null != presenter) {
             presenter.attatch(initModule(), this);
         }
-
         setContentView(initLayout());
+        ButterKnife.bind(this);
         initView();
         initData();
 
@@ -91,7 +94,9 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 
     protected abstract BaseModel initModule();
 
-    protected abstract int initLayout();
+    protected abstract
+    @LayoutRes
+    int initLayout();
 
     protected abstract void initView();
 
