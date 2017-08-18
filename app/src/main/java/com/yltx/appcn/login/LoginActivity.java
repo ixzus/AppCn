@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                                         dialog.dismiss();
                                     }
                                 })
-                                .setMargin(60)
+                                .setMargin(34)
                                 .setOutCancel(false)
                                 .setAnimStyle(R.style.DialogAnimation)
                                 .show(getSupportFragmentManager());
