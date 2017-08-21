@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/dialog_white_round_corner_bg">
+
+    <RelativeLayout
+        android:id="@+id/rlTitle"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="48dp">
+
+        <RadioButton
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:button="@drawable/selector_item"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/carNo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/radio"
+            android:gravity="center"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            tools:text="粤B888888" />
+
+        <TextView
+            android:id="@+id/carDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:text="车辆详情"
+            android:textColor="@color/text_grey_medium"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/base_view" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/orderNumTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="派单号: "
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/orderNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderNumTitle"
+        android:layout_toRightOf="@+id/orderNumTitle"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"
+        tools:text="CN00000000000000" />
+
+    <TextView
+        android:id="@+id/orderTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderNumTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:text="派单时间:"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/orderTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderTimeTitle"
+        android:layout_toRightOf="@+id/orderTimeTitle"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="12sp"
+        tools:text="2017-5-1 11:11:11" />
+
+    <TextView
+        android:id="@+id/orderPointTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderTimeTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:text="扣分"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/orderPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderPointTitle"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/orderPointTitle"
+        android:textColor="@color/text_orange"
+        android:textSize="14sp"
+        tools:text="0分" />
+
+    <TextView
+        android:id="@+id/orderFineTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderPointTitle"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/orderPoint"
+        android:text="罚款"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/orderFine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderFineTitle"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/orderFineTitle"
+        android:textColor="@color/text_orange"
+        android:textSize="14sp"
+        tools:text="100元" />
+
+    <TextView
+        android:id="@+id/orderOverdueFineTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderPointTitle"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/orderFine"
+        android:text="滞纳金"
+        android:textColor="@color/text_black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/orderOverdueFine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/orderOverdueFineTitle"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/orderOverdueFineTitle"
+        android:textColor="@color/text_orange"
+        android:textSize="14sp"
+        tools:text="100元" />
+
+    <TextView
+        android:id="@+id/orderAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderPoint"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="14sp"
+        tools:text="[广东深圳]深南高速" />
+
+    <TextView
+        android:id="@+id/orderReson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderAddr"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="14sp"
+        tools:text="机动车机动车" />
+
+    <TextView
+        android:id="@+id/orderStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/orderNumTitle"
+        android:background="@mipmap/ic_status_1"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        tools:text="待接单" />
+
+
+</RelativeLayout>

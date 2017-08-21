@@ -24,6 +24,7 @@ import com.jude.swipbackhelper.SwipeBackHelper;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 功能描述:
@@ -37,6 +38,8 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
     //    private ImmersionBar mImmersionBar;
     protected String TAG;
 
+    protected Unbinder unbinder;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         setContentView(initLayout());
 //        StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
         StatusBarUtil.setTranslucent(this);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         initView();
         initData();
 
@@ -92,6 +95,7 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 //        if (null != mImmersionBar) {
 //            mImmersionBar.destroy();
 //        }
+        unbinder.unbind();
     }
 
     protected abstract P initPresenter();

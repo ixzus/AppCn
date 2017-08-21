@@ -1,13 +1,289 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yltx.appcn.main.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/hometext"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="homefragment" />
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/banner"
+        style="@style/BannerDefaultStyle"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:banner_pageChangeDuration="1000"
+        app:banner_pointAutoPlayAble="true"
+        app:banner_pointContainerBackground="@android:color/transparent"
+        app:banner_pointDrawable="@drawable/bga_banner_selector_point_hollow"
+        app:banner_pointTopBottomMargin="4dp"
+        app:banner_transitionEffect="alpha" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/msg"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:paddingRight="10dp"
+        android:src="@mipmap/main_home_normal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/newmsg"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/bg_num"
+        app:layout_constraintRight_toRightOf="@+id/msg"
+        app:layout_constraintTop_toTopOf="@+id/msg" />
+
+    <LinearLayout
+        android:id="@+id/list_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/wait"
+                style="@style/HomeItem"
+                android:drawableTop="@mipmap/ic_wait"
+                android:text="待接单" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/deal"
+                style="@style/HomeItem"
+                android:drawableTop="@mipmap/ic_deal"
+                android:text="待办理" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/reject"
+                style="@style/HomeItem"
+                android:drawableTop="@mipmap/ic_reject"
+                android:text="已驳回" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/list_item2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_item">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/refuse"
+                style="@style/HomeItem"
+                android:drawableTop="@mipmap/ic_refuse"
+                android:text="已拒单" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/finish"
+                style="@style/HomeItem"
+                android:drawableTop="@mipmap/ic_finish"
+                android:text="已完成" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1">
+
+            <TextView style="@style/HomeItem" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="@color/base_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_item2">
+
+    </View>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:padding="0dp"
+                    android:text="待处理"
+                    android:textColor="@color/text_grey_medium"
+                    android:textSize="16dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingBottom="0dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="0dp"
+                        android:text="00"
+                        android:textColor="@color/text_orange"
+                        android:textSize="38dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/num"
+                        android:layout_toRightOf="@+id/num"
+                        android:text="单"
+                        android:textColor="@color/text_orange"
+                        android:textSize="24dp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:text="待接单:"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:text="00单" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:text="待办理:" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:text="00单" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:text="待接单:" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:text="00单" />
+                </LinearLayout>
+
+                <com.allen.library.SuperButton
+                    android:id="@+id/btnDeal"
+                    style="@style/ButtonYesStyle"
+                    android:layout_width="176dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="立即处理"
+                    app:sCornersRadius="1dp"
+                    app:sSelectorDisableColor="@color/button_no"
+                    app:sSelectorNormalColor="@color/button_yes"
+                    app:sSelectorPressedColor="@color/button_yes_click"
+                    app:sUseSelector="true" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="6dp"
+            android:src="@mipmap/ic_mark" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -41,11 +41,13 @@ dependencies {
 
     compile librarys.supportV4
     compile librarys.supportV7
+    compile librarys.cardview
     compile librarys.constraint
     compile librarys.barlibrary
     compile librarys.swipebackhelper
     compile librarys.SuperTextView
     compile librarys.SmartRefreshLayout
+    compile librarys.SmartRefreshHeader
     compile librarys.gif
     compile librarys.BaseRecyclerViewAdapterHelper
     compile librarys.Toasty
