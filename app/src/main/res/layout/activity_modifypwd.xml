@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <com.ixzus.applibrary.widget.ClearEditTextView
+        style="@style/InputStyle"
+        android:id="@+id/cet_old"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:hint="请输入旧密码" />
+
+    <com.ixzus.applibrary.widget.ClearEditTextView
+        style="@style/InputStyle"
+        android:id="@+id/cet_new"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:hint="请设置新密码" />
+
+    <com.ixzus.applibrary.widget.ClearEditTextView
+        style="@style/InputStyle"
+        android:id="@+id/cet_comfire"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:hint="请确认新密码" />
+
+
+    <com.allen.library.SuperButton
+        android:id="@+id/b"
+        style="@style/ButtonYesStyle"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="28dp"
+        android:text="确认修改"
+        app:sCornersRadius="1dp"
+        app:sSelectorDisableColor="@color/button_no"
+        app:sSelectorNormalColor="@color/button_yes"
+        app:sSelectorPressedColor="@color/button_yes_click"
+        app:sUseSelector="true" />
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <com.ixzus.applibrary.widget.ClearEditTextView
+        style="@style/InputStyle"
+        android:id="@+id/cet_phone"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:hint="请输入认证的手机号"
+        android:drawableLeft="@mipmap/main_phone_normal"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+    <com.ixzus.applibrary.widget.ClearEditTextView
+        style="@style/InputStyle"
+        android:id="@+id/cet_sms"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:hint="请输入验证码"
+        android:layout_toLeftOf="@+id/sb_getsms"
+        android:drawableLeft="@mipmap/main_sendms_normal"
+        />
+
+
+    <com.allen.library.SuperButton
+        android:id="@+id/sb_getsms"
+        style="@style/ButtonYesStyle"
+        android:layout_width="100dp"
+        android:layout_marginTop="10dp"
+        android:text="获取验证码"
+        android:layout_alignParentRight="true"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="16dp"
+        android:padding="4dp"
+        android:layout_marginLeft="12dp"
+
+        android:textColor="@color/base_color"
+        app:sCornersRadius="1dp"
+        app:sSelectorDisableColor="@color/button_no"
+        app:sSelectorNormalColor="@color/white"
+        app:sSelectorPressedColor="@color/button_no"
+        app:sStrokeColor="@color/base_color"
+        app:sStrokeWidth="1px"
+        app:sUseSelector="true" />
+
+    </RelativeLayout>
+
+
+    <com.allen.library.SuperButton
+        android:id="@+id/sb_next"
+        style="@style/ButtonYesStyle"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="28dp"
+        android:text="下一步"
+        app:sCornersRadius="1dp"
+        app:sSelectorDisableColor="@color/button_no"
+        app:sSelectorNormalColor="@color/button_yes"
+        app:sSelectorPressedColor="@color/button_yes_click"
+        app:sUseSelector="true" />
+
+
+
+
+
+</LinearLayout>

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/toolbar_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
         android:src="@drawable/ic_back"
         android:visibility="visible"
@@ -19,8 +19,8 @@
 
     <View
         android:id="@+id/line"
-        android:layout_width="1dp"
-        android:layout_height="20dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/BlueGrey900"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_back"
@@ -30,8 +30,8 @@
 
     <TextView
         android:id="@+id/toolbar_back_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
         android:textColor="@color/white"
         android:textSize="18sp"

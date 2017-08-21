@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="231dp"
+        android:orientation="vertical"
+        android:background="@mipmap/my_bg"
+        >
+        <android.support.v4.widget.CircleImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@mipmap/my_avator_normal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="72dp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张三"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="13888888888"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            />
+    </LinearLayout>
+
+
+
+    <!--<com.allen.library.SuperTextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--app:sLeftTvDrawableLeft="@mipmap/ic_launcher"-->
+        <!--app:sLeftTextString="kkkkkkkkkkkkkkkk"-->
+        <!--app:sRightTvDrawableRight="@mipmap/ic_launcher"-->
+        <!--app:sRightTextString="aaaaaaaaaaaaaa"/>-->
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTvDrawableLeft="@mipmap/my_message"
+        app:sLeftTextString="消息"
+        app:sLeftTextColor="@color/my_lefttext_gravy"
+        app:sLeftTextSize="16sp"
+        android:layout_marginTop="10dp"
+        />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTvDrawableLeft="@mipmap/my_question"
+        app:sLeftTextString="常见问题"
+        app:sLeftTextColor="@color/my_lefttext_gravy"
+        app:sLeftTextSize="16sp"
+        android:layout_marginTop="10dp"
+
+        />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTvDrawableLeft="@mipmap/my_setting"
+        app:sLeftTextString="设置"
+        app:sLeftTextColor="@color/my_lefttext_gravy"
+        app:sLeftTextSize="16sp"
+        android:layout_marginTop="10dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/my_about"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/my_version_gravy"
+            android:text="当前版本号: V1.0.0"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="54dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+
+
+
+    
+
+
+
+
+</LinearLayout>
