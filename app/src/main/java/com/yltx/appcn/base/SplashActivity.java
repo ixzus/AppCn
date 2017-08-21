@@ -1,8 +1,9 @@
 package com.yltx.appcn.base;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.ixzus.applibrary.base.BaseActivity;
+import com.ixzus.applibrary.base.BaseModel;
 import com.orhanobut.logger.Logger;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +20,8 @@ import io.reactivex.functions.Function;
  * Created by ixzus on 2017/8/17.
  */
 
-public class SplashActivity extends RxAppCompatActivity {
+public class SplashActivity extends BaseActivity<Contract.IView, Persenter>
+        implements Contract.IView {
     private int countTime = 2;
 
     @Override
@@ -68,9 +70,49 @@ public class SplashActivity extends RxAppCompatActivity {
                 });
     }
 
-    private void goNext(){
+    private void goNext() {
 //        ARouter.getInstance().build("/app/MainActivity").navigation(SplashActivity.this);
         ARouter.getInstance().build("/login/loginActivity").navigation(SplashActivity.this);
         finish();
+    }
+
+    @Override
+    public void retry() {
+
+    }
+
+    @Override
+    public String getJson() {
+        return null;
+    }
+
+    @Override
+    public void onResult(String code) {
+
+    }
+
+    @Override
+    protected Persenter initPresenter() {
+        return new Persenter();
+    }
+
+    @Override
+    protected BaseModel initModule() {
+        return new Model();
+    }
+
+    @Override
+    protected int initLayout() {
+        return 0;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 }
