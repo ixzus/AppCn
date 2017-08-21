@@ -42,8 +42,10 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     protected void initView() {
-        toolbar("首页", false, null);
+        toolbar("首页", true, null);
+
         showStatus(ViewStatus.STATUS_LOADING);
+
         RxView.clicks(button)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))

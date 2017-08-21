@@ -10,7 +10,7 @@ import com.yltx.appcn.main.home.HomeFragment;
  * Created by ixzus on 2017/8/3.
  */
 
-public class Persenter extends BasePresenter<Model, SplashActivity> implements Contract.IPresenter {
+public class Persenter extends BasePresenter<Model, HomeFragment> implements Contract.IPresenter {
     @Override
     public void loadResult(String resultJson) {
         view.onResult(resultJson);
@@ -18,7 +18,7 @@ public class Persenter extends BasePresenter<Model, SplashActivity> implements C
 
     @Override
     public void loadData(Context contex, String tag) {
-        view.getJson();
+//        view.getJson();
         String json = " {\"accountName\":\"13510378755\", \n" +
                 "                                         \"cordova\":\"1.2.2\", \n" +
                 "                                         \"ip\":\"\", \n" +
