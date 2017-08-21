@@ -3,7 +3,7 @@ package com.yltx.appcn.base;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BasePresenter;
-import com.yltx.appcn.main.HomeFragment;
+import com.yltx.appcn.main.home.HomeFragment;
 
 /**
  * 功能描述:

@@ -1,9 +1,8 @@
-package com.yltx.appcn.main;
+package com.yltx.appcn.main.home;
 
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BasePresenter;
-import com.yltx.appcn.login.LoginActivity;
 
 /**
  * 功能描述:

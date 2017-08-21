@@ -12,8 +12,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.yltx.appcn.main.HomeFragment;
-import com.yltx.appcn.main.MyFragment;
+import com.yltx.appcn.main.home.HomeFragment;
+import com.yltx.appcn.main.my.MyFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
