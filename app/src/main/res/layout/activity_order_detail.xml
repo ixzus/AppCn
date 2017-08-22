@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yltx.appcn.main.orderlist.orderdetail.OrderDetailActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/flbtn"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <include layout="@layout/orderdetail_progress" />
+
+            <include layout="@layout/line_10" />
+
+            <include layout="@layout/orderdetail_money" />
+
+            <include layout="@layout/orderdetail_reson" />
+
+            <include layout="@layout/orderdetail_pic" />
+
+            <include layout="@layout/orderdetail_info" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <!--<View-->
+        <!--android:id="@+id/line"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2px"-->
+        <!--android:layout_above="@+id/flbtn"-->
+        <!--android:background="@color/base_view" />-->
+
+
+    <FrameLayout
+        android:id="@+id/flbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <com.allen.library.SuperButton
+            android:id="@+id/oneBtn"
+            style="@style/DialogButtonStyle"
+            android:layout_height="48dp"
+            android:text="拒单"
+            android:visibility="gone"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/button_yes"
+            app:sSelectorPressedColor="@color/button_yes_click"
+            app:sUseSelector="true" />
+
+        <LinearLayout
+            android:id="@+id/llTwoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="visible">
+
+            <com.allen.library.SuperButton
+                android:id="@+id/cancel"
+                style="@style/DialogButtonStyle"
+                android:layout_height="match_parent"
+                android:text="办理失败"
+                app:sSelectorDisableColor="@color/button_no"
+                app:sSelectorNormalColor="@color/button_no"
+                app:sSelectorPressedColor="@color/button_no_click"
+                app:sUseSelector="true" />
+
+
+            <com.allen.library.SuperButton
+                android:id="@+id/ok"
+                style="@style/DialogButtonStyle"
+                android:layout_height="match_parent"
+                android:text="办理成功"
+                app:sSelectorDisableColor="@color/button_no"
+                app:sSelectorNormalColor="@color/button_yes"
+                app:sSelectorPressedColor="@color/button_yes_click"
+                app:sUseSelector="true" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+</RelativeLayout>

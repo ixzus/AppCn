@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/orderdetail_status_start"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_checkbox_press" />
+
+    <View
+        android:id="@+id/lineleft"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignTop="@+id/orderdetail_status_start"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/orderdetail_status_deal"
+        android:layout_toRightOf="@+id/orderdetail_status_start"
+        android:background="@color/text_grey_medium" />
+
+    <ImageView
+        android:id="@+id/orderdetail_status_deal"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_check_enable" />
+
+
+    <View
+        android:id="@+id/lineright"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignTop="@+id/orderdetail_status_start"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/orderdetail_status_end"
+        android:layout_toRightOf="@+id/orderdetail_status_deal"
+        android:background="@color/text_grey_medium" />
+
+    <ImageView
+        android:id="@+id/orderdetail_status_end"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_check_enable" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderdetail_status_start"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/base_color"
+        android:textSize="12sp"
+        tools:text="待接单" />
+
+    <TextView
+        android:id="@+id/orderdetail_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="10sp"
+        tools:text="2017-5-1 11:11:11" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderdetail_status_start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="12sp"
+        tools:text="处理订单" />
+
+    <TextView
+        android:id="@+id/orderdetail_deal_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="10sp"
+        tools:text="2017-5-1 11:11:11" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/orderdetail_status_start"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="12sp"
+        tools:text="订单完成" />
+
+    <TextView
+        android:id="@+id/orderdetail_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv3"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/text_grey_medium"
+        android:textSize="10sp"
+        tools:text="2017-5-1 11:11:11" />
+
+</RelativeLayout>

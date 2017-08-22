@@ -70,8 +70,9 @@ public class SplashActivity extends RxAppCompatActivity {
 
     private void goNext(){
 //        ARouter.getInstance().build("/login/loginActivity").navigation(SplashActivity.this);
-        ARouter.getInstance().build("/app/MainActivity").navigation(SplashActivity.this);
+//        ARouter.getInstance().build("/app/MainActivity").navigation(SplashActivity.this);
 //        ARouter.getInstance().build("/order/OrderListActivity").navigation(SplashActivity.this);
+        ARouter.getInstance().build("/order/OrderDetailActivity").navigation(SplashActivity.this);
         finish();
     }
 }

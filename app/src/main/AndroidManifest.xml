@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".main.orderlist.OrderListActivity"></activity>
+        <activity android:name=".main.orderlist.OrderListActivity" />
+        <activity android:name=".main.orderlist.orderdetail.OrderDetailActivity"></activity>
     </application>
 
 </manifest>

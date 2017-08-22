@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llpic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TextOrderDetailItemL"
+        android:layout_height="40dp"
+        android:text="审核备注" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/reson"
+            style="@style/TextOrderDetailItemL"
+            android:textColor="@color/text_orange"
+            tools:text="请重新 上传" />
+
+        <com.allen.library.SuperButton
+            android:id="@+id/update"
+            style="@style/ButtonYesStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="修改凭证"
+            android:textColor="@color/base_color"
+            android:textSize="12sp"
+            app:sCornersRadius="1dp"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/white"
+            app:sSelectorPressedColor="@color/button_no"
+            app:sStrokeColor="@color/base_color"
+            app:sStrokeWidth="1px"
+            app:sUseSelector="true" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/line_10" />
+
+</LinearLayout>
