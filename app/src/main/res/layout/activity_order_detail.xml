@@ -39,11 +39,11 @@
 
 
     <!--<View-->
-        <!--android:id="@+id/line"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="2px"-->
-        <!--android:layout_above="@+id/flbtn"-->
-        <!--android:background="@color/base_view" />-->
+    <!--android:id="@+id/line"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2px"-->
+    <!--android:layout_above="@+id/flbtn"-->
+    <!--android:background="@color/base_view" />-->
 
 
     <FrameLayout
@@ -57,7 +57,6 @@
             style="@style/DialogButtonStyle"
             android:layout_height="48dp"
             android:text="拒单"
-            android:visibility="gone"
             app:sSelectorDisableColor="@color/button_no"
             app:sSelectorNormalColor="@color/button_yes"
             app:sSelectorPressedColor="@color/button_yes_click"
@@ -67,7 +66,7 @@
             android:id="@+id/llTwoBtn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.allen.library.SuperButton
                 android:id="@+id/cancel"
@@ -92,6 +91,5 @@
 
         </LinearLayout>
     </FrameLayout>
-
 
 </RelativeLayout>
