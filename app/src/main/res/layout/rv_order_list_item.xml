@@ -138,7 +138,7 @@
         android:textSize="14sp"
         tools:text="机动车机动车" />
 
-        <LinearLayout
+    <LinearLayout
         android:id="@+id/llclose"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -151,12 +151,15 @@
             android:background="@color/base_view" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:drawableRight="@mipmap/ic_up"
             android:gravity="center"
-            android:textSize="12sp"
+            android:text="收起订单"
             android:textColor="@color/text_grey_medium"
-            android:text="收起订单" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

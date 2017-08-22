@@ -191,9 +191,12 @@
             android:background="@color/base_view" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:drawableRight="@mipmap/ic_down"
             android:gravity="center"
+            android:drawablePadding="8dp"
             android:text="展开订单"
             android:textColor="@color/text_grey_medium"
             android:textSize="12sp" />

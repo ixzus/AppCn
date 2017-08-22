@@ -58,6 +58,13 @@ public class ConfirmDialog extends AbsDialog {
             viewHolder.setText(R.id.ok, "立即修改");
             viewHolder.setText(R.id.cancel, "取消");
         }
+
+        if("确认订单".equals(type)){
+            viewHolder.setText(R.id.title, "温馨提示");
+            viewHolder.setText(R.id.message, "您已选择辆车,共计违章条\n罚款总额元\n您确认接单吗？");
+            viewHolder.setText(R.id.ok, "确认接单");
+            viewHolder.setText(R.id.cancel, "取消");
+        }
         viewHolder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

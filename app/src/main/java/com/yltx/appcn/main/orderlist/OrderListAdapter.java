@@ -1,5 +1,6 @@
 package com.yltx.appcn.main.orderlist;
 
+import android.support.v4.util.ArrayMap;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -17,7 +18,27 @@ import java.util.List;
 public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
     public static final int TYPE_LEVEL_0 = 0;
     public static final int TYPE_LEVEL_1 = 1;
-    private String mSessionId;
+    private int pos;
+    private ArrayMap array = new ArrayMap();
+
+    public void setItemCheck(String key, boolean isCheck) {
+        array.put(key, isCheck);
+        notifyDataSetChanged();
+    }
+
+    public boolean isItemCheck(String key) {
+        if (array.get(key) == null) {
+            return false;
+        }
+        return Boolean.valueOf(array.get(key).toString());
+    }
+
+    public void allCheck(boolean isCheck) {
+        for (int i = 0, l = mData.size(); i < l; ++i) {
+            array.put(((Level0Item) mData.get(i)).title, isCheck);
+        }
+        notifyDataSetChanged();
+    }
 
     public OrderListAdapter(List<MultiItemEntity> data) {
         super(data);
@@ -26,15 +47,14 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
     }
 
 
-    private int pos;
-    private View clickView;
-
     @Override
     protected void convert(final BaseViewHolder holder, final MultiItemEntity item) {
         switch (holder.getItemViewType()) {
             case TYPE_LEVEL_0:
                 final Level0Item lv0 = (Level0Item) item;
+                holder.setChecked(R.id.radio, lv0.isCheck);
                 holder.setText(R.id.orderNum, lv0.title);
+                holder.addOnClickListener(R.id.radio);
                 if (lv0.isExpanded()) {
                     holder.getView(R.id.llopen).setVisibility(View.GONE);
                 } else {

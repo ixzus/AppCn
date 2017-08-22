@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
  */
 public class Level0Item extends AbstractExpandableItem<Level1Item> implements MultiItemEntity {
     public String title;
+    public boolean isCheck;
 
     public Level0Item(String title) {
         this.title = title;
