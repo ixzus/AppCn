@@ -6,47 +6,6 @@
     android:layout_marginTop="10dp"
     android:background="@drawable/dialog_white_round_corner_bg">
 
-    <RelativeLayout
-        android:id="@+id/rlTitle"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="48dp">
-
-        <RadioButton
-            android:id="@+id/radio"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:button="@drawable/selector_item"
-            android:paddingRight="10dp" />
-
-        <TextView
-            android:id="@+id/carNo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/radio"
-            android:gravity="center"
-            android:textColor="@color/text_black"
-            android:textSize="16sp"
-            tools:text="粤B888888" />
-
-        <TextView
-            android:id="@+id/carDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:paddingRight="10dp"
-            android:text="车辆详情"
-            android:textColor="@color/text_grey_medium"
-            android:textSize="12sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_alignParentBottom="true"
-            android:background="@color/base_view" />
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/orderNumTitle"
@@ -178,6 +137,28 @@
         android:textColor="@color/text_grey_medium"
         android:textSize="14sp"
         tools:text="机动车机动车" />
+
+        <LinearLayout
+        android:id="@+id/llclose"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/orderReson"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/base_view" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/text_grey_medium"
+            android:text="收起订单" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/orderStatus"

@@ -50,7 +50,7 @@ public class OrderListFragment extends Fragment {
 
     private List<MultiItemEntity> listData = new ArrayList<>();
     private int pageNo = 1;
-    private int pageSize = 1;
+    private int pageSize = 3;
     private int pageTotal;
 
 
@@ -150,14 +150,14 @@ public class OrderListFragment extends Fragment {
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                pageNo++;
-                loadData(mParam1, pageNo, pageSize);
-                mAdapter.addData(listData);
-                if (pageNo > 1) {
-                    mAdapter.loadMoreEnd();
-                } else {
-                    mAdapter.loadMoreComplete();
-                }
+//                pageNo++;
+//                loadData(mParam1, pageNo, pageSize);
+//                mAdapter.addData(listData);
+//                if (pageNo > 1) {
+//                    mAdapter.loadMoreEnd();
+//                } else {
+//                    mAdapter.loadMoreComplete();
+//                }
             }
         }, recyclerView);
 
@@ -167,8 +167,16 @@ public class OrderListFragment extends Fragment {
 
     private void loadData(String orderType, int pageNo, int pageSize) {
         for (int i = 0; i < pageSize; ++i) {
-            Level0Item lv0 = new Level0Item(orderType + pageNo);
-            lv0.addSubItem(lv0);
+            Level0Item lv0 = new Level0Item("one" + i);
+            for (int j = 0, l = 2; j < l; ++j) {
+                Level1Item lv1;
+                if (j == l - 1) {
+                    lv1 = new Level1Item("one" + i, true);
+                } else {
+                    lv1 = new Level1Item("one" + i, false);
+                }
+                lv0.addSubItem(lv1);
+            }
             listData.add(lv0);
         }
     }
