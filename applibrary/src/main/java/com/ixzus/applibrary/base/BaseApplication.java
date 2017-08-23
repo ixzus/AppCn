@@ -68,8 +68,8 @@ public class BaseApplication extends Application {
                 .setInfoColor(Color.GRAY) // optional
                 .setSuccessColor(Color.GREEN) // optional
                 .setWarningColor(Color.YELLOW) // optional
-                .setTextColor(Color.GRAY) // optional
-                .setTextSize(12) // optional
+                .setTextColor(Color.WHITE) // optional
+                .setTextSize(14) // optional
                 .apply(); // required
     }
 

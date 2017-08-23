@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llreson"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TextOrderDetailItemL"
+        android:layout_height="40dp"
+        android:text="审核备注" />
+
+    <TextView
+        android:id="@+id/reson"
+        style="@style/TextOrderDetailItemL"
+        android:layout_height="40dp"
+        android:textColor="@color/text_orange"
+        tools:text="审核备注" />
+
+    <include layout="@layout/line_10" />
+
+</LinearLayout>

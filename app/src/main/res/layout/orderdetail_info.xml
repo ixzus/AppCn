@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:text="派单号" />
+
+        <TextView
+            android:id="@+id/no"
+            style="@style/TextOrderDetailItemR"
+            tools:text="CN000000000000" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:text="派单时间" />
+
+        <TextView
+            android:id="@+id/sendTime"
+            style="@style/TextOrderDetailItemR"
+            tools:text="2017-5-1 11:11:11" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTakeTime"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:text="接单时间" />
+
+        <TextView
+            android:id="@+id/takeTime"
+            style="@style/TextOrderDetailItemR"
+            tools:text="2017-5-1 11:11:11" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:text="违章编号" />
+
+        <TextView
+            android:id="@+id/uid"
+            style="@style/TextOrderDetailItemR"
+            tools:text="5555555555555555555555" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:text="车牌号" />
+
+        <TextView
+            android:id="@+id/carno"
+            style="@style/TextOrderDetailItemR"
+            tools:text="粤B55555" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:text="违章时间" />
+
+        <TextView
+            android:id="@+id/breakTime"
+            style="@style/TextOrderDetailItemR"
+            tools:text="2017-5-1 11:11:11" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="违章地点" />
+
+        <TextView
+            android:id="@+id/breakAddr"
+            style="@style/TextOrderDetailItemR"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:lineSpacingExtra="8dp"
+            tools:text="【广东深圳】广东深圳广东深圳广东深圳广东深圳广东深圳广东深圳广东深圳广东深圳" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextOrderDetailItemL"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="违章内容" />
+
+        <TextView
+            android:id="@+id/breakInfo"
+            style="@style/TextOrderDetailItemR"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:lineSpacingExtra="8dp"
+            tools:text="机动车机动车机动车机动车机动车机动车机动车机动车机动车机动车机动车机动车" />
+    </RelativeLayout>
+
+</merge>
