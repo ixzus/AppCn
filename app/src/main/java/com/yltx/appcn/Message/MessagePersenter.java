@@ -1,4 +1,4 @@
-package com.yltx.appcn.Message;
+package com.yltx.appcn.message;
 
 import android.content.Context;
 

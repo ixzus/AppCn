@@ -3,6 +3,7 @@ package com.yltx.appcn.pwd;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BasePresenter;
+import com.yltx.appcn.bean.SendSmsRsBean;
 
 /**
  * Author：Wq
@@ -21,8 +22,8 @@ public class FindPwdPersenter extends BasePresenter<FindPwdModel,FindPwdActivity
     }
 
     @Override
-    public void sendSmsResult(String resultJson) {
-        view.onSendResult(resultJson);
+    public void sendSmsResult(SendSmsRsBean mSendSmsRsBean) {
+        view.onSendResult(mSendSmsRsBean);
 
     }
 

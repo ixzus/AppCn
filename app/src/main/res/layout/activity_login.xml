@@ -5,42 +5,141 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.yltx.appcn.login.LoginActivity">
+    tools:context="com.yltx.appcn.login.LoginActivity"
+    android:background="@color/bg_white"
+    >
 
     <include layout="@layout/toolbar" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
 
-    <com.allen.library.SuperButton
-        android:id="@+id/button"
-        style="@style/ButtonYesStyle"
-        android:layout_margin="10dp"
-        android:text="登录"
-        app:sCornersRadius="1dp"
-        app:sSelectorDisableColor="@color/button_no"
-        app:sSelectorNormalColor="@color/button_yes"
-        app:sSelectorPressedColor="@color/button_yes_click"
-        app:sUseSelector="true" />
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_launcher"
+        />
+
+    </LinearLayout>
 
 
-    <com.allen.library.SuperButton
-        android:id="@+id/button1"
-        style="@style/ButtonYesStyle"
-        android:layout_margin="10dp"
-        android:text="登录"
-        android:textColor="@color/base_color"
-        app:sCornersRadius="1dp"
-        app:sSelectorDisableColor="@color/button_no"
-        app:sSelectorNormalColor="@color/white"
-        app:sSelectorPressedColor="@color/button_no"
-        app:sStrokeColor="@color/base_color"
-        app:sStrokeWidth="1px"
-        app:sUseSelector="true" />
+    <!--<com.allen.library.SuperButton-->
+        <!--android:id="@+id/button"-->
+        <!--style="@style/ButtonYesStyle"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:text="登录"-->
+        <!--app:sCornersRadius="1dp"-->
+        <!--app:sSelectorDisableColor="@color/button_no"-->
+        <!--app:sSelectorNormalColor="@color/button_yes"-->
+        <!--app:sSelectorPressedColor="@color/button_yes_click"-->
+        <!--app:sUseSelector="true" />-->
 
+
+    <!--<com.allen.library.SuperButton-->
+        <!--android:id="@+id/button1"-->
+        <!--style="@style/ButtonYesStyle"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:text="登录"-->
+        <!--android:textColor="@color/base_color"-->
+        <!--app:sCornersRadius="1dp"-->
+        <!--app:sSelectorDisableColor="@color/button_no"-->
+        <!--app:sSelectorNormalColor="@color/white"-->
+        <!--app:sSelectorPressedColor="@color/button_no"-->
+        <!--app:sStrokeColor="@color/base_color"-->
+        <!--app:sStrokeWidth="1px"-->
+        <!--app:sUseSelector="true" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        >
     <com.ixzus.applibrary.widget.ClearEditTextView
         style="@style/InputStyle"
-        android:layout_margin="10dp"
-        android:drawableLeft="@mipmap/main_home_normal"
+        android:id="@+id/cet_inputphone"
+        android:drawableLeft="@mipmap/main_phone_normal"
         android:hint="请输入" />
+        <com.ixzus.applibrary.widget.ClearEditTextView
+            style="@style/InputStyle"
+            android:id="@+id/cet_inputpwde"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@mipmap/main_pwd_normal"
+            android:drawableRight="@mipmap/main_look_normal"
+            android:hint="请输入" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            >
+            <TextView
+                android:id="@+id/tv_forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:text="忘记密码?"
+                android:textColor="@color/my_lefttext_gravy"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+                <CheckBox
+                    android:id="@+id/cb_rember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_repwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="记住密码"
+                    android:textColor="@color/my_lefttext_gravy"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="10dp"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <com.allen.library.SuperButton
+            android:id="@+id/button"
+            style="@style/ButtonYesStyle"
+            android:text="登录"
+            app:sCornersRadius="1dp"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/button_yes"
+            app:sSelectorPressedColor="@color/button_yes_click"
+            app:sUseSelector="true"
+            android:layout_marginTop="18dp"
+            />
+        <com.allen.library.SuperButton
+            android:id="@+id/button1"
+            style="@style/ButtonYesStyle"
+            android:text="登录"
+            android:textColor="@color/base_color"
+            app:sCornersRadius="1dp"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/white"
+            app:sSelectorPressedColor="@color/button_no"
+            app:sStrokeColor="@color/base_color"
+            app:sStrokeWidth="1px"
+            app:sUseSelector="true"
+            android:visibility="gone"
+            />
+    </LinearLayout>
 
 
 

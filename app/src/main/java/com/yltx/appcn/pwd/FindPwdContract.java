@@ -3,6 +3,7 @@ package com.yltx.appcn.pwd;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BaseContract;
+import com.yltx.appcn.bean.SendSmsRsBean;
 
 /**
  * 功能描述:
@@ -15,13 +16,13 @@ public class FindPwdContract {
 
         String getSmsCode();
 
-        void onSendResult(String code);
+        void onSendResult(SendSmsRsBean mSendSmsRsBean);
         void onCheckNextResult(String code);
     }
 
     interface IFindPwdPresenter extends BaseContract.IBasePresenter {
         void sendSms(Context contex, String tag,String json);
-        void  sendSmsResult(String resultJson);
+        void  sendSmsResult(SendSmsRsBean mSendSmsRsBean);
 
 
         void checkNext(Context contex, String tag,String json);

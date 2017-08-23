@@ -1,13 +1,8 @@
-package com.yltx.appcn.Message;
-
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
+package com.yltx.appcn.message;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yltx.appcn.R;
-
-import java.util.List;
 
 /**
  * Author：Wq
@@ -26,8 +21,5 @@ public class MessageAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, String item) {
 
         helper.setText(R.id.tv_time, item);
-
-
-
     }
 }

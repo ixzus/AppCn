@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperButton;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
@@ -16,6 +17,8 @@ import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.SendSmsRsBean;
+import com.yltx.appcn.login.LoginActivity;
 import com.yltx.appcn.widget.dialog.TimeCount;
 
 import java.util.concurrent.TimeUnit;
@@ -33,7 +36,7 @@ import io.reactivex.functions.Consumer;
  * Description：//todo
  */
 
-@Route(path = "/modifypwd/FindPwdActivity")
+@Route(path = "/pwd/FindPwdActivity")
 public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, FindPwdPersenter> implements FindPwdContract.IFindPwdView, IToolbar {
     @BindView(R.id.toolbar_back)
     ImageView toolbarBack;
@@ -81,6 +84,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         toSendSms();
+                      //  new TimeCount(sbGetsms, 60 * 1000, 1000).start();
                     }
                 });
 
@@ -93,13 +97,20 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
 //                       presenter.checkNext(FindPwdActivity.this, TAG);
-                        toCheckNext();//点击下一步校验验证码
+                      //  toCheckNext();//点击下一步校验验证码
+
+                        toNext();
                     }
                 });
 
 
 
 
+    }
+
+    private void toNext() {
+        ARouter.getInstance().build("/modifypwd/ModifyPwdActivity").navigation(FindPwdActivity.this);
+        finish();
     }
 
     private void toCheckNext() {
@@ -147,7 +158,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
     }
 
     @Override
-    public void onSendResult(String code) {
+    public void onSendResult(SendSmsRsBean mSendSmsRsBean) {
 
                 //发送验证码  返回结果
         //@// TODO: 2017/8/21  判断返回结果是否成功 成功 则倒计时开始
@@ -184,6 +195,8 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
+
 
 
 

@@ -1,8 +1,11 @@
 package com.yltx.appcn.net;
 
 import com.yltx.appcn.bean.CartMemberBean;
+import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
+import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
+import com.yltx.appcn.bean.SendSmsRsBean;
 import com.yltx.appcn.bean.WeatherInfo;
 
 import java.util.concurrent.TimeUnit;
@@ -40,6 +43,8 @@ public interface ApiService {
 //
 //    }
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+
+    //http://192.168.X.X:XX/api/user/login
     @POST("member/login")
     Observable<Member> login(@Body LoginInfo loginInfo);
 
@@ -52,5 +57,17 @@ public interface ApiService {
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("data/cityinfo/101010100.html")
     Observable<WeatherInfo> getWeather();
+
+
+
+    //http://192.168.X.X:XX/api/user/login   登录
+    @POST("user/login")
+    Observable<LoginRsBean> login(@Body LoginBean mLoginBean);
+
+
+    //http://192.168.X.X:XX/api/user/sendMsgByPhone
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @GET("user/sendMsgByPhone")
+    Observable<SendSmsRsBean> sendMsgByPhone(@Query("mobilePhone") String mobilePhone, @Query("businessType") String businessType);
 
 }

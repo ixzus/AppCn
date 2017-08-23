@@ -23,6 +23,13 @@
         </activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".pwd.FindPwdActivity"></activity>
+        <activity android:name=".modifypwd.ModifyPwdActivity"></activity>
+        <activity android:name=".message.MessageActivity"></activity>
+        <activity android:name=".cardetail.CarDetailAvtivity"></activity>
+
+        <activity android:name=".other.SettingActivity"></activity>
+
     </application>
 
 </manifest>

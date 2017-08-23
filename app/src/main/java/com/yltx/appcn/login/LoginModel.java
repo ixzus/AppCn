@@ -7,7 +7,9 @@ import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.net.NetObserver;
 import com.ixzus.applibrary.net.RxSchedulers;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
+import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
 import com.yltx.appcn.net.RxRetrofit;
 
@@ -18,21 +20,23 @@ import com.yltx.appcn.net.RxRetrofit;
 
 public class LoginModel extends BaseModel implements LoginContract.ILoginModel {
     @Override
-    public void doLogin(Context context, final String TAG, final String json, final LoginContract.ILoginPresenter iLoginPresenter) {
-        LoginInfo loginInfo = new Gson().fromJson(json, LoginInfo.class);
-        RxRetrofit.getInstance().getApiService().login(loginInfo)
-                .compose(((RxAppCompatActivity)context).<Member>bindToLifecycle())
-                .compose(RxSchedulers.<Member>io_main())
-                .subscribe(new NetObserver<Member>(context, TAG, 0, true) {
+    public void doLogin(Context context, final String TAG, final LoginBean mLoginBean, final LoginContract.ILoginPresenter iLoginPresenter) {
+
+        RxRetrofit.getInstance().getApiService().login(mLoginBean)
+                .compose(((RxAppCompatActivity)context).<LoginRsBean>bindToLifecycle())
+                .compose(RxSchedulers.<LoginRsBean>io_main())
+                .subscribe(new NetObserver<LoginRsBean>(context, TAG, 0, true) {
+
 
                     @Override
-                    public void onSuccess(int whichRequest, Member member) {
-                        iLoginPresenter.loginResult(new Gson().toJson(member));
+                    public void onSuccess(int whichRequest, LoginRsBean loginRsBean) {
+//                        iLoginPresenter.loginResult(new Gson().toJson(member));
+                        iLoginPresenter.loginResult(loginRsBean);
                     }
 
                     @Override
                     public void onError(int whichRequest, Throwable e) {
-                        iLoginPresenter.loginResult(e.toString());
+//                        iLoginPresenter.loginResult(e.toString());
                     }
                 });
     }

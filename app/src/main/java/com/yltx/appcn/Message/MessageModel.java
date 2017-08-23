@@ -1,9 +1,8 @@
-package com.yltx.appcn.Message;
+package com.yltx.appcn.message;
 
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BaseModel;
-import com.yltx.appcn.pwd.FindPwdContract;
 
 /**
  * Author：Wq
