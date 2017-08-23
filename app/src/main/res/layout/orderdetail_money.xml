@@ -99,7 +99,10 @@
         android:layout_alignTop="@id/titleMoney"
         android:layout_marginRight="10dp"
         android:background="@mipmap/ic_status_1"
-        android:padding="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
         android:textColor="@color/white"
         tools:text="待接单" />
 

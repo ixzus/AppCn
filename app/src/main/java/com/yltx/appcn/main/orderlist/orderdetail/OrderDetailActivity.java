@@ -2,9 +2,14 @@ package com.yltx.appcn.main.orderlist.orderdetail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.SuperButton;
@@ -26,6 +31,7 @@ import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.R;
+import com.yltx.appcn.main.orderlist.OrderViewType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,20 +45,59 @@ public class OrderDetailActivity extends RxAppCompatActivity implements TakePhot
 
     @BindView(R.id.oneBtn)
     SuperButton oneBtn;
+    @BindView(R.id.llTwoBtn)
+    LinearLayout llTwoBtn;
     @BindView(R.id.update)
     SuperButton update;
     @BindView(R.id.recyclerViewPic)
     RecyclerView recyclerViewPic;
+    @BindView(R.id.llreson)
+    LinearLayout llreson;
+    @BindView(R.id.resonTitle)
+    TextView resonTitle;
+    @BindView(R.id.llpic)
+    LinearLayout llpic;
+    @BindView(R.id.llpicreson)
+    LinearLayout llpicreson;
+    @BindView(R.id.orderStatus)
+    TextView orderStatus;
+
+    /****************************/
+    @BindView(R.id.startLineR)
+    View startLineR;
+    @BindView(R.id.start_time)
+    TextView startTime;
+    @BindView(R.id.dealLineL)
+    View dealLineL;
+    @BindView(R.id.dealIv)
+    ImageView dealIv;
+    @BindView(R.id.dealLineR)
+    View dealLineR;
+    @BindView(R.id.dealText)
+    TextView dealText;
+    @BindView(R.id.deal_time)
+    TextView dealTime;
+    @BindView(R.id.rlDeal)
+    RelativeLayout rlDeal;
+    @BindView(R.id.endIv)
+    ImageView endIv;
+    @BindView(R.id.endLineL)
+    View endLineL;
+    @BindView(R.id.endText)
+    TextView endText;
+    @BindView(R.id.end_time)
+    TextView endTime;
+    /****************************/
 
     private List<String> listData = new ArrayList<>();
-    private PicAdapter mAdapter;
     private GridImageAdapter adapter;
+
+    private String orderViewType = OrderViewType.SUCCESS;
 
     private CustomHelper customHelper;
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
     private ArrayList<TImage> images;
-    private boolean isModify = true;
 
     public TakePhoto getTakePhoto() {
         if (takePhoto == null) {
@@ -67,12 +112,77 @@ public class OrderDetailActivity extends RxAppCompatActivity implements TakePhot
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         ButterKnife.bind(this);
-        if (isModify) {
-            initRv();
-            update.setVisibility(View.VISIBLE);
-            customHelper = CustomHelper.of();
+        switch (orderViewType) {
+            case OrderViewType.WAIT:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_1));
+                oneBtn.setVisibility(View.VISIBLE);
+                break;
+            case OrderViewType.DEAL:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_2));
+                llTwoBtn.setVisibility(View.VISIBLE);
+                startLineR.setBackgroundResource(R.color.base_color);
+                dealIv.setBackground(AppCompatResources.getDrawable(this, R.drawable.ic_checkbox_press));
+                dealLineL.setBackgroundResource(R.color.base_color);
+                dealText.setTextColor(getResources().getColor(R.color.base_color));
+                break;
+            case OrderViewType.REJECT:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_2));
+                llpicreson.setVisibility(View.VISIBLE);
+                llpic.setVisibility(View.VISIBLE);
+                update.setVisibility(View.VISIBLE);
+                dealIv.setBackground(AppCompatResources.getDrawable(this, R.drawable.ic_checkbox_press));
+                initRv();
+                customHelper = CustomHelper.of();
+                break;
+            case OrderViewType.REFUSE:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_3));
+                llreson.setVisibility(View.VISIBLE);
+                rlDeal.setVisibility(View.GONE);
+                startLineR.setBackgroundResource(R.color.base_color);
+                endLineL.setBackgroundResource(R.color.base_color);
+                endIv.setBackground(AppCompatResources.getDrawable(this, R.drawable.ic_checkbox_press));
+                endText.setTextColor(getResources().getColor(R.color.base_color));
+                resonTitle.setText("拒单原因");
+                break;
+            case OrderViewType.DEALOK:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_3));
+                llpic.setVisibility(View.VISIBLE);
+                statusAll();
+                initRv();
+                break;
+            case OrderViewType.SUCCESS:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_3));
+                llpicreson.setVisibility(View.VISIBLE);
+                llpic.setVisibility(View.VISIBLE);
+                statusAll();
+                initRv();
+                break;
+            case OrderViewType.FAIL:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_2));
+                llreson.setVisibility(View.VISIBLE);
+                statusAll();
+                resonTitle.setText("办理失败原因");
+                break;
+            case OrderViewType.DEALFAIL:
+                orderStatus.setBackground(AppCompatResources.getDrawable(this, R.mipmap.ic_status_2));
+                llreson.setVisibility(View.VISIBLE);
+                statusAll();
+                resonTitle.setText("办理失败原因");
+                break;
         }
+        orderStatus.setText(orderViewType);
 
+    }
+
+    private void statusAll() {
+        startLineR.setBackgroundResource(R.color.base_color);
+        dealIv.setBackground(AppCompatResources.getDrawable(this, R.drawable.ic_checkbox_press));
+        dealLineL.setBackgroundResource(R.color.base_color);
+        dealLineR.setBackgroundResource(R.color.base_color);
+        dealText.setTextColor(getResources().getColor(R.color.base_color));
+        endLineL.setBackgroundResource(R.color.base_color);
+        endIv.setBackground(AppCompatResources.getDrawable(this, R.drawable.ic_checkbox_press));
+        endText.setTextColor(getResources().getColor(R.color.base_color));
     }
 
     @Override
@@ -96,13 +206,7 @@ public class OrderDetailActivity extends RxAppCompatActivity implements TakePhot
 
     private void initRv() {
         listData.add("http://img17.3lian.com/d/file/201702/21/b79143e1538188ec4030ba5c3b93f6ea.png");
-//        listData.add("http://img17.3lian.com/d/file/201702/21/b79143e1538188ec4030ba5c3b93f6ea.png");
         recyclerViewPic.setLayoutManager(new GridLayoutManager(this, 4));
-//        mAdapter = new PicAdapter();
-//        mAdapter.openLoadAnimation();
-//        recyclerViewPic.setAdapter(mAdapter);
-//        mAdapter.setNewData(listData);
-
         adapter = new GridImageAdapter(OrderDetailActivity.this);
         adapter.setList(listData);
         adapter.setSelectMax(4);
@@ -111,7 +215,6 @@ public class OrderDetailActivity extends RxAppCompatActivity implements TakePhot
         adapter.setOnAddClickListener(new GridImageAdapter.OnAddClickListener() {
             @Override
             public void onAddClick() {
-                Logger.e("add");
                 addDialog();
             }
         });
@@ -167,7 +270,6 @@ public class OrderDetailActivity extends RxAppCompatActivity implements TakePhot
                 if (adapter != null) {
                     adapter.setUpdate(true);
                 }
-
                 break;
             case R.id.oneBtn:
                 KeyboardUtils.showSoftInput(OrderDetailActivity.this);

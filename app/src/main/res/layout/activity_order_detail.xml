@@ -64,6 +64,7 @@
             style="@style/DialogButtonStyle"
             android:layout_height="48dp"
             android:text="拒单"
+            android:visibility="gone"
             app:sSelectorDisableColor="@color/button_no"
             app:sSelectorNormalColor="@color/button_yes"
             app:sSelectorPressedColor="@color/button_yes_click"
