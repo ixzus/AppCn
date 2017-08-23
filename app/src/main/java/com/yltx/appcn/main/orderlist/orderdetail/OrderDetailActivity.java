@@ -8,6 +8,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.SuperButton;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.BaseDialog;
 import com.ixzus.applibrary.widget.ViewConvertListener;
@@ -84,6 +85,7 @@ public class OrderDetailActivity extends RxAppCompatActivity {
                         holder.setOnClickListener(R.id.photo, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                Toast.show("拍照");
                                 dialog.dismiss();
                             }
                         });
