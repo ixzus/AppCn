@@ -21,6 +21,8 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
     private int pos;
     private ArrayMap array = new ArrayMap();
 
+    private String orderViewType = OrderViewType.SUCCESS;
+
     public void setItemCheck(String key, boolean isCheck) {
         array.put(key, isCheck);
         notifyDataSetChanged();
@@ -54,6 +56,37 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 final Level0Item lv0 = (Level0Item) item;
                 holder.setChecked(R.id.radio, lv0.isCheck);
                 holder.setText(R.id.orderNum, lv0.title);
+
+                /*****************/
+                switch (orderViewType) {
+                    case OrderViewType.WAIT:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_1);
+                        break;
+                    case OrderViewType.DEAL:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                    case OrderViewType.REJECT:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                    case OrderViewType.REFUSE:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_3);
+                        break;
+                    case OrderViewType.DEALOK:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_3);
+                        break;
+                    case OrderViewType.SUCCESS:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_3);
+                        break;
+                    case OrderViewType.FAIL:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                    case OrderViewType.DEALFAIL:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                }
+                holder.setText(R.id.orderStatus, orderViewType);
+                /*****************/
+
                 holder.addOnClickListener(R.id.radio);
                 if (lv0.isExpanded()) {
                     holder.getView(R.id.llopen).setVisibility(View.GONE);
