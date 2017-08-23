@@ -26,6 +26,7 @@ ext {
             utilcode                     : 'com.blankj:utilcode:1.8.1',
             CommonUtil                   : 'com.abrahamcaijin.commonutil:CommonUtil:1.0.1',
             logger                       : 'com.orhanobut:logger:2.1.1',
+            circleimageview              : 'de.hdodenhof:circleimageview:2.1.0',
 
             //retrofit2
             retrofit2                    : 'com.squareup.retrofit2:retrofit:2.3.0',
