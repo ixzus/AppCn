@@ -11,7 +11,7 @@ import es.dmoral.toasty.Toasty;
 
 public class Toast {
     public static void show(String msg) {
-        Toasty.info(BaseApplication.getBaseApplication(), msg).show();
+        Toasty.normal(BaseApplication.getBaseApplication(), msg).show();
     }
 
     public static void showSuccess(String msg) {
