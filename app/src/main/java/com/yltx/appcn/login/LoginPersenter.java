@@ -3,6 +3,9 @@ package com.yltx.appcn.login;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BasePresenter;
+import com.jingewenku.abrahamcaijin.commonutil.encryption.MD5Utils;
+import com.yltx.appcn.bean.LoginBean;
+import com.yltx.appcn.bean.LoginRsBean;
 
 /**
  * 功能描述:
@@ -11,25 +14,15 @@ import com.ixzus.applibrary.base.BasePresenter;
 
 public class LoginPersenter extends BasePresenter<LoginModel, LoginActivity> implements LoginContract.ILoginPresenter {
     @Override
-    public void loginResult(String resultJson) {
-        view.onLoginResult(resultJson);
+   public void loginResult(LoginRsBean mLoginRsBean)
+    {
+        view.onLoginResult(mLoginRsBean);
     }
-
     @Override
     public void login(Context contex, String tag) {
-        view.getName();
-        view.getPwd();
-        String json = " {\"accountName\":\"13510378755\", \n" +
-                "                                         \"cordova\":\"1.2.2\", \n" +
-                "                                         \"ip\":\"\", \n" +
-                "                                         \"loginChannel\":\"Android\", \n" +
-                "                                         \"loginType\":\"mobilePhone\", \n" +
-                "                                         \"model\":\"HUAWEI MT7-L09\", \n" +
-                "                                         \"password\":\"e10adc3949ba59abbe56e057f20f883e\", \n" +
-                "                                         \"platform\":\"Android\", \n" +
-                "                                         \"reference\":\"cheguanjia\", \n" +
-                "                                         \"uuid\":\"865276021651906\", \n" +
-                "                                         \"version\":\"Huawei\"} ";
-        model.doLogin(contex, tag, json, this);
+        LoginBean mLoginBean=new LoginBean();
+        mLoginBean.setAccountName(view.getName());
+        mLoginBean.setPassword(MD5Utils.encryptMD5(view.getPwd()));//MD5加密
+        model.doLogin(contex, tag, mLoginBean, this);
     }
 }

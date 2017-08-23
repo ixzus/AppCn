@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RxRetrofit {
     private static RxRetrofit instance;
 
-    private String BASE_URL = "http://192.168.3.49:11012/mdm-rs/";
+    private String BASE_URL = "http://192.168.1.29:8081/api/";
     private int DEFAULT_TIMEOUT = 3;
     private static int change = 0;
 

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_cartype"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="车辆类型"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+
+    <View
+        style="@style/HlineViewStyle" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_carnum"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="车辆号码"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+        <View
+            style="@style/HlineViewStyle" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_enginnum"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="发动机号"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+
+        <View
+            style="@style/HlineViewStyle" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_framenum"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="车架号"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+        <View
+            style="@style/HlineViewStyle" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_carproperty"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="车辆性质"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+        <View
+            style="@style/HlineViewStyle" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_original"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="行驶证正本"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+    <ImageView
+        android:id="@+id/iv_original"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_copy"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:sLeftTextString="行驶证副本"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_copy"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

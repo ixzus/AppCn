@@ -1,8 +1,16 @@
 package com.yltx.appcn.login;
 
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperButton;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
@@ -11,15 +19,20 @@ import com.ixzus.applibrary.impl.IActivity;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.widget.AbsDialog;
+import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
+import com.yltx.appcn.base.SplashActivity;
+import com.yltx.appcn.bean.LoginRsBean;
+import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -34,6 +47,28 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     SuperButton button;
     @BindView(R.id.button1)
     SuperButton button1;
+    @BindView(R.id.toolbar_back)
+    ImageView toolbarBack;
+    @BindView(R.id.toolbar_line)
+    View toolbarLine;
+    @BindView(R.id.toolbar_back_text)
+    TextView toolbarBackText;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.iv_title)
+    ImageView ivTitle;
+    @BindView(R.id.cet_inputphone)
+    ClearEditTextView cetInputphone;
+    @BindView(R.id.cet_inputpwde)
+    ClearEditTextView cetInputpwde;
+    @BindView(R.id.tv_forgot)
+    TextView tvForgot;
+    @BindView(R.id.cb_rember)
+    CheckBox cbRember;
+    @BindView(R.id.tv_repwd)
+    TextView tvRepwd;
 
     @Override
     protected int initLayout() {
@@ -53,7 +88,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        presenter.login(LoginActivity.this, TAG);
+                        toLogin();
                     }
                 });
         RxView.clicks(button1)
@@ -84,6 +119,78 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                                 .show(getSupportFragmentManager());
                     }
                 });
+
+
+
+        //@// TODO: 2017/8/22  忘记密码
+        RxView.clicks(tvForgot)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .compose(bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+                        toForgot();
+                    }
+                });
+
+
+        //@// TODO: 2017/8/22  记住密码密码
+        RxView.clicks(tvRepwd)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .compose(bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+                        toRemenber();
+                    }
+                });
+
+        //@// TODO: 2017/8/22  记住密码密码
+        RxView.clicks(ivTitle)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .compose(bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+                        toSetting();
+                    }
+                });
+    }
+
+    private void toLogin() {
+        if(TextUtils.isEmpty(getName())){
+            Toast.makeText(LoginActivity.this, "输入手机号不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(getPwd())){
+            Toast.makeText(LoginActivity.this, "输入密码不能为空", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+        presenter.login(LoginActivity.this, TAG);
+    }
+
+    private void toSetting() {
+
+        ARouter.getInstance().build("/other/SettingActivity").navigation(LoginActivity.this);
+        finish();
+
+    }
+
+    private void toRemenber() {
+
+        ARouter.getInstance().build("/message/MessageActivity").navigation(LoginActivity.this);
+        finish();
+    }
+
+    private void toForgot() {
+
+
+        ARouter.getInstance().build("/pwd/FindPwdActivity").navigation(LoginActivity.this);
+        finish();
     }
 
     @Override
@@ -104,20 +211,38 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public String getName() {
-        return "13510378755";
+        return cetInputphone.getText().toString().trim();
     }
 
     @Override
     public String getPwd() {
-        return "e10adc3949ba59abbe56e057f20f883e";
+        return cetInputpwde.getText().toString().trim();
+    }
+
+
+    private void toNext() {
+        ARouter.getInstance().build("/app/MainActivity").navigation(LoginActivity.this);
+        finish();
     }
 
     @Override
-    public void onLoginResult(String code) {
+    public void onLoginResult(LoginRsBean mLoginRsBean) {
+        if(ResultInfoUtils.isSuccess(mLoginRsBean.getCode())){
+            toNext();
+        }
+        Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
     }
+
+
 
     @Override
     public void retry() {
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

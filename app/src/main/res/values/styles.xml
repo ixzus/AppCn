@@ -69,6 +69,24 @@
         <item name="android:drawablePadding">8dp</item>
     </style>
 
+
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_cb_remenber</item>
+    </style>
+
+    <style name="LookCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_cb_look</item>
+    </style>
+
+
+
+
+    <style name="HlineViewStyle">
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/bg_white</item>
+    </style>
+
     /*************************** home item **********************/
 
     <style name="HomeItem">
@@ -142,6 +160,7 @@
         <item name="banner_tipTextColor">@android:color/white</item>
         <!-- 加载网络数据时覆盖在BGABanner最上层的占位图 -->
         <item name="banner_placeholderDrawable">@mipmap/ic_launcher</item>
+
     </style>
 
 </resources>

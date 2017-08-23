@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+
+        >
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_modifypwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTextString="修改密码"
+        app:sLeftTextColor="@color/my_lefttext_gravy"
+        app:sLeftTextSize="14sp"
+        app:sRightTvDrawableRight="@mipmap/ic_next"
+        android:layout_marginTop="10dp"
+        />
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_close"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            app:sLeftTextString="新消息通知"
+            app:sLeftTextColor="@color/my_lefttext_gravy"
+        app:sLeftTextSize="14sp"
+            app:sRightTextString="关闭"
+            android:gravity="center_vertical"
+        />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/my_lefttext_gravy"
+            android:textSize="12sp"
+            android:text="请在iPhone的 【设置】 - 【通知】 中找到 【车务管家】 App,打开通知\n开关，以免消息推送延迟或无法接收"
+            android:maxLines="2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+        <com.allen.library.SuperTextView
+            android:id="@+id/st_shock"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            app:sLeftTextString="消息震动"
+            app:sLeftTextColor="@color/my_lefttext_gravy"
+            app:sLeftTextSize="14sp"
+            app:sRightTvDrawableRight="@mipmap/ic_next" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_quit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="#508cee"
+        android:textSize="18sp"
+        android:text="退出登录"
+        android:maxLines="2"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="08-28 12:28"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_tv_circle"
+        android:layout_marginTop="28dp"
+        android:padding="8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_item_message"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+    <TextView
+        android:id="@+id/tv_messagetype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="派单消息"
+        android:textSize="18sp"
+        android:textColor="@color/my_lefttext_gravy"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您已到新的订单,请及时办理!车牌号为粤B8888，共计违章5条，扣分8分，罚款2500.00元"
+        android:textSize="14sp"
+        android:textColor="@color/my_version_gravy"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:maxLines="2"
+        />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/st_tolook"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sLeftTextString="查看详情"
+        app:sLeftTextColor="@color/my_version_gravy"
+        app:sLeftTextSize="14sp"
+        app:sRightTvDrawableRight="@mipmap/ic_next"
+        />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
