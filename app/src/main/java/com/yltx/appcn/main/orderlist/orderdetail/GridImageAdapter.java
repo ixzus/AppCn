@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.yltx.appcn.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,11 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
 
     public void setList(List<String> list) {
         this.list = list;
+    }
+
+    public void updateList(List<String> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -114,6 +120,7 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (getItemViewType(position) == TYPE_CAMERA) {
+            viewHolder.mDel.setVisibility(View.GONE);
             Glide.with(context).load(R.mipmap.ic_add).crossFade().into(viewHolder.mImg);
             viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,7 +129,17 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
                 }
             });
         } else {
-            Glide.with(context).load(list.get(position)).crossFade().into(viewHolder.mImg);
+            if (isUpdate) {
+                viewHolder.mDel.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.mDel.setVisibility(View.GONE);
+            }
+            String imgurl = list.get(position);
+            if (imgurl.contains("http")) {
+                Glide.with(context).load(imgurl).crossFade().into(viewHolder.mImg);
+            } else {
+                Glide.with(context).load(new File(imgurl)).crossFade().into(viewHolder.mImg);
+            }
             viewHolder.mDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

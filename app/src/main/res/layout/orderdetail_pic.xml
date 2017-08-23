@@ -25,6 +25,7 @@
         <com.allen.library.SuperButton
             android:id="@+id/update"
             style="@style/ButtonYesStyle"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
