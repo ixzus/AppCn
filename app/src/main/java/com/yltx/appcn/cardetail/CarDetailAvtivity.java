@@ -28,8 +28,6 @@ import butterknife.ButterKnife;
 public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetailView, CarDetailPresenter> implements CarDetailContract.ICarDetailView, IToolbar {
     @BindView(R.id.toolbar_back)
     ImageView toolbarBack;
-    @BindView(R.id.toolbar_line)
-    View toolbarLine;
     @BindView(R.id.toolbar_back_text)
     TextView toolbarBackText;
     @BindView(R.id.toolbar_title)

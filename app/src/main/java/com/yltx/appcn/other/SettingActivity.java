@@ -43,8 +43,6 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
 
     @BindView(R.id.toolbar_back)
     ImageView toolbarBack;
-    @BindView(R.id.toolbar_line)
-    View toolbarLine;
     @BindView(R.id.toolbar_back_text)
     TextView toolbarBackText;
     @BindView(R.id.toolbar_title)
@@ -132,7 +130,6 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
     protected void toolbar(String centerText, boolean isBack, String backText) {
         if (isBack) {
             findViewById(com.ixzus.applibrary.R.id.toolbar_back).setVisibility(View.VISIBLE);
-            findViewById(com.ixzus.applibrary.R.id.toolbar_line).setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(backText)) {
             ((TextView) findViewById(com.ixzus.applibrary.R.id.toolbar_back_text)).setText(backText);

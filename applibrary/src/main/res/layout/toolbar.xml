@@ -36,34 +36,25 @@
         <ImageView
             android:id="@+id/toolbar_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_back"
-            android:visibility="gone"
+            android:layout_height="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/toolbar_line"
-            android:layout_width="1dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/toolbar_text"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar_back"
-            app:layout_constraintLeft_toRightOf="@+id/toolbar_back"
-            app:layout_constraintTop_toTopOf="@+id/toolbar_back" />
 
         <TextView
             android:id="@+id/toolbar_back_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/toolbar_text"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/toolbar_line"
+            app:layout_constraintLeft_toRightOf="@+id/toolbar_back"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="返回" />
 
@@ -79,6 +70,13 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="标题" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2px"
+            android:background="#f4f4f4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.Toolbar>

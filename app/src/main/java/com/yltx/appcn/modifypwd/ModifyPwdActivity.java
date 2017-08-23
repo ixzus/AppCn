@@ -52,8 +52,6 @@ import static com.yltx.appcn.utils.Consta.sendSmsData.Sms_Code;
 public class ModifyPwdActivity extends BaseActivity<ModifyPwdContract.IModifyPwdView, ModifyPwdPersenter> implements ModifyPwdContract.IModifyPwdView, IToolbar {
     @BindView(R.id.toolbar_back)
     ImageView toolbarBack;
-    @BindView(R.id.toolbar_line)
-    View toolbarLine;
     @BindView(R.id.toolbar_back_text)
     TextView toolbarBackText;
     @BindView(R.id.toolbar_title)

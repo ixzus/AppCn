@@ -48,8 +48,6 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     SuperButton button1;
     @BindView(R.id.toolbar_back)
     ImageView toolbarBack;
-    @BindView(R.id.toolbar_line)
-    View toolbarLine;
     @BindView(R.id.toolbar_back_text)
     TextView toolbarBackText;
     @BindView(R.id.toolbar_title)

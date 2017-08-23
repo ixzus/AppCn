@@ -146,7 +146,6 @@ public class OrderListActivity extends RxAppCompatActivity {
     protected void toolbar(String centerText, boolean isBack, String backText) {
         if (isBack) {
             findViewById(com.ixzus.applibrary.R.id.toolbar_back).setVisibility(View.VISIBLE);
-            findViewById(com.ixzus.applibrary.R.id.toolbar_line).setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(backText)) {
             ((TextView) findViewById(com.ixzus.applibrary.R.id.toolbar_back_text)).setText(backText);

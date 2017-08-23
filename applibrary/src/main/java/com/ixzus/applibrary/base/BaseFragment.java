@@ -76,7 +76,6 @@ public abstract class BaseFragment<V extends BaseContract.IBaseView, P extends B
     protected void toolbar(String centerText, boolean isBack, String backText) {
         if (isBack) {
             getActivity().findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
-            getActivity().findViewById(R.id.toolbar_line).setVisibility(View.VISIBLE);
             if (getActivity().findViewById(R.id.toolbar_back) != null) {
                 getActivity().findViewById(R.id.toolbar_back).setOnClickListener(new View.OnClickListener() {
                     @Override
