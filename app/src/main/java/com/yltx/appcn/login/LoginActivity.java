@@ -221,7 +221,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
 
     private void toNext() {
-
+        ARouter.getInstance().build("/app/MainActivity").navigation(LoginActivity.this);
+        finish();
     }
 
     @Override
@@ -230,7 +231,6 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
-
     }
 
 

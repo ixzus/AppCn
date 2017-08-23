@@ -32,6 +32,7 @@ public class FindPwdModel extends BaseModel implements FindPwdContract.IFindPwdM
                 .subscribe(new NetObserver<SendSmsRsBean>(context, tag, 0, true) {
                     @Override
                     public void onSuccess(int whichRequest, SendSmsRsBean mSendSmsRsBean) {
+
                         mPresenter.sendSmsResult(mSendSmsRsBean);
                     }
 

@@ -3,6 +3,8 @@ package com.yltx.appcn.modifypwd;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BaseContract;
+import com.yltx.appcn.bean.ResetPwdBean;
+import com.yltx.appcn.bean.ResetPwdRsBean;
 
 /**
  * 功能描述:
@@ -30,7 +32,7 @@ public class ModifyPwdContract {
         void onModifyPwdResult(String code);
 
 
-        void onResetPwdResult(String code);
+        void onResetPwdResult(ResetPwdRsBean mResetPwdRsBean);
 
     }
     interface IModifyPwdPresenter extends BaseContract.IBasePresenter {
@@ -39,13 +41,13 @@ public class ModifyPwdContract {
         void  ModifyPwdResult(String resultJson);
 
 
-        void ResetPwd(Context contex, String tag, String json);
-        void  ResetPwdResult(String resultJson);
+        void ResetPwd(Context contex, String tag, ResetPwdBean mResetPwdBean);
+        void  ResetPwdResult(ResetPwdRsBean mResetPwdRsBean);
     }
     interface IModifyPwdModel extends BaseContract.IBaseModel {
 
         void doModifyPwd(Context context, String tag, String postJson, IModifyPwdPresenter mPresenter);//发送验证码
 
-        void doResetPwd(Context context, String tag, String postJson, IModifyPwdPresenter mPresenter);//发送验证码
+        void doResetPwd(Context context, String tag, ResetPwdBean mResetPwdBean, IModifyPwdPresenter mPresenter);//发送验证码
     }
 }

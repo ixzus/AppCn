@@ -5,6 +5,8 @@ import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
+import com.yltx.appcn.bean.ResetPwdBean;
+import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.SendSmsRsBean;
 import com.yltx.appcn.bean.WeatherInfo;
 
@@ -61,6 +63,7 @@ public interface ApiService {
 
 
     //http://192.168.X.X:XX/api/user/login   登录
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("user/login")
     Observable<LoginRsBean> login(@Body LoginBean mLoginBean);
 
@@ -69,5 +72,11 @@ public interface ApiService {
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("user/sendMsgByPhone")
     Observable<SendSmsRsBean> sendMsgByPhone(@Query("mobilePhone") String mobilePhone, @Query("businessType") String businessType);
+
+    //http://192.168.X.X:XX/api/user/resetnewPassword 重置密码
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @POST("user/resetnewPassword")
+    Observable<ResetPwdRsBean> resetnewPassword(@Body ResetPwdBean mResetPwdBean);
+
 
 }

@@ -13,12 +13,13 @@ import com.allen.library.SuperButton;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.SendSmsRsBean;
-import com.yltx.appcn.login.LoginActivity;
+import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.TimeCount;
 
 import java.util.concurrent.TimeUnit;
@@ -29,6 +30,12 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType;
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_Modify;
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_ReSet;
+import static com.yltx.appcn.utils.Consta.sendSmsData.PHONE;
+import static com.yltx.appcn.utils.Consta.sendSmsData.Sms_Code;
 
 /**
  * Author：Wq
@@ -84,7 +91,6 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         toSendSms();
-                      //  new TimeCount(sbGetsms, 60 * 1000, 1000).start();
                     }
                 });
 
@@ -96,10 +102,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-//                       presenter.checkNext(FindPwdActivity.this, TAG);
-                      //  toCheckNext();//点击下一步校验验证码
-
-                        toNext();
+                        toCheckNext();
                     }
                 });
 
@@ -109,8 +112,14 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
     }
 
     private void toNext() {
-        ARouter.getInstance().build("/modifypwd/ModifyPwdActivity").navigation(FindPwdActivity.this);
+
+        ARouter.getInstance().build("/modifypwd/ModifyPwdActivity")
+                .withInt(ModifyType, ModifyType_ReSet)
+                .withString(Sms_Code,getSmsCode())
+                .withString(PHONE,getPhone())
+                .navigation(FindPwdActivity.this);
         finish();
+
     }
 
     private void toCheckNext() {
@@ -119,13 +128,11 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
             Toasty.normal(FindPwdActivity.this, "请输入有效手机号!").show();
             return;
         }
-
         if(TextUtils.isEmpty(getSmsCode())){
             Toasty.normal(FindPwdActivity.this, "输入验证码不能为空!").show();
             return;
         }
-
-        presenter.checkNext(FindPwdActivity.this, TAG,"");
+        toNext();
     }
 
     private void toSendSms() {
@@ -134,7 +141,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
             Toasty.normal(FindPwdActivity.this, "请输入有效手机号!").show();
             return;
         }
-        presenter.sendSms(FindPwdActivity.this, TAG,"");
+        presenter.sendSms(FindPwdActivity.this, TAG,getPhone());
     }
 
     @Override
@@ -159,11 +166,12 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
 
     @Override
     public void onSendResult(SendSmsRsBean mSendSmsRsBean) {
-
-                //发送验证码  返回结果
-        //@// TODO: 2017/8/21  判断返回结果是否成功 成功 则倒计时开始
-        new TimeCount(sbGetsms, 60 * 1000, 1000).start();
-
+        if(ResultInfoUtils.isSuccess(mSendSmsRsBean.getCode())){
+            //发送验证码  返回结果
+            //@// TODO: 2017/8/21  判断返回结果是否成功 成功 则倒计时开始
+            new TimeCount(sbGetsms, 60 * 1000, 1000).start();
+        }
+        Toast.show(mSendSmsRsBean.getMessage());
     }
 
     @Override
@@ -172,22 +180,6 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
         //@// TODO: 2017/8/21  判断校验结果是否成功  成功则跳转重置密码页面
 
     }
-
-//    @Override
-//    public void onSendResult(String code) {
-//        //发送验证码  返回结果
-//        //发送验码成功,开启倒计时
-//        new TimeCount(sbGetsms, 60 * 1000, 1000).start();
-//    }
-//
-//    @Override
-//    public void onCheckNextResult(String code) {
-//        //校验验证码返回结果
-//
-//
-//        //成功跳转下一个页面
-//
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

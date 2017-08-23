@@ -23,6 +23,7 @@ public class FindPwdPersenter extends BasePresenter<FindPwdModel,FindPwdActivity
 
     @Override
     public void sendSmsResult(SendSmsRsBean mSendSmsRsBean) {
+
         view.onSendResult(mSendSmsRsBean);
 
     }
