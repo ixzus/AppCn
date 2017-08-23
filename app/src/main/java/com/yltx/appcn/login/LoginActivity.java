@@ -225,7 +225,9 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
+
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
+
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();

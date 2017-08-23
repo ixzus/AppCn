@@ -32,6 +32,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType;
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_Modify;
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_ReSet;
+
 /**
  * Author：Wq
  * Date：2017/8/21 19:50
@@ -118,7 +122,9 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
 
 
     private void toNext() {
-        ARouter.getInstance().build("/modifypwd/ModifyPwdActivity").navigation(SettingActivity.this);
+        ARouter.getInstance().build("/modifypwd/ModifyPwdActivity")
+                .withInt(ModifyType, ModifyType_Modify)
+                .navigation(SettingActivity.this);
         finish();
     }
 
