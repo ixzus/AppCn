@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ixzus.applibrary.R;
 import com.ixzus.applibrary.base.BaseApplication;
+import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.LoadingDialog;
 
@@ -64,6 +65,10 @@ public abstract class NetObserver<T> implements Observer<T> {
 
     @Override
     public final void onNext(T response) {
+        if (null == response) {
+            Toast.show("空数据");
+            return;
+        }
         onSuccess(mWhichRequest, response);
 //        if (response.getCode() == RESPONSE_CODE_OK) {
 //            onSuccess(mWhichRequest, response.getResult());
