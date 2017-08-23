@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.yltx.appcn.main.my.MyInfoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +13,8 @@
         android:orientation="vertical"
         android:background="@mipmap/my_bg"
         >
-        <android.support.v4.widget.CircleImageView
+        <ImageView
+            android:id="@+id/civ_photo"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:src="@mipmap/my_avator_normal"
@@ -20,6 +23,7 @@
 
             />
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="张三"
@@ -30,6 +34,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -51,6 +56,7 @@
         <!--app:sRightTextString="aaaaaaaaaaaaaa"/>-->
 
     <com.allen.library.SuperTextView
+        android:id="@+id/st_message"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:sLeftTvDrawableLeft="@mipmap/my_message"
@@ -61,6 +67,7 @@
         />
 
     <com.allen.library.SuperTextView
+        android:id="@+id/st_question"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:sLeftTvDrawableLeft="@mipmap/my_question"
@@ -72,6 +79,7 @@
         />
 
     <com.allen.library.SuperTextView
+        android:id="@+id/st_setting"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:sLeftTvDrawableLeft="@mipmap/my_setting"
@@ -87,6 +95,7 @@
         android:layout_below="@+id/my_about"
         >
         <TextView
+            android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"

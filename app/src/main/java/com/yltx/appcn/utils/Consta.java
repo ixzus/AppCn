@@ -24,4 +24,13 @@ public class Consta {
         public static final String Sms_Code="smsCode";//验证码
 
     }
+
+    //ACache.get(getActivity()).put("key","userid");
+    //ACache.get(getActivity()).getAsString("key");
+
+    public class SP_PARAMS {
+        public static final String USERID= "userId";//不可以代缴
+
+
+    }
 }

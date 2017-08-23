@@ -228,6 +228,10 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
         if(ResultInfoUtils.isSuccess(mLoginRsBean.getCode())){
+
+
+//            ACache.get(getActivity()).put("key","userid");
+//            ACache.get(getActivity()).getAsString("key");
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();

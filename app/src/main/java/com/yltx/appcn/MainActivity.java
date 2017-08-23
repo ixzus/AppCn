@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.FragmentUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.main.home.HomeFragment;
 import com.yltx.appcn.main.my.MyFragment;
+import com.yltx.appcn.main.my.MyInfoFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +33,7 @@ public class MainActivity extends RxAppCompatActivity {
     LinearLayout mainMenu;
     //
     private HomeFragment homeFragment;
-    private MyFragment myFragment;
+    private MyInfoFragment myFragment;
     private int index = R.id.main_home;
 
     @Override
@@ -80,7 +81,9 @@ public class MainActivity extends RxAppCompatActivity {
                 FragmentUtils.hideFragment(homeFragment);
             }
             if (null == myFragment) {
-                myFragment = MyFragment.newInstance(null, null);
+//                myFragment = MyFragment.newInstance(null, null);
+
+                myFragment = MyInfoFragment.newInstance(null, null);
                 FragmentUtils.addFragment(getSupportFragmentManager(), myFragment, R.id.main_frame);
             } else {
                 FragmentUtils.showFragment(myFragment);

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperButton;
+import com.google.gson.Gson;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.impl.IToolbar;
@@ -22,6 +23,7 @@ import com.jingewenku.abrahamcaijin.commonutil.encryption.MD5Utils;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.base.SplashActivity;
+import com.yltx.appcn.bean.ModifyPwdBean;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.utils.ResultInfoUtils;
@@ -94,7 +96,7 @@ public class ModifyPwdActivity extends BaseActivity<ModifyPwdContract.IModifyPwd
         mModifyType=getIntent().getIntExtra(ModifyType,1);
         if(ModifyType_Modify ==mModifyType){
             //修改密码
-            toolbar("修改密码密码", true, null);
+            toolbar("修改密码", true, null);
 
         }else if(ModifyType_ReSet==mModifyType){
 
@@ -125,28 +127,65 @@ public class ModifyPwdActivity extends BaseActivity<ModifyPwdContract.IModifyPwd
         if(ModifyType_Modify ==mModifyType){
             //修改密码
 
+            toModify();
+
         }else if(ModifyType_ReSet==mModifyType){
             //重置
 
-            if(TextUtils.isEmpty(getNew())){
-                Toast.show("输入新密码不能为空！");
-                return;
-            }
-            if(TextUtils.isEmpty(getComfire())){
-                Toast.show("输入确认密码不能为空!");
-                return;
-            }
-
-            if(!getNew().equals(getComfire())){
-                Toast.show("两次输入密码不一致!");
-                return;
-            }
-            ResetPwdBean mResetPwdBean=new ResetPwdBean();
-            mResetPwdBean.setPhone(mPhone);
-            mResetPwdBean.setCode(mSmsCode);
-            mResetPwdBean.setNewPassword(MD5Utils.encryptMD5(getNew()));
-            presenter.ResetPwd(ModifyPwdActivity.this,TAG,mResetPwdBean);
+            toReSet();
         }
+    }
+
+    private void toModify() {
+
+        if(TextUtils.isEmpty(getOld())){
+            Toast.show("输入旧密码不能为空！");
+            return;
+        }
+
+        if(TextUtils.isEmpty(getNew())){
+            Toast.show("输入新密码不能为空！");
+            return;
+        }
+        if(TextUtils.isEmpty(getComfire())){
+            Toast.show("输入确认密码不能为空!");
+            return;
+        }
+
+        if(!getNew().equals(getComfire())){
+            Toast.show("两次输入密码不一致!");
+            return;
+        }
+        ModifyPwdBean mModifyPwdBean=new ModifyPwdBean();
+        mModifyPwdBean.setUserId("15800");
+        mModifyPwdBean.setOldPassword(MD5Utils.encryptMD5(getOld()));
+        mModifyPwdBean.setNewPassword(MD5Utils.encryptMD5(getNew()));
+        presenter.ModifyPwd(ModifyPwdActivity.this,TAG,mModifyPwdBean);
+
+
+
+
+    }
+
+    private void toReSet() {
+        if(TextUtils.isEmpty(getNew())){
+            Toast.show("输入新密码不能为空！");
+            return;
+        }
+        if(TextUtils.isEmpty(getComfire())){
+            Toast.show("输入确认密码不能为空!");
+            return;
+        }
+
+        if(!getNew().equals(getComfire())){
+            Toast.show("两次输入密码不一致!");
+            return;
+        }
+        ResetPwdBean mResetPwdBean=new ResetPwdBean();
+        mResetPwdBean.setPhone(mPhone);
+        mResetPwdBean.setCode(mSmsCode);
+        mResetPwdBean.setNewPassword(MD5Utils.encryptMD5(getNew()));
+        presenter.ResetPwd(ModifyPwdActivity.this,TAG,mResetPwdBean);
     }
 
     @Override
@@ -175,7 +214,14 @@ public class ModifyPwdActivity extends BaseActivity<ModifyPwdContract.IModifyPwd
     }
 
     @Override
-    public void onModifyPwdResult(String code) {
+    public void onModifyPwdResult(ResetPwdRsBean mResetPwdRsBean) {
+
+        Log.d(TAG,"====onModifyPwdResult;;"+new Gson().toJson(mResetPwdRsBean));
+        if(null!=mResetPwdRsBean&&ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
+            ARouter.getInstance().build("/login/loginActivity").navigation(ModifyPwdActivity.this);//登录页面
+            finish();
+        }
+        Toast.show(mResetPwdRsBean.getMessag());
 
     }
 
