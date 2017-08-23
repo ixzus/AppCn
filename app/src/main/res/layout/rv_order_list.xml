@@ -194,9 +194,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:drawablePadding="8dp"
             android:drawableRight="@mipmap/ic_down"
             android:gravity="center"
-            android:drawablePadding="8dp"
             android:text="展开订单"
             android:textColor="@color/text_grey_medium"
             android:textSize="12sp" />
@@ -210,7 +210,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/orderNumTitle"
         android:background="@mipmap/ic_status_1"
-        android:padding="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
         android:textColor="@color/white"
         tools:text="待接单" />
 

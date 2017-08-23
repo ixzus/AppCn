@@ -24,7 +24,6 @@ import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
-import com.yltx.appcn.base.SplashActivity;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
@@ -77,7 +76,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     protected void initView() {
-        toolbar("首页", true, null);
+        toolbar("登录", false, null);
 
         showStatus(ViewStatus.STATUS_LOADING);
 
@@ -121,7 +120,6 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 });
 
 
-
         //@// TODO: 2017/8/22  忘记密码
         RxView.clicks(tvForgot)
                 .throttleFirst(1, TimeUnit.SECONDS)
@@ -161,11 +159,13 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     }
 
     private void toLogin() {
-        if(TextUtils.isEmpty(getName())){
+        cetInputphone.setText("13823315295");
+        cetInputpwde.setText("666666");
+        if (TextUtils.isEmpty(getName())) {
             Toast.makeText(LoginActivity.this, "输入手机号不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(getPwd())){
+        if (TextUtils.isEmpty(getPwd())) {
             Toast.makeText(LoginActivity.this, "输入密码不能为空", Toast.LENGTH_SHORT).show();
             return;
 
@@ -227,16 +227,13 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
-        if(ResultInfoUtils.isSuccess(mLoginRsBean.getCode())){
 
+        if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
 
-//            ACache.get(getActivity()).put("key","userid");
-//            ACache.get(getActivity()).getAsString("key");
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
     }
-
 
 
     @Override

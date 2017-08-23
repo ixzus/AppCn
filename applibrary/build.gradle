@@ -55,6 +55,7 @@ dependencies {
     compile librarys.utilcode
     compile librarys.CommonUtil
     compile librarys.logger
+    compile librarys.circleimageview
     //retrofit
     compile librarys.retrofit2
     compile librarys.convertergson
