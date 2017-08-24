@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
@@ -26,6 +27,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
+import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.util.ArrayList;
@@ -263,8 +265,8 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public String getUserId() {
-//        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID);
-        return "15900";
+        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID);
+//        return "15900";
     }
 
     @Override
