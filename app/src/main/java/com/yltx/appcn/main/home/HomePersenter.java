@@ -12,7 +12,7 @@ import com.yltx.appcn.bean.HandleNum;
 
 public class HomePersenter extends BasePresenter<HomeModel, HomeFragment> implements HomeContract.IPresenter {
     @Override
-    public void loadResult(HandleNum result) {
+    public void loadResult(HandleNum.DataBean result) {
         view.onResult(result);
     }
 
