@@ -162,8 +162,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     }
 
     private void toLogin() {
-//        cetInputphone.setText("13823315295");
-//        cetInputpwde.setText("666666");
+//        cetInputphone.setText("13510378755");
+//        cetInputpwde.setText("123456");
         if (TextUtils.isEmpty(getName())) {
             Toast.makeText(LoginActivity.this, "输入手机号不能为空", Toast.LENGTH_SHORT).show();
             return;
@@ -233,7 +233,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
         Log.d(TAG,"==================onLoginResult::"+new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
-            ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
+           // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
