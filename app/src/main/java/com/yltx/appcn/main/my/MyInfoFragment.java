@@ -22,6 +22,7 @@ import com.yltx.appcn.bean.GetUserInfoRsBean;
 import com.yltx.appcn.login.LoginActivity;
 import com.yltx.appcn.main.home.HomeFragment;
 import com.yltx.appcn.utils.Consta;
+import com.yltx.appcn.utils.ResultInfoUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -172,8 +173,14 @@ public class MyInfoFragment extends BaseFragment<MyContract.IMyView, MyPersenter
     }
 
     private void setData(GetUserInfoRsBean mGetUserInfoRsBean) {
-        tvName.setText(mGetUserInfoRsBean.getRealname());
-        tvPhone.setText(mGetUserInfoRsBean.getPhone());
+        if(null!=mGetUserInfoRsBean&& ResultInfoUtils.isSuccess(mGetUserInfoRsBean.getCode())){
+            if(null!=mGetUserInfoRsBean.getData()){
+                tvName.setText(mGetUserInfoRsBean.getData().getRealname());
+                tvPhone.setText(mGetUserInfoRsBean.getData().getPhone());
+            }
+
+        }
+
     }
 
 

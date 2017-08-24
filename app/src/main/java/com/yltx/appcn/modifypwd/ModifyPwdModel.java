@@ -2,15 +2,18 @@ package com.yltx.appcn.modifypwd;
 
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.net.NetObserver;
 import com.ixzus.applibrary.net.RxSchedulers;
+import com.ixzus.applibrary.util.Toast;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.bean.ModifyPwdBean;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.SendSmsRsBean;
 import com.yltx.appcn.net.RxRetrofit;
+import com.yltx.appcn.utils.ResultInfoUtils;
 
 import static com.yltx.appcn.utils.Consta.sendSmsData.businessType;
 
@@ -47,7 +50,11 @@ public class ModifyPwdModel extends BaseModel implements ModifyPwdContract.IModi
                 .subscribe(new NetObserver<ResetPwdRsBean>(context, tag, 0, true) {
                     @Override
                     public void onSuccess(int whichRequest, ResetPwdRsBean mResetPwdRsBean) {
-                        mPresenter.ModifyPwdResult(mResetPwdRsBean);
+                        //mPresenter.ModifyPwdResult(mResetPwdRsBean);
+                        if(null!=mResetPwdRsBean&&ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
+                            mPresenter.ModifyPwdResult(mResetPwdRsBean);
+                        }
+                        Toast.show(mResetPwdRsBean.getMessage());
                     }
 
                     @Override
@@ -70,8 +77,11 @@ public class ModifyPwdModel extends BaseModel implements ModifyPwdContract.IModi
                 .subscribe(new NetObserver<ResetPwdRsBean>(context, tag, 0, true) {
                     @Override
                     public void onSuccess(int whichRequest, ResetPwdRsBean mResetPwdRsBean) {
-
-                        mPresenter.ResetPwdResult(mResetPwdRsBean);
+                        //mPresenter.ResetPwdResult(mResetPwdRsBean);
+                        if(null!=mResetPwdRsBean&& ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
+                            mPresenter.ResetPwdResult(mResetPwdRsBean);
+                        }
+                        Toast.show(mResetPwdRsBean.getMessage());
                     }
 
                     @Override

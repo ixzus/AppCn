@@ -8,26 +8,14 @@ package com.yltx.appcn.bean;
 
 public class SendSmsRsBean {
     /**
-     * type : success
      * code : success
      * message : 发送成功,请注意查收!
-     * value : null
-     * success : true
+     * data : null
      */
 
-    private String type;
     private String code;
     private String message;
-    private String value;
-    private boolean success;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    private Object data;
 
     public String getCode() {
         return code;
@@ -45,19 +33,12 @@ public class SendSmsRsBean {
         this.message = message;
     }
 
-    public String getValue() {
-        return value;
+    public Object getData() {
+        return data;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setData(Object data) {
+        this.data = data;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 }

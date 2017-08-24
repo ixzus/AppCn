@@ -5,10 +5,12 @@ import android.content.Context;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.net.NetObserver;
 import com.ixzus.applibrary.net.RxSchedulers;
+import com.ixzus.applibrary.util.Toast;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.SendSmsRsBean;
 import com.yltx.appcn.net.RxRetrofit;
+import com.yltx.appcn.utils.ResultInfoUtils;
 
 import static com.yltx.appcn.utils.Consta.sendSmsData.businessType;
 
@@ -32,8 +34,11 @@ public class FindPwdModel extends BaseModel implements FindPwdContract.IFindPwdM
                 .subscribe(new NetObserver<SendSmsRsBean>(context, tag, 0, true) {
                     @Override
                     public void onSuccess(int whichRequest, SendSmsRsBean mSendSmsRsBean) {
+                        if(ResultInfoUtils.isSuccess(mSendSmsRsBean.getCode())){
+                            mPresenter.sendSmsResult(mSendSmsRsBean);
+                        }
+                        Toast.show(mSendSmsRsBean.getMessage());
 
-                        mPresenter.sendSmsResult(mSendSmsRsBean);
                     }
 
                     @Override

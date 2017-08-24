@@ -215,24 +215,15 @@ public class ModifyPwdActivity extends BaseActivity<ModifyPwdContract.IModifyPwd
 
     @Override
     public void onModifyPwdResult(ResetPwdRsBean mResetPwdRsBean) {
-
         Log.d(TAG,"====onModifyPwdResult;;"+new Gson().toJson(mResetPwdRsBean));
-        if(null!=mResetPwdRsBean&&ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
-            ARouter.getInstance().build("/login/loginActivity").navigation(ModifyPwdActivity.this);//登录页面
-            finish();
-        }
-        Toast.show(mResetPwdRsBean.getMessag());
-
+        ARouter.getInstance().build("/login/loginActivity").navigation(ModifyPwdActivity.this);//登录页面
+        finish();
     }
 
     @Override
     public void onResetPwdResult(ResetPwdRsBean mResetPwdRsBean) {
-        if(null!=mResetPwdRsBean&& ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
-            ARouter.getInstance().build("/login/loginActivity").navigation(ModifyPwdActivity.this);//登录页面
+        ARouter.getInstance().build("/login/loginActivity").navigation(ModifyPwdActivity.this);//登录页面
             finish();
-        }
-        Toast.show(mResetPwdRsBean.getMessag());
-
     }
 
     @Override
