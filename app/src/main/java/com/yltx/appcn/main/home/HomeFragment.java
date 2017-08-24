@@ -49,8 +49,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
     TextView refuse;
     @BindView(R.id.finish)
     TextView finish;
-    @BindView(R.id.num)
-    TextView num;
     @BindView(R.id.btnDeal)
     SuperButton btnDeal;
     @BindView(R.id.waitTip)
