@@ -23,6 +23,7 @@ import com.yltx.appcn.login.LoginActivity;
 import com.yltx.appcn.main.home.HomeFragment;
 import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.utils.ResultInfoUtils;
+import com.yltx.appcn.utils.SystemTool;
 
 import java.util.concurrent.TimeUnit;
 
@@ -90,6 +91,8 @@ public class MyInfoFragment extends BaseFragment<MyContract.IMyView, MyPersenter
     @Override
     protected void initView() {
 
+        tvVersion.setText(getResources().getString(R.string.app_name) + "v" + SystemTool.getAppVersion(getContext()));
+
 
         RxView.clicks(stMessage)
                 .throttleFirst(1, TimeUnit.SECONDS)
@@ -134,6 +137,7 @@ public class MyInfoFragment extends BaseFragment<MyContract.IMyView, MyPersenter
     }
 
     private void toQuestion() {
+        ARouter.getInstance().build("/other/MyIssueActivity").navigation(getActivity());
     }
 
     @Override

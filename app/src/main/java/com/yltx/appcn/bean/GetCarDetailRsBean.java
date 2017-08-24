@@ -72,23 +72,23 @@ public class GetCarDetailRsBean {
         private String carnumber;
         private String carcode;
         private String cardrivenumber;
-        private Object provincePrefix;
-        private Object carNumCode;
+        private String provincePrefix;
+        private String carNumCode;
         private String carType;
-        private Object queryDate;
+        private String queryDate;
         private String deleted;
         private String dataSource;
-        private Object userId;
+        private String userId;
         private String privateFlag;
-        private Object drivingPermit;
-        private Object drivingPermit2;
+        private String drivingPermit;
+        private String drivingPermit2;
         private String totalScore;
         private String totalAmount;
         private String count;
-        private Object code;
-        private Object message;
-        private Object carTypeName;
-        private Object carCount;
+        private String code;
+        private String message;
+        private String carTypeName;
+        private String carCount;
 
         public String getId() {
             return id;
@@ -134,15 +134,15 @@ public class GetCarDetailRsBean {
             return provincePrefix;
         }
 
-        public void setProvincePrefix(Object provincePrefix) {
+        public void setProvincePrefix(String provincePrefix) {
             this.provincePrefix = provincePrefix;
         }
 
-        public Object getCarNumCode() {
+        public String getCarNumCode() {
             return carNumCode;
         }
 
-        public void setCarNumCode(Object carNumCode) {
+        public void setCarNumCode(String carNumCode) {
             this.carNumCode = carNumCode;
         }
 
@@ -154,11 +154,11 @@ public class GetCarDetailRsBean {
             this.carType = carType;
         }
 
-        public Object getQueryDate() {
+        public String getQueryDate() {
             return queryDate;
         }
 
-        public void setQueryDate(Object queryDate) {
+        public void setQueryDate(String queryDate) {
             this.queryDate = queryDate;
         }
 
@@ -182,7 +182,7 @@ public class GetCarDetailRsBean {
             return userId;
         }
 
-        public void setUserId(Object userId) {
+        public void setUserId(String userId) {
             this.userId = userId;
         }
 
@@ -194,19 +194,19 @@ public class GetCarDetailRsBean {
             this.privateFlag = privateFlag;
         }
 
-        public Object getDrivingPermit() {
+        public String getDrivingPermit() {
             return drivingPermit;
         }
 
-        public void setDrivingPermit(Object drivingPermit) {
+        public void setDrivingPermit(String drivingPermit) {
             this.drivingPermit = drivingPermit;
         }
 
-        public Object getDrivingPermit2() {
+        public String getDrivingPermit2() {
             return drivingPermit2;
         }
 
-        public void setDrivingPermit2(Object drivingPermit2) {
+        public void setDrivingPermit2(String drivingPermit2) {
             this.drivingPermit2 = drivingPermit2;
         }
 
@@ -238,7 +238,7 @@ public class GetCarDetailRsBean {
             return code;
         }
 
-        public void setCode(Object code) {
+        public void setCode(String code) {
             this.code = code;
         }
 
@@ -246,7 +246,7 @@ public class GetCarDetailRsBean {
             return message;
         }
 
-        public void setMessage(Object message) {
+        public void setMessage(String message) {
             this.message = message;
         }
 
@@ -254,7 +254,7 @@ public class GetCarDetailRsBean {
             return carTypeName;
         }
 
-        public void setCarTypeName(Object carTypeName) {
+        public void setCarTypeName(String carTypeName) {
             this.carTypeName = carTypeName;
         }
 
@@ -262,7 +262,7 @@ public class GetCarDetailRsBean {
             return carCount;
         }
 
-        public void setCarCount(Object carCount) {
+        public void setCarCount(String carCount) {
             this.carCount = carCount;
         }
     }

@@ -8,11 +8,15 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.SuperTextView;
+import com.bumptech.glide.Glide;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.CarType;
 import com.yltx.appcn.bean.GetCarDetailRsBean;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,6 +86,7 @@ public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetail
 
         toolbar("车辆详情", true, null);
 
+
     }
 
     @Override
@@ -128,12 +133,18 @@ public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetail
     }
 
     private void setData(GetCarDetailRsBean.DataBean data) {
-
-        stCartype.setRightString(data.getCarType());
+        //stCartype.setRightString(data.getCarType());
+        stCartype.setRightString(CarType.getName(data.getCarType()));
         stCarnum.setRightString(data.getCarnumber());
         stEnginnum.setRightString(data.getCardrivenumber());
         stFramenum.setRightString(data.getCarcode());
-        stCarproperty.setRightString(data.getPrivateFlag());
+        if("1".equals(data.getPrivateFlag())){
+            stCarproperty.setRightString("单位车");
+        }else if("0".equals(data.getPrivateFlag())){
+            stCarproperty.setRightString("私家车");
+        }
+        Glide.with(this).load(data.getDrivingPermit()).placeholder(R.mipmap.cardetail_iv_normal).into(ivOriginal);
+        Glide.with(this).load(data.getDrivingPermit2()).placeholder(R.mipmap.cardetail_iv_normal).into(ivCopy);
     }
 
     @Override

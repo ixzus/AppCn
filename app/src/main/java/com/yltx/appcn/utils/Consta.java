@@ -30,10 +30,17 @@ public class Consta {
 
     public class SP_PARAMS {
         public static final String USERID= "userId";//不可以代缴
+
+        public static final String MESSAGE_BODY= "message_body";//消息body
     }
 
 
     public class INTENT_KEY_PARAMS {
         public static final String CARID= "carId";//不可以代缴
+    }
+
+    public class MESSAGE_TYPE {
+        public static final String MESSAGE_TYPE_ORDER= "order";//订单
+        public static final String MESSAGE_TYPE_SYSTEM= "system";//系统
     }
 }

@@ -178,7 +178,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     private void toSetting() {
 
-        ARouter.getInstance().build("/other/SettingActivity").navigation(LoginActivity.this);
+        ARouter.getInstance().build("/cardetail/CarDetailAvtivity").navigation(LoginActivity.this);
         finish();
 
     }
