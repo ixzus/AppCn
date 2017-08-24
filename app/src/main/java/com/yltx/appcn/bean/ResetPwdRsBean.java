@@ -8,17 +8,16 @@ package com.yltx.appcn.bean;
 
 public class ResetPwdRsBean {
 
-    private String messag;
+
+    /**
+     * code : success
+     * message : 操作成功
+     * data : null
+     */
 
     private String code;
-
-    public String getMessag() {
-        return messag;
-    }
-
-    public void setMessag(String messag) {
-        this.messag = messag;
-    }
+    private String message;
+    private Object data;
 
     public String getCode() {
         return code;
@@ -26,5 +25,21 @@ public class ResetPwdRsBean {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }
