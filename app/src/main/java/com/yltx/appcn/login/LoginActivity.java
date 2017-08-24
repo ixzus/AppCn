@@ -230,10 +230,12 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
-
         Log.d(TAG,"==================onLoginResult::"+new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
            // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
+            if(null!=mLoginRsBean.getData()){
+                ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getData().getUserId());
+            }
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
