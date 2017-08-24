@@ -101,6 +101,11 @@ public interface ApiService {
     Observable<HandleNum> getToBeHandleNum(@Query("userId") String userId);
 
 
+    //http://192.168.X.X:XX/api/message/getMessages
+
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @GET("message/getMessages")
+    Observable<GetUserInfoRsBean> getMessages(@Query("userId") String userId,@Query("page") String page);
 
 
 }

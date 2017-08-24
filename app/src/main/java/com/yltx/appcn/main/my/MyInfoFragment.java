@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperTextView;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.util.ACache;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.scwang.smartrefresh.header.material.CircleImageView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -20,6 +21,7 @@ import com.yltx.appcn.R;
 import com.yltx.appcn.bean.GetUserInfoRsBean;
 import com.yltx.appcn.login.LoginActivity;
 import com.yltx.appcn.main.home.HomeFragment;
+import com.yltx.appcn.utils.Consta;
 
 import java.util.concurrent.TimeUnit;
 
@@ -135,9 +137,8 @@ public class MyInfoFragment extends BaseFragment<MyContract.IMyView, MyPersenter
 
     @Override
     protected void initData() {
-
-        presenter.loadData(this.getContext(),TAG);//拉取数据
-
+        String userId=ACache.get(getActivity()).getAsString(Consta.SP_PARAMS.USERID);
+        presenter.loadData(this.getContext(),TAG,userId);//拉取数据
     }
 
     @Override

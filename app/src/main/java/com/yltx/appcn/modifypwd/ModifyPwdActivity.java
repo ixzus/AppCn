@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -26,6 +27,7 @@ import com.yltx.appcn.base.SplashActivity;
 import com.yltx.appcn.bean.ModifyPwdBean;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
+import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.utils.ResultInfoUtils;
 
 import org.w3c.dom.Text;
@@ -155,7 +157,7 @@ public class ModifyPwdActivity extends BaseActivity<ModifyPwdContract.IModifyPwd
             return;
         }
         ModifyPwdBean mModifyPwdBean=new ModifyPwdBean();
-        mModifyPwdBean.setUserId("15800");
+        mModifyPwdBean.setUserId(ACache.get(this).getAsString(Consta.SP_PARAMS.USERID));
         mModifyPwdBean.setOldPassword(MD5Utils.encryptMD5(getOld()));
         mModifyPwdBean.setNewPassword(MD5Utils.encryptMD5(getNew()));
         presenter.ModifyPwd(ModifyPwdActivity.this,TAG,mModifyPwdBean);

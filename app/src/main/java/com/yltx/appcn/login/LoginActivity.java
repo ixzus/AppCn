@@ -18,6 +18,7 @@ import com.ixzus.applibrary.constant.ViewStatus;
 import com.ixzus.applibrary.impl.IActivity;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.ixzus.applibrary.widget.ViewHolder;
@@ -25,6 +26,8 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.LoginRsBean;
+import com.yltx.appcn.modifypwd.ModifyPwdActivity;
+import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
@@ -157,8 +160,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     }
 
     private void toLogin() {
-        cetInputphone.setText("13510378755");
-        cetInputpwde.setText("123456");
+//        cetInputphone.setText("13510378755");
+//        cetInputpwde.setText("123456");
         if (TextUtils.isEmpty(getName())) {
             Toast.makeText(LoginActivity.this, "输入手机号不能为空", Toast.LENGTH_SHORT).show();
             return;
@@ -227,7 +230,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     public void onLoginResult(LoginRsBean mLoginRsBean) {
 
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
-
+            ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();

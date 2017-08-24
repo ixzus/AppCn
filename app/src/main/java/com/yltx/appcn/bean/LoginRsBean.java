@@ -30,18 +30,18 @@ public class LoginRsBean {
     private ResponseHeaderBean responseHeader;
     private String code;
     private String message;
-    private Object userId;
-    private Object username;
-    private Object realname;
-    private Object email;
-    private Object phone;
-    private Object tel;
-    private Object fax;
-    private Object entType;
-    private Object xsessionid;
-    private Object xsessionExpireDate;
-    private Object xsessionExpireTime;
-    private Object msn;
+    private String userId;
+    private String username;
+    private String realname;
+    private String email;
+    private String phone;
+    private String tel;
+    private String fax;
+    private String entType;
+    private String xsessionid;
+    private String xsessionExpireDate;
+    private String xsessionExpireTime;
+    private String msn;
 
     public ResponseHeaderBean getResponseHeader() {
         return responseHeader;
@@ -67,19 +67,19 @@ public class LoginRsBean {
         this.message = message;
     }
 
-    public Object getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Object userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Object getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Object username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -87,79 +87,79 @@ public class LoginRsBean {
         return realname;
     }
 
-    public void setRealname(Object realname) {
+    public void setRealname(String realname) {
         this.realname = realname;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Object getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Object phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Object getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(Object tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
-    public Object getFax() {
+    public String getFax() {
         return fax;
     }
 
-    public void setFax(Object fax) {
+    public void setFax(String fax) {
         this.fax = fax;
     }
 
-    public Object getEntType() {
+    public String getEntType() {
         return entType;
     }
 
-    public void setEntType(Object entType) {
+    public void setEntType(String entType) {
         this.entType = entType;
     }
 
-    public Object getXsessionid() {
+    public String getXsessionid() {
         return xsessionid;
     }
 
-    public void setXsessionid(Object xsessionid) {
+    public void setXsessionid(String xsessionid) {
         this.xsessionid = xsessionid;
     }
 
-    public Object getXsessionExpireDate() {
+    public String getXsessionExpireDate() {
         return xsessionExpireDate;
     }
 
-    public void setXsessionExpireDate(Object xsessionExpireDate) {
+    public void setXsessionExpireDate(String xsessionExpireDate) {
         this.xsessionExpireDate = xsessionExpireDate;
     }
 
-    public Object getXsessionExpireTime() {
+    public String getXsessionExpireTime() {
         return xsessionExpireTime;
     }
 
-    public void setXsessionExpireTime(Object xsessionExpireTime) {
+    public void setXsessionExpireTime(String xsessionExpireTime) {
         this.xsessionExpireTime = xsessionExpireTime;
     }
 
-    public Object getMsn() {
+    public String getMsn() {
         return msn;
     }
 
-    public void setMsn(Object msn) {
+    public void setMsn(String msn) {
         this.msn = msn;
     }
 
@@ -181,114 +181,114 @@ public class LoginRsBean {
          * warnings : []
          */
 
-        private Object terminalType;
-        private Object channel;
-        private Object expire;
-        private Object requestId;
-        private Object sessionId;
-        private Object sessionExpires;
-        private Object token;
-        private Object cookieMemberId;
-        private Object success;
-        private Object message;
-        private Object errorCode;
-        private Object errorMsg;
+        private String terminalType;
+        private String channel;
+        private String expire;
+        private String requestId;
+        private String sessionId;
+        private String sessionExpires;
+        private String token;
+        private String cookieMemberId;
+        private String success;
+        private String message;
+        private String errorCode;
+        private String errorMsg;
         private List<?> errors;
         private List<?> warnings;
 
-        public Object getTerminalType() {
+        public String getTerminalType() {
             return terminalType;
         }
 
-        public void setTerminalType(Object terminalType) {
+        public void setTerminalType(String terminalType) {
             this.terminalType = terminalType;
         }
 
-        public Object getChannel() {
+        public String getChannel() {
             return channel;
         }
 
-        public void setChannel(Object channel) {
+        public void setChannel(String channel) {
             this.channel = channel;
         }
 
-        public Object getExpire() {
+        public String getExpire() {
             return expire;
         }
 
-        public void setExpire(Object expire) {
+        public void setExpire(String expire) {
             this.expire = expire;
         }
 
-        public Object getRequestId() {
+        public String getRequestId() {
             return requestId;
         }
 
-        public void setRequestId(Object requestId) {
+        public void setRequestId(String requestId) {
             this.requestId = requestId;
         }
 
-        public Object getSessionId() {
+        public String getSessionId() {
             return sessionId;
         }
 
-        public void setSessionId(Object sessionId) {
+        public void setSessionId(String sessionId) {
             this.sessionId = sessionId;
         }
 
-        public Object getSessionExpires() {
+        public String getSessionExpires() {
             return sessionExpires;
         }
 
-        public void setSessionExpires(Object sessionExpires) {
+        public void setSessionExpires(String sessionExpires) {
             this.sessionExpires = sessionExpires;
         }
 
-        public Object getToken() {
+        public String getToken() {
             return token;
         }
 
-        public void setToken(Object token) {
+        public void setToken(String token) {
             this.token = token;
         }
 
-        public Object getCookieMemberId() {
+        public String getCookieMemberId() {
             return cookieMemberId;
         }
 
-        public void setCookieMemberId(Object cookieMemberId) {
+        public void setCookieMemberId(String cookieMemberId) {
             this.cookieMemberId = cookieMemberId;
         }
 
-        public Object getSuccess() {
+        public String getSuccess() {
             return success;
         }
 
-        public void setSuccess(Object success) {
+        public void setSuccess(String success) {
             this.success = success;
         }
 
-        public Object getMessage() {
+        public String getMessage() {
             return message;
         }
 
-        public void setMessage(Object message) {
+        public void setMessage(String message) {
             this.message = message;
         }
 
-        public Object getErrorCode() {
+        public String getErrorCode() {
             return errorCode;
         }
 
-        public void setErrorCode(Object errorCode) {
+        public void setErrorCode(String errorCode) {
             this.errorCode = errorCode;
         }
 
-        public Object getErrorMsg() {
+        public String getErrorMsg() {
             return errorMsg;
         }
 
-        public void setErrorMsg(Object errorMsg) {
+        public void setErrorMsg(String errorMsg) {
             this.errorMsg = errorMsg;
         }
 
