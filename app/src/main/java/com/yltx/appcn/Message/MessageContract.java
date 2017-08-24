@@ -11,13 +11,13 @@ import com.ixzus.applibrary.base.BaseContract;
 
 public class MessageContract {
     interface IMessageView extends BaseContract.IBaseView {
-        void onGetMessageResult(String code);
+        void onGetMessagesResult(String code);
     }
     interface IMessagePresenter extends BaseContract.IBasePresenter {
-        void GetMessage(Context contex, String tag, String json);
-        void  GetMessageResult(String resultJson);
+        void GetMessages(Context contex, String tag, String json);
+        void  GetMessagesResult(String resultJson);
     }
     interface IMessageModel extends BaseContract.IBaseModel {
-        void doGetMessage(Context context, String tag, String postJson, IMessagePresenter mPresenter);//发送验证码
+        void doGetMessages(Context context, String tag, String postJson, IMessagePresenter mPresenter);//发送验证码
     }
 }

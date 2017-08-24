@@ -3,6 +3,9 @@ package com.yltx.appcn.cardetail;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BaseContract;
+import com.yltx.appcn.bean.GetCarDetailRsBean;
+
+import static android.R.attr.data;
 
 /**
  * 功能描述:
@@ -11,13 +14,13 @@ import com.ixzus.applibrary.base.BaseContract;
 
 public class CarDetailContract {
     interface ICarDetailView extends BaseContract.IBaseView {
-        void onGetCarDetailResult(String code);
+        void onGetCarDetailResult(GetCarDetailRsBean.DataBean data);
     }
 
     interface ICarDetailPresenter extends BaseContract.IBasePresenter {
-        void GetCarDetail(Context contex, String tag);
+        void GetCarDetail(Context contex, String tag,String str);
 
-        void GetCarDetailResult(String resultJson);
+        void GetCarDetailResult(GetCarDetailRsBean.DataBean data);
     }
 
     interface ICarDetailModel extends BaseContract.IBaseModel {

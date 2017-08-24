@@ -12,9 +12,13 @@ import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.GetCarDetailRsBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.yltx.appcn.utils.Consta.INTENT_KEY_PARAMS.CARID;
+import static com.yltx.appcn.utils.Consta.sendSmsData.PHONE;
 
 /**
  * Author：Wq
@@ -53,6 +57,8 @@ public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetail
     @BindView(R.id.iv_copy)
     ImageView ivCopy;
 
+    private String mCarId;
+
     @Override
     protected CarDetailPresenter initPresenter() {
         return new CarDetailPresenter();
@@ -70,6 +76,9 @@ public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetail
 
     @Override
     protected void initView() {
+//        mCarId=getIntent().getStringExtra(CARID);
+
+        mCarId="893";
 
         toolbar("车辆详情", true, null);
 
@@ -77,9 +86,9 @@ public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetail
 
     @Override
     protected void initData() {
-
-
         setData();
+        presenter.GetCarDetail(CarDetailAvtivity.this,TAG,mCarId);
+
 
     }
 
@@ -112,8 +121,19 @@ public class CarDetailAvtivity extends BaseActivity<CarDetailContract.ICarDetail
     }
 
     @Override
-    public void onGetCarDetailResult(String code) {
+    public void onGetCarDetailResult(GetCarDetailRsBean.DataBean data) {
 
+        setData(data);
+
+    }
+
+    private void setData(GetCarDetailRsBean.DataBean data) {
+
+        stCartype.setRightString(data.getCarType());
+        stCarnum.setRightString(data.getCarnumber());
+        stEnginnum.setRightString(data.getCardrivenumber());
+        stFramenum.setRightString(data.getCarcode());
+        stCarproperty.setRightString(data.getPrivateFlag());
     }
 
     @Override

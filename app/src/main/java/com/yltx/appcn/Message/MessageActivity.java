@@ -43,6 +43,8 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
 
     private MessageAdapter adapter;
 
+    private int startPage=1;
+
     private ArrayList<String> mList;
 
     @Override
@@ -70,7 +72,7 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
     @Override
     protected void initData() {
         initRv();
-        //initRefresh();
+        initRefresh();
         initEvent();
     }
 
@@ -79,7 +81,6 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toasty.normal(MessageActivity.this, "查看详情：" + position).show();
-
                 toNext();
             }
         });
@@ -93,7 +94,7 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
     }
 
     private void initRefresh() {
-        presenter.GetMessage(MessageActivity.this, TAG, "");
+        presenter.GetMessages(MessageActivity.this, TAG, "");
     }
 
     private void initRv() {
@@ -118,7 +119,7 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
     }
 
     @Override
-    public void onGetMessageResult(String code) {
+    public void onGetMessagesResult(String code) {
 
         //@// TODO: 2017/8/21  判断是否成功  然后设置Adapter
 
