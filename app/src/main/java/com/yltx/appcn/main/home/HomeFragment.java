@@ -2,9 +2,7 @@ package com.yltx.appcn.main.home;
 
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +13,7 @@ import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.util.ACache;
+import com.ixzus.applibrary.util.Toast;
 import com.orhanobut.logger.Logger;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.HandleNum;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -65,7 +63,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
     TextView dealNum;
     @BindView(R.id.rejectNum)
     TextView rejectNum;
-    Unbinder unbinder;
 
     private String mParam1;
     private String mParam2;
@@ -96,7 +93,7 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
 
     @Override
     public void fetchData() {
-        Logger.e("fetchData:");
+        Toast.show("first");
     }
 
 
@@ -136,24 +133,36 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
         waitNum.setText(bean.getToOrderNum());
         dealNum.setText(bean.getToHandleNum());
         rejectNum.setText(bean.getToRejectNum());
+        int num1 = 0, num2 = 0, num3 = 0;
         try {
-            if (Integer.valueOf(bean.getToOrderNum().toString()) > 0) {
+            num1 = Integer.valueOf(bean.getToOrderNum().toString());
+            if (num1 > 0) {
                 waitTip.setVisibility(View.VISIBLE);
                 waitTip.setText(bean.getToOrderNum());
             }
         } catch (NumberFormatException e) {
         }
         try {
-            if (Integer.valueOf(bean.getToHandleNum().toString()) > 0) {
+            num2 = Integer.valueOf(bean.getToHandleNum().toString());
+            if (num2 > 0) {
                 dealTip.setVisibility(View.VISIBLE);
                 dealTip.setText(bean.getToHandleNum());
             }
         } catch (NumberFormatException e) {
         }
         try {
-            if (Integer.valueOf(bean.getToRejectNum().toString()) > 0) {
+            num3 = Integer.valueOf(bean.getToRejectNum().toString());
+            if (num3 > 0) {
                 rejectTip.setVisibility(View.VISIBLE);
                 rejectTip.setText(bean.getToRejectNum());
+            }
+        } catch (NumberFormatException e) {
+        }
+
+        totalNum.setText(String.valueOf(num1 + num2 + num3));
+        try {
+            if (Integer.valueOf(bean.getUnReadedNum().toString()) > 0) {
+                newmsg.setVisibility(View.VISIBLE);
             }
         } catch (NumberFormatException e) {
         }
@@ -189,14 +198,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
         banner.setDelegate(new BGABanner.Delegate<ImageView, String>() {
             @Override
             public void onBannerItemClick(BGABanner banner, ImageView itemView, String model, int position) {
-//                ToastUtils.showCustomMessage("click" + position);
-                if (0 == position) {
-                    //http://mp.weixin.qq.com/s/kxm9MKp2IFuSbJp6uVMxGw
-//                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
-//                    intent.putExtra("mURL", "http://mp.weixin.qq.com/s/uISldavNThcR08Cah_teWg");
-//                    intent.putExtra("mTITLE", "订单为何处理失败? 看过来！");
-//                    startActivity(intent);
-                }
             }
         });
     }
@@ -209,10 +210,10 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
 
     @Override
     public void onResult(HandleNum.DataBean result) {
-//        waitNum.setText(result);
+        refreshUI(result);
     }
 
-    @OnClick({R.id.wait, R.id.deal, R.id.reject, R.id.refuse, R.id.finish, R.id.btnDeal})
+    @OnClick({R.id.msg, R.id.wait, R.id.deal, R.id.reject, R.id.refuse, R.id.finish, R.id.btnDeal})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.wait:
@@ -231,23 +232,13 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
                 orderType = 4;
                 break;
             case R.id.btnDeal:
-                orderType = 5;
+                orderType = 0;
                 break;
+            case R.id.msg:
+                ARouter.getInstance().build("/message/MessageActivity").navigation(ActivityManager.getInstance().getCurrentActivity());
+                return;
         }
-        ARouter.getInstance().build("/login/loginActivity").withInt("orderType", orderType).navigation(ActivityManager.getInstance().getCurrentActivity());
+        ARouter.getInstance().build("/order/OrderListActivity").withInt("orderType", orderType).navigation(ActivityManager.getInstance().getCurrentActivity());
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

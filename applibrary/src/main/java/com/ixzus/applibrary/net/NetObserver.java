@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ixzus.applibrary.R;
-import com.ixzus.applibrary.base.BaseApplication;
 import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.LoadingDialog;
@@ -17,7 +16,6 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.net.UnknownServiceException;
 
-import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
@@ -80,7 +78,7 @@ public abstract class NetObserver<T> implements Observer<T> {
     public void onFailure(int code, String message) {
         if (code == RESPONSE_CODE_FAILED && mContext != null) {
 //            HttpUiTips.alertTip(mContext, message, code);
-            Toasty.normal(mContext, message).show();
+            Toast.show(message);
         } else {
             disposeEorCode(message, code);
         }
@@ -94,9 +92,12 @@ public abstract class NetObserver<T> implements Observer<T> {
                 ARouter.getInstance().build("/app/MainActivity").navigation();
                 break;
             case 500:
-                Toasty.normal(mContext, "服务器开小差,努力抢修中...").show();
+                Toast.show("服务器开小差,努力抢修中...");
+                break;
+            default:
+                Toast.show(code + "-" + message);
+                break;
         }
-//        Toast.makeText(mContext, message + " # " + code, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -158,7 +159,7 @@ public abstract class NetObserver<T> implements Observer<T> {
     public void onStart(int whichRequest) {
 //        if (!NetworkUtil.isNetworkAvailable(context)) {
         if (!NetworkUtils.isAvailableByPing()) {
-            Toasty.normal(BaseApplication.getBaseApplication(), "当前网络不可用，请检查网络情况").show();
+            Toast.show("当前网络不可用，请检查网络情况");
 //            Toast.makeText(App.getApplication(), "当前网络不可用，请检查网络情况", Toast.LENGTH_SHORT).show();
             NetworkUtils.openWirelessSettings();
 //            ActivityManager.getInstance().getCurrentActivity().startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
