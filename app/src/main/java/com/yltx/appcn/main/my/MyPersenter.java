@@ -16,8 +16,8 @@ import com.yltx.appcn.bean.GetUserInfoRsBean;
 public class MyPersenter extends BasePresenter<MyModel,MyInfoFragment> implements MyContract.IMyPresenter {
 
     @Override
-    public void loadData(Context contex, String tag) {
-            model.doLoadData(contex,tag,this);
+    public void loadData(Context contex, String tag,String str) {
+            model.doLoadData(contex,tag,str,this);
     }
 
     @Override

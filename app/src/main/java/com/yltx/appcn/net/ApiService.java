@@ -96,6 +96,11 @@ public interface ApiService {
     Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
 
 
+    //http://192.168.X.X:XX/api/message/getMessages
+
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @GET("message/getMessages")
+    Observable<GetUserInfoRsBean> getMessages(@Query("userId") String userId,@Query("page") String page);
 
 
 }

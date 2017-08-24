@@ -16,12 +16,12 @@ public class MyContract {
     }
 
     interface IMyPresenter extends BaseContract.IBasePresenter {
-        void loadData(Context contex, String tag);
+        void loadData(Context contex, String tag,String str);
 
         void loadResult(GetUserInfoRsBean mGetUserInfoRsBean);
     }
 
     interface IMyModel extends BaseContract.IBaseModel {
-        void doLoadData(Context context, String tag,IMyPresenter mIMyPresenter);
+        void doLoadData(Context context, String tag,String str,IMyPresenter mIMyPresenter);
     }
 }
