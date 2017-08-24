@@ -30,7 +30,10 @@ public class Consta {
 
     public class SP_PARAMS {
         public static final String USERID= "userId";//不可以代缴
+    }
 
 
+    public class INTENT_KEY_PARAMS {
+        public static final String CARID= "carId";//不可以代缴
     }
 }

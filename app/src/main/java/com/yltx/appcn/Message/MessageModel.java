@@ -13,12 +13,15 @@ import com.ixzus.applibrary.base.BaseModel;
 public class MessageModel extends BaseModel implements MessageContract.IMessageModel {
 
     @Override
-    public void doGetMessage(Context context, String tag, String postJson, MessageContract.IMessagePresenter mPresenter) {
+    public void doGetMessages(Context context, String tag, String postJson, MessageContract.IMessagePresenter mPresenter) {
 
 
 
 //        //@// TODO: 2017/8/21 接口返回
 //        mPresenter.GetMessageResult("");
+
+
+
 
     }
 }

@@ -12,14 +12,14 @@ import com.ixzus.applibrary.base.BasePresenter;
 
 public class MessagePersenter extends BasePresenter<MessageModel,MessageActivity> implements MessageContract.IMessagePresenter{
     @Override
-    public void GetMessage(Context context, String tag, String json) {
+    public void GetMessages(Context context, String tag, String json) {
 
-        model.doGetMessage(context,tag,json,this);
+        model.doGetMessages(context,tag,json,this);
 
     }
 
     @Override
-    public void GetMessageResult(String resultJson) {
+    public void GetMessagesResult(String resultJson) {
 
     }
 }

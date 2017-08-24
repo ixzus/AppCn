@@ -1,6 +1,7 @@
 package com.yltx.appcn.net;
 
 import com.yltx.appcn.bean.CartMemberBean;
+import com.yltx.appcn.bean.GetCarDetailRsBean;
 import com.yltx.appcn.bean.GetUserInfoRsBean;
 import com.yltx.appcn.bean.HandleNum;
 import com.yltx.appcn.bean.LoginBean;
@@ -106,6 +107,19 @@ public interface ApiService {
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("message/getMessages")
     Observable<GetUserInfoRsBean> getMessages(@Query("userId") String userId,@Query("page") String page);
+
+
+
+    //http://192.168.X.X:XX/api/message/getMessage
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @GET("message/getMessage")
+    Observable<GetUserInfoRsBean> getMessage(@Query("messageId") String messageId);
+
+
+    //http://192.168.X.X:XX/api/carServiceOrder/getCarInfoById
+    @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
+    @GET("carServiceOrder/getCarInfoById")
+    Observable<GetCarDetailRsBean> getCarInfoById(@Query("carId") String carId);
 
 
 }
