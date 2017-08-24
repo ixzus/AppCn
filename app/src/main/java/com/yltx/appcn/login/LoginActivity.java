@@ -3,6 +3,7 @@ package com.yltx.appcn.login;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperButton;
+import com.google.gson.Gson;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.constant.ViewStatus;
@@ -229,6 +231,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
 
+        Log.d(TAG,"==================onLoginResult::"+new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
             ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
             toNext();
