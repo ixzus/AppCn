@@ -2,6 +2,7 @@ package com.yltx.appcn.net;
 
 import com.yltx.appcn.bean.CartMemberBean;
 import com.yltx.appcn.bean.GetUserInfoRsBean;
+import com.yltx.appcn.bean.HandleNum;
 import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
@@ -94,6 +95,10 @@ public interface ApiService {
     @POST("user/updatePassword")
 //    Observable<String> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
     Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
+
+
+    @GET("carServiceOrder/getToBeHandleNum")
+    Observable<HandleNum> getToBeHandleNum(@Query("userId") String userId);
 
 
 

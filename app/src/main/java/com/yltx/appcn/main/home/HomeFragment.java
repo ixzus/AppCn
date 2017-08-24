@@ -3,9 +3,7 @@ package com.yltx.appcn.main.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +13,13 @@ import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
 import com.orhanobut.logger.Logger;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.HandleNum;
 import com.yltx.appcn.main.orderlist.OrderListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
@@ -50,7 +48,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
     TextView num;
     @BindView(R.id.btnDeal)
     SuperButton btnDeal;
-    Unbinder unbinder;
 
     private String mParam1;
     private String mParam2;
@@ -110,32 +107,14 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePersenter
     }
 
     @Override
-    public String getName() {
+    public String getUserId() {
         return null;
     }
 
-    @Override
-    public String getPwd() {
-        return null;
-    }
 
     @Override
-    public void onResult(String code) {
+    public void onResult(HandleNum result) {
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     private List<String> imgList = new ArrayList<>();
