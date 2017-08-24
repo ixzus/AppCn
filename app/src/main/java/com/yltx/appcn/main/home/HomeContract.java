@@ -12,15 +12,19 @@ import com.yltx.appcn.bean.HandleNum;
 
 public class HomeContract {
     interface IView extends BaseContract.IBaseView {
+        void initBanner();
+
         String getUserId();
 
-        void onResult(HandleNum result);
+        void onResult(HandleNum.DataBean result);
+
+        void refreshUI(HandleNum.DataBean bean);
     }
 
     interface IPresenter extends BaseContract.IBasePresenter {
         void loadData(Context contex, String tag);
 
-        void loadResult(HandleNum result);
+        void loadResult(HandleNum.DataBean result);
     }
 
     interface IModel extends BaseContract.IBaseModel {
