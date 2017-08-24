@@ -164,7 +164,7 @@ public class FindPwdActivity extends BaseActivity<FindPwdContract.IFindPwdView, 
 
     @Override
     public void onSendResult(SendSmsRsBean mSendSmsRsBean) {
-            //Model 已经对返回结果成功进行了判断
+            //OrderListModel 已经对返回结果成功进行了判断
             //发送验证码  返回结果
             //@// TODO: 2017/8/21  判断返回结果是否成功 成功 则倒计时开始
             new TimeCount(sbGetsms, 60 * 1000, 1000).start();

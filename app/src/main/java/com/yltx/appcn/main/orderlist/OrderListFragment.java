@@ -2,50 +2,48 @@ package com.yltx.appcn.main.orderlist;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperButton;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.ixzus.applibrary.base.ActivityManager;
+import com.ixzus.applibrary.base.BaseFragment;
+import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
-import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.CarServiceOrderRsObj;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
-import es.dmoral.toasty.Toasty;
 
 import static com.yltx.appcn.main.orderlist.OrderListAdapter.TYPE_LEVEL_0;
 
 
-public class OrderListFragment extends Fragment {
+public class OrderListFragment extends BaseFragment<OrderListContract.IView, OrderListPersenter> implements OrderListContract.IView {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    Unbinder unbinder;
     @BindView(R.id.rlBottom)
     RelativeLayout rlBottomLayout;
     @BindView(R.id.radioAll)
@@ -71,6 +69,12 @@ public class OrderListFragment extends Fragment {
     private int pageNo = 1;
     private int pageSize = 3;
     private int pageTotal;
+    private String orderStatus;
+    private boolean isRefresh;
+
+    int count = 0;
+    int breakCount = 0;
+    double total = 0.0;
 
 
     public OrderListFragment() {
@@ -95,65 +99,83 @@ public class OrderListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order_list, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        return view;
+    public void fetchData() {
+
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    protected OrderListPersenter initPresenter() {
+        return new OrderListPersenter();
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initView();
-        if ("WAIT".equals(mParam1)) {
+    protected BaseModel initModule() {
+        return new OrderListModel();
+    }
+
+    @Override
+    protected int initLayout() {
+        return R.layout.fragment_order_list;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        load();
+        refreshLayout.autoRefresh();
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    public void load() {
+        switch (mParam1) {
+            case OrderViewType.WAIT:
+                orderStatus = "0702";
+                break;
+            case OrderViewType.DEAL:
+                orderStatus = "0703";
+                break;
+            case OrderViewType.REJECT:
+                orderStatus = "0709";
+                break;
+            case OrderViewType.REFUSE:
+                orderStatus = "0704";
+                break;
+            case OrderViewType.SUCCESS:
+                orderStatus = "9999";
+                break;
+        }
+        if (OrderViewType.WAIT.equals(mParam1)) {
             rlBottomLayout.setVisibility(View.VISIBLE);
         } else {
             rlBottomLayout.setVisibility(View.GONE);
         }
 
-    }
-
-
-    private void initView() {
         viewNoData = getActivity().getLayoutInflater().inflate(R.layout.view_no_data, (ViewGroup) recyclerView.getParent(), false);
         viewNoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pageNo = 1;
                 listData.clear();
-                loadData(mParam1, pageNo, pageSize);
-                mAdapter.setNewData(listData);
-                mAdapter.loadMoreComplete();
+                presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
             }
         });
 
-//        refreshLayout.autoRefresh();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                isRefresh = true;
                 pageNo = 1;
                 listData.clear();
-                loadData(mParam1, pageNo, pageSize);
-                mAdapter.setNewData(listData);
-                mAdapter.loadMoreEnd();
-                refreshlayout.finishRefresh(2000);
-                //                mAdapter.setNewData(null);
-                //                mAdapter.setEmptyView(viewNoData);
+                presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
             }
         });
-
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), VERTICAL));
 
         mAdapter = new OrderListAdapter(null);
         mAdapter.setEmptyView(viewNoData);
@@ -163,21 +185,23 @@ public class OrderListFragment extends Fragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toasty.normal(getActivity(), "click " + position).show();
+                String orderId;
+                if (TYPE_LEVEL_0 == adapter.getItemViewType(position)) {
+                    orderId = ((Level0Item) adapter.getData().get(position)).orderId;
+                } else {
+                    orderId = ((Level1Item) adapter.getData().get(position)).orderId;
+                }
+                ARouter.getInstance().build("/order/OrderDetailActivity").withString("orderId", orderId).navigation(ActivityManager.getInstance().getCurrentActivity());
             }
         });
 
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-//                pageNo++;
-//                loadData(mParam1, pageNo, pageSize);
-//                mAdapter.addData(listData);
-//                if (pageNo > 1) {
-//                    mAdapter.loadMoreEnd();
-//                } else {
-//                    mAdapter.loadMoreComplete();
-//                }
+                if (pageNo * pageSize < pageTotal) {
+                    pageNo++;
+                    presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
+                }
             }
         }, recyclerView);
 
@@ -189,32 +213,22 @@ public class OrderListFragment extends Fragment {
                 if (view.getId() == R.id.radio) {
                     if (((Level0Item) adapter.getItem(position)).isCheck) {
                         ((Level0Item) adapter.getItem(position)).isCheck = false;
+                        isCheck = false;
+                        radioAll.setChecked(isCheck);
                     } else {
                         ((Level0Item) adapter.getItem(position)).isCheck = true;
                     }
                     adapter.notifyDataSetChanged();
-                    Logger.e("click" + position);
-                    Logger.e("click" + ((Level0Item) adapter.getItem(position)).isCheck);
+                    itemSelect();
                 }
             }
         });
 
     }
 
-    private void loadData(String orderType, int pageNo, int pageSize) {
-        for (int i = 0; i < pageSize; ++i) {
-            Level0Item lv0 = new Level0Item("one" + i);
-            for (int j = 0, l = 2; j < l; ++j) {
-                Level1Item lv1;
-                if (j == l - 1) {
-                    lv1 = new Level1Item("one" + i, true);
-                } else {
-                    lv1 = new Level1Item("one" + i, false);
-                }
-                lv0.addSubItem(lv1);
-            }
-            listData.add(lv0);
-        }
+    @Override
+    protected void initData() {
+
     }
 
     @OnClick({R.id.radioAll, R.id.btnTakeOrder})
@@ -246,14 +260,113 @@ public class OrderListFragment extends Fragment {
         }
     }
 
+
+    @Override
+    public String getUserId() {
+//        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID);
+        return "15900";
+    }
+
+    @Override
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    @Override
+    public int getPageNo() {
+        return pageNo;
+    }
+
+    @Override
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    @Override
+    public void onResult(CarServiceOrderRsObj result) {
+        if (isRefresh) {
+            refreshLayout.finishRefresh();
+            isRefresh = false;
+        }
+        if (null == result || null == result.getData() || null == result.getData().getDispatchList()) {
+            Toast.show("空数据");
+            if (1 == pageNo) {
+            } else {
+                mAdapter.loadMoreFail();
+            }
+            return;
+        }
+        try {
+            pageTotal = Integer.valueOf(result.getData().getTotalCount());
+        } catch (NumberFormatException e) {
+        }
+        for (int i = 0; i < result.getData().getDispatchList().size(); ++i) {
+            CarServiceOrderRsObj.DataBean.DispatchListBean dispatchListBean = result.getData().getDispatchList().get(i);
+            List<CarServiceOrderRsObj.DataBean.DispatchListBean.ListBean> list = dispatchListBean.getList();
+            CarServiceOrderRsObj.DataBean.DispatchListBean.ListBean listBean = list.get(0);
+            Level0Item lv0 = new Level0Item(listBean.getId(), listBean.getStatus(), listBean.getCarNum(),
+                    listBean.getDispatchNo(), listBean.getDispatchDate(), listBean.getDegree(),
+                    listBean.getCount(), listBean.getLatefine(),
+                    "[" + listBean.getLocation() + "]" + listBean.getLocationName(), listBean.getReason(),
+                    dispatchListBean.getOrderCount(), dispatchListBean.getPayCount(), 1 == list.size());
+            for (int j = 0; j < list.size(); ++j) {
+                if (0 == j) {
+                    continue;
+                }
+                Level1Item lv1;
+                if (j == list.size() - 1) {
+                    lv1 = new Level1Item(list.get(j).getId(), list.get(j).getStatus(), list.get(j).getDispatchNo(), list.get(j).getDispatchDate(),
+                            list.get(j).getDegree(), list.get(j).getCount(), list.get(j).getLatefine(),
+                            "[" + list.get(j).getLocation() + "]" + list.get(j).getLocationName(), list.get(j).getReason(), true);
+                } else {
+                    lv1 = new Level1Item(list.get(j).getId(), list.get(j).getStatus(), list.get(j).getDispatchNo(), list.get(j).getDispatchDate(),
+                            list.get(j).getDegree(), list.get(j).getCount(), list.get(j).getLatefine(),
+                            "[" + list.get(j).getLocation() + "]" + list.get(j).getLocationName(), list.get(j).getReason(), false);
+                }
+                lv0.addSubItem(lv1);
+            }
+            listData.add(lv0);
+        }
+        if (1 == pageNo) {
+            mAdapter.setNewData(listData);
+        } else {
+            mAdapter.addData(listData);
+        }
+        if (pageNo * pageSize < pageTotal) {
+            mAdapter.loadMoreComplete();
+        } else {
+            mAdapter.loadMoreEnd();
+        }
+
+    }
+
+    @Override
+    public void onResultErr() {
+        if (isRefresh) {
+            refreshLayout.finishRefresh();
+            isRefresh = false;
+        }
+    }
+
     private void doSelect() {
-        List<String> list = new ArrayList<>();
+        count = 0;
+        breakCount = 0;
+        total = 0.0;
+
         if (isCheck) {
             for (MultiItemEntity multiItemEntity : mAdapter.getData()) {
                 if (TYPE_LEVEL_0 == multiItemEntity.getItemType()) {
                     Level0Item lv0 = (Level0Item) multiItemEntity;
                     lv0.isCheck = true;
-                    list.add(lv0.title);
+                    ++count;
+                    try {
+                        breakCount += Integer.valueOf(lv0.orderCount);
+                    } catch (NumberFormatException e) {
+                    }
+                    try {
+                        total += Double.valueOf(lv0.payCount);
+                    } catch (NumberFormatException e) {
+                    }
                 }
             }
         } else {
@@ -261,12 +374,44 @@ public class OrderListFragment extends Fragment {
                 if (TYPE_LEVEL_0 == multiItemEntity.getItemType()) {
                     Level0Item lv0 = (Level0Item) multiItemEntity;
                     lv0.isCheck = false;
+                    count = 0;
+                    breakCount = 0;
+                    total = 0.0;
                 }
             }
         }
         mAdapter.notifyDataSetChanged();
-        for (String s : list) {
-            Logger.e("--" + s);
+        carCount.setText("" + count);
+        carBreakCount.setText("" + breakCount);
+        moneyTotal.setText("" + total);
+    }
+
+    private void itemSelect() {
+        count = 0;
+        breakCount = 0;
+        total = 0.0;
+        for (MultiItemEntity multiItemEntity : mAdapter.getData()) {
+            if (TYPE_LEVEL_0 == multiItemEntity.getItemType()) {
+                Level0Item lv0 = (Level0Item) multiItemEntity;
+                if (lv0.isCheck) {
+                    ++count;
+                    try {
+                        breakCount += Integer.valueOf(lv0.orderCount);
+                    } catch (NumberFormatException e) {
+                    }
+                    try {
+                        total += Double.valueOf(lv0.payCount);
+                    } catch (NumberFormatException e) {
+                    }
+                }
+            }
         }
+        if (listData.size() == count) {
+            isCheck = true;
+            radioAll.setChecked(isCheck);
+        }
+        carCount.setText("" + count);
+        carBreakCount.setText("" + breakCount);
+        moneyTotal.setText("" + total);
     }
 }
