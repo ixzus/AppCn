@@ -11,7 +11,9 @@ import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
+import com.yltx.appcn.bean.ResultInfo;
 import com.yltx.appcn.bean.SendSmsRsBean;
+import com.yltx.appcn.bean.TakeOrder;
 import com.yltx.appcn.bean.WeatherInfo;
 
 import java.util.concurrent.TimeUnit;
@@ -102,13 +104,16 @@ public interface ApiService {
     @GET("carServiceOrder/dispatchList")
     Observable<CarServiceOrderRsObj> getDispatchList(@Query("memberId") String memberId, @Query("status") String status, @Query("pageNumber") int pageNumber, @Query("pageSize") int pageSize);
 
+    //接单
+    @POST("carServiceOrder/processOrder")
+    Observable<ResultInfo> processOrder(@Body TakeOrder takeOrder);
+
 
     //http://192.168.X.X:XX/api/message/getMessages
 
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("message/getMessages")
     Observable<GetUserInfoRsBean> getMessages(@Query("userId") String userId, @Query("page") String page);
-
 
 
     //http://192.168.X.X:XX/api/message/getMessage

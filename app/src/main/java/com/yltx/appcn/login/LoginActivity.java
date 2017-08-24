@@ -235,6 +235,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
            // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
             if(null!=mLoginRsBean.getData()){
                 ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getData().getUserId());
+                ACache.get(this).put(Consta.SP_PARAMS.USERNAME,mLoginRsBean.getData().getUsername());
             }
             toNext();
         }

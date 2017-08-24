@@ -18,7 +18,6 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
-import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
@@ -27,7 +26,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
-import com.yltx.appcn.utils.Consta;
+import com.yltx.appcn.bean.ResultInfo;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.util.ArrayList;
@@ -252,6 +251,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                         .setConfirmOkListener(new ConfirmDialog.ConfirmOkListener() {
                             @Override
                             public void convertView(ViewHolder holder, AbsDialog dialog) {
+                                presenter.takeOrder(ActivityManager.getInstance().getCurrentActivity(), TAG);
                                 dialog.dismiss();
                             }
                         })
@@ -265,8 +265,13 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public String getUserId() {
-        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID);
-//        return "15900";
+//        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID);
+        return "15900";
+    }
+
+    @Override
+    public String getUserName() {
+        return "Android";
     }
 
     @Override
@@ -339,6 +344,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
         } else {
             mAdapter.loadMoreEnd();
         }
+        itemSelect();
 
     }
 
@@ -348,6 +354,42 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
             refreshLayout.finishRefresh();
             isRefresh = false;
         }
+    }
+
+    @Override
+    public String getIds() {
+        List<String> listIds = new ArrayList<>();
+        for (MultiItemEntity multiItemEntity : mAdapter.getData()) {
+            if (TYPE_LEVEL_0 == multiItemEntity.getItemType()) {
+                Level0Item lv0 = (Level0Item) multiItemEntity;
+                if (lv0.isCheck) {
+                    listIds.add(lv0.orderId);
+                }
+            }
+        }
+        return listToString(listIds);
+    }
+
+    public String listToString(List<String> stringList) {
+        if (stringList == null) {
+            return null;
+        }
+        StringBuilder result = new StringBuilder();
+        boolean flag = false;
+        for (String string : stringList) {
+            if (flag) {
+                result.append(",");
+            } else {
+                flag = true;
+            }
+            result.append(string);
+        }
+        return result.toString();
+    }
+
+    @Override
+    public void onTakeOrderResult(ResultInfo resultInfo) {
+
     }
 
     private void doSelect() {

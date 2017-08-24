@@ -31,10 +31,12 @@
 
         <activity android:name=".other.SettingActivity"></activity>
 
-=
+        =
         <activity android:name=".MainActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".main.orderlist.OrderListActivity" />
+        <activity
+            android:name=".main.orderlist.OrderListActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".main.orderlist.orderdetail.OrderDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"></activity>

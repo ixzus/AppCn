@@ -8,6 +8,8 @@ import com.ixzus.applibrary.net.RxSchedulers;
 import com.ixzus.applibrary.util.Toast;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
+import com.yltx.appcn.bean.ResultInfo;
+import com.yltx.appcn.bean.TakeOrder;
 import com.yltx.appcn.net.RxRetrofit;
 
 /**
@@ -27,6 +29,35 @@ public class OrderListModel extends BaseModel implements OrderListContract.IMode
                     @Override
                     public void onSuccess(int whichRequest, CarServiceOrderRsObj result) {
                         iPresenter.loadResult(result);
+                    }
+
+                    @Override
+                    public void onError(int whichRequest, Throwable e) {
+                        iPresenter.loadErr();
+                    }
+                });
+    }
+
+    @Override
+    public void doTakeOrder(Context context, String TAG, String ids, String status, String personNo, String personName, final OrderListContract.IPresenter iPresenter) {
+        TakeOrder takeOrder = new TakeOrder();
+        takeOrder.setId(ids);
+        takeOrder.setStatus("0703");
+        takeOrder.setHandlePersonNo(personNo);
+        takeOrder.setHandlePersonName(personName);
+        RxRetrofit.getInstance().getApiService().processOrder(takeOrder)
+                .compose(((RxAppCompatActivity) context).<ResultInfo>bindToLifecycle())
+                .compose(RxSchedulers.<ResultInfo>io_main())
+                .subscribe(new NetObserver<ResultInfo>(context, TAG, 1, true) {
+
+                    @Override
+                    public void onSuccess(int whichRequest, ResultInfo result) {
+                        if (null != result) {
+                            if ("success".equals(result.getCode())) {
+                                iPresenter.takeOrderResult(result);
+                            }
+                            Toast.show(result.getMessage());
+                        }
                     }
 
                     @Override
