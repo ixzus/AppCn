@@ -140,7 +140,6 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
     protected void toolbar(String centerText, boolean isBack, String backText) {
         if (isBack) {
             findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
-            findViewById(R.id.toolbar_line).setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(backText)) {
             ((TextView) findViewById(R.id.toolbar_back_text)).setText(backText);
@@ -157,7 +156,6 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
         }
         if (isBack) {
             findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
-            findViewById(R.id.toolbar_line).setVisibility(View.VISIBLE);
         }
         if (!TextUtils.isEmpty(backText)) {
             if (0 != tvColor) {
