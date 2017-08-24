@@ -68,11 +68,11 @@ public class OrderListActivity extends RxAppCompatActivity {
         titleList.add("已驳回");
         titleList.add("已拒单");
         titleList.add("已完成");
-        waitFragment = OrderListFragment.newInstance("WAIT", "");
-        dealFragment = OrderListFragment.newInstance("DEAL", "");
-        rejectFragment = OrderListFragment.newInstance("REJECT", "");
-        refuseFragment = OrderListFragment.newInstance("REFUSE", "");
-        finishFragment = OrderListFragment.newInstance("FINISH", "");
+        waitFragment = OrderListFragment.newInstance(OrderViewType.WAIT, "");
+        dealFragment = OrderListFragment.newInstance(OrderViewType.DEAL, "");
+        rejectFragment = OrderListFragment.newInstance(OrderViewType.REJECT, "");
+        refuseFragment = OrderListFragment.newInstance(OrderViewType.REFUSE, "");
+        finishFragment = OrderListFragment.newInstance(OrderViewType.SUCCESS, "");
         for (String s : titleList) {
             tabLayout.addTab(tabLayout.newTab().setText(s));
         }

@@ -1,5 +1,6 @@
 package com.yltx.appcn.net;
 
+import com.yltx.appcn.bean.CarServiceOrderRsObj;
 import com.yltx.appcn.bean.CartMemberBean;
 import com.yltx.appcn.bean.GetCarDetailRsBean;
 import com.yltx.appcn.bean.GetMessagesRsBean;
@@ -9,7 +10,6 @@ import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
-import com.yltx.appcn.bean.ModifyPwdBean;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.SendSmsRsBean;
@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.rx_cache2.LifeCache;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -67,7 +66,6 @@ public interface ApiService {
     Observable<WeatherInfo> getWeather();
 
 
-
     //http://192.168.X.X:XX/api/user/login   登录
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("user/login")
@@ -91,23 +89,28 @@ public interface ApiService {
     Observable<GetUserInfoRsBean> getUserInfoByUserId(@Query("userId") String userId);
 
 
-
     //http://192.168.X.X:XX/api/user/updatePassword  修改密码
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("user/updatePassword")
 //    Observable<String> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
     Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
 
-
+    //首页
     @GET("carServiceOrder/getToBeHandleNum")
     Observable<HandleNum> getToBeHandleNum(@Query("userId") String userId);
+
+    //派单列表
+    @GET("carServiceOrder/dispatchList")
+    Observable<CarServiceOrderRsObj> getDispatchList(@Query("memberId") String memberId, @Query("status") String status, @Query("pageNumber") int pageNumber, @Query("pageSize") int pageSize);
 
 
     //http://192.168.X.X:XX/api/message/getMessages
 
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("message/getMessages")
+
     Observable<GetMessagesRsBean> getMessages(@Query("userId") String userId, @Query("page") String page);
+
 
 
 

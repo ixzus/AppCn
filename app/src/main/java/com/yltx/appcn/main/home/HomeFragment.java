@@ -14,7 +14,6 @@ import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
-import com.orhanobut.logger.Logger;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.HandleNum;
 import com.yltx.appcn.utils.Consta;
@@ -24,7 +23,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 

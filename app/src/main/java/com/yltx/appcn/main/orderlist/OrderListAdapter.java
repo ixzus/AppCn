@@ -6,6 +6,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.ixzus.applibrary.util.Toast;
 import com.yltx.appcn.R;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
     private int pos;
     private ArrayMap array = new ArrayMap();
 
-    private String orderViewType = OrderViewType.SUCCESS;
+    private String orderViewType;
 
     public void setItemCheck(String key, boolean isCheck) {
         array.put(key, isCheck);
@@ -37,7 +38,7 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
 
     public void allCheck(boolean isCheck) {
         for (int i = 0, l = mData.size(); i < l; ++i) {
-            array.put(((Level0Item) mData.get(i)).title, isCheck);
+            array.put(((Level0Item) mData.get(i)).carNo, isCheck);
         }
         notifyDataSetChanged();
     }
@@ -55,9 +56,49 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
             case TYPE_LEVEL_0:
                 final Level0Item lv0 = (Level0Item) item;
                 holder.setChecked(R.id.radio, lv0.isCheck);
-                holder.setText(R.id.orderNum, lv0.title);
+                holder.setText(R.id.carNo, lv0.carNo);
+                holder.setText(R.id.orderNum, lv0.orderNo);
+                holder.setText(R.id.orderTime, lv0.orderTime);
+                holder.setText(R.id.orderPoint, lv0.point + "分");
+                holder.setText(R.id.orderFine, lv0.fine + "元");
+                holder.setText(R.id.orderOverdueFine, lv0.overduefine + "元");
+                holder.setText(R.id.orderAddr, lv0.addr);
+                holder.setText(R.id.orderReson, lv0.reson);
 
                 /*****************/
+                switch (lv0.status) {
+                    case "0702":
+                        orderViewType = OrderViewType.WAIT;
+                        break;
+                    case "0703":
+                        orderViewType = OrderViewType.DEAL;
+                        break;
+                    case "0704":
+                        orderViewType = OrderViewType.REFUSE;
+                        break;
+                    case "0705":
+                        orderViewType = OrderViewType.DEALFAIL;
+                        break;
+                    case "0706":
+                        orderViewType = OrderViewType.DEALOK;
+                        break;
+                    case "0707":
+                        orderViewType = OrderViewType.DEALOK;
+                        break;
+                    case "0708":
+                        orderViewType = OrderViewType.DEALOK;
+                        break;
+                    case "0709":
+                        orderViewType = OrderViewType.REJECT;
+                        break;
+                    case "0520":
+                        orderViewType = OrderViewType.SUCCESS;
+                    case "0530":
+                        orderViewType = OrderViewType.FAIL;
+                        break;
+                    default:
+                        return;
+                }
                 switch (orderViewType) {
                     case OrderViewType.WAIT:
                         holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_1);
@@ -93,6 +134,9 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 } else {
                     holder.getView(R.id.llopen).setVisibility(View.VISIBLE);
                 }
+                if (lv0.isOnly) {
+                    holder.getView(R.id.llopen).setVisibility(View.GONE);
+                }
                 holder.getView(R.id.llopen).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -109,7 +153,75 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 break;
             case TYPE_LEVEL_1:
                 final Level1Item lv1 = (Level1Item) item;
-                holder.setText(R.id.orderNum, lv1.title);
+                holder.setText(R.id.orderNum, lv1.orderNo);
+                holder.setText(R.id.orderTime, lv1.orderTime);
+                holder.setText(R.id.orderPoint, lv1.point + "分");
+                holder.setText(R.id.orderFine, lv1.fine + "元");
+                holder.setText(R.id.orderOverdueFine, lv1.overduefine + "元");
+                holder.setText(R.id.orderAddr, lv1.addr);
+                holder.setText(R.id.orderReson, lv1.reson);
+                /*****************/
+                switch (lv1.status) {
+                    case "0702":
+                        orderViewType = OrderViewType.WAIT;
+                        break;
+                    case "0703":
+                        orderViewType = OrderViewType.DEAL;
+                        break;
+                    case "0704":
+                        orderViewType = OrderViewType.REFUSE;
+                        break;
+                    case "0705":
+                        orderViewType = OrderViewType.DEALFAIL;
+                        break;
+                    case "0706":
+                        orderViewType = OrderViewType.DEALOK;
+                        break;
+                    case "0707":
+                        orderViewType = OrderViewType.DEALOK;
+                        break;
+                    case "0708":
+                        orderViewType = OrderViewType.DEALOK;
+                        break;
+                    case "0709":
+                        orderViewType = OrderViewType.REJECT;
+                        break;
+                    case "0520":
+                        orderViewType = OrderViewType.SUCCESS;
+                    case "0530":
+                        orderViewType = OrderViewType.FAIL;
+                        break;
+                    default:
+                        return;
+                }
+                switch (orderViewType) {
+                    case OrderViewType.WAIT:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_1);
+                        break;
+                    case OrderViewType.DEAL:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                    case OrderViewType.REJECT:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                    case OrderViewType.REFUSE:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_3);
+                        break;
+                    case OrderViewType.DEALOK:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_3);
+                        break;
+                    case OrderViewType.SUCCESS:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_3);
+                        break;
+                    case OrderViewType.FAIL:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                    case OrderViewType.DEALFAIL:
+                        holder.setBackgroundRes(R.id.orderStatus, R.mipmap.ic_status_2);
+                        break;
+                }
+                holder.setText(R.id.orderStatus, orderViewType);
+                /*****************/
                 if (lv1.isLast) {
                     holder.getView(R.id.llclose).setVisibility(View.VISIBLE);
                 } else {
@@ -118,10 +230,10 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 holder.getView(R.id.llclose).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Toast.show("boolean:" + lv1.isLast);
                         collapse(pos);
                     }
                 });
-                break;
 
         }
     }
