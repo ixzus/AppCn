@@ -9,13 +9,25 @@ import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfirmDialog extends AbsDialog {
     private String type;
+    private List<String> listInfo;
 
     public static ConfirmDialog newInstance(String type) {
         Bundle bundle = new Bundle();
         bundle.putString("type", type);
+        ConfirmDialog dialog = new ConfirmDialog();
+        dialog.setArguments(bundle);
+        return dialog;
+    }
+
+    public static ConfirmDialog newInstance(String type, ArrayList<String> listInfo) {
+        Bundle bundle = new Bundle();
+        bundle.putString("type", type);
+        bundle.putStringArrayList("listInfo", listInfo);
         ConfirmDialog dialog = new ConfirmDialog();
         dialog.setArguments(bundle);
         return dialog;
@@ -29,6 +41,7 @@ public class ConfirmDialog extends AbsDialog {
             return;
         }
         type = bundle.getString("type");
+        listInfo = bundle.getStringArrayList("listInfo");
         if (savedInstanceState != null) {
             confirmOkListener = (ConfirmOkListener) savedInstanceState.getSerializable("confirmOkListener");
             confirmCancelListener = (ConfirmCancelListener) savedInstanceState.getSerializable("confirmCancelListener");
@@ -59,9 +72,10 @@ public class ConfirmDialog extends AbsDialog {
             viewHolder.setText(R.id.cancel, "取消");
         }
 
-        if("确认订单".equals(type)){
+        if ("确认订单".equals(type)) {
+            String str = "您已选择" + listInfo.get(0) + "辆车,共计" + listInfo.get(1) + "条违章\n罚款总额" + listInfo.get(2) + "元\n您确认接单吗？";
             viewHolder.setText(R.id.title, "温馨提示");
-            viewHolder.setText(R.id.message, "您已选择辆车,共计违章条\n罚款总额元\n您确认接单吗？");
+            viewHolder.setText(R.id.message, str);
             viewHolder.setText(R.id.ok, "确认接单");
             viewHolder.setText(R.id.cancel, "取消");
         }

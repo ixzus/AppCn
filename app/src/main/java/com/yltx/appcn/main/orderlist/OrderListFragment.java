@@ -241,7 +241,11 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 doSelect();
                 break;
             case R.id.btnTakeOrder:
-                ConfirmDialog.newInstance("确认订单")
+                ArrayList<String> listInfo = new ArrayList<>();
+                listInfo.add("" + count);
+                listInfo.add("" + breakCount);
+                listInfo.add("" + total);
+                ConfirmDialog.newInstance("确认订单",listInfo)
                         .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
                             @Override
                             public void convertView(ViewHolder holder, AbsDialog dialog) {
