@@ -272,16 +272,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     public void onLoginResult(LoginRsBean mLoginRsBean) {
         Log.d(TAG, "==================onLoginResult::" + new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
-<<<<<<< HEAD
-           // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
-            if(null!=mLoginRsBean.getData()){
-                ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getData().getUserId());
-                ACache.get(this).put(Consta.SP_PARAMS.USERNAME,mLoginRsBean.getData().getUsername());
-            }
-=======
-
             setCacheData(mLoginRsBean);
->>>>>>> 17a96a24fdb406cb09ce494409d57a67337ceef8
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();

@@ -10,11 +10,8 @@ import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
-<<<<<<< HEAD
 import com.yltx.appcn.bean.OrderDetail;
-=======
 import com.yltx.appcn.bean.ModifyPwdBean;
->>>>>>> 17a96a24fdb406cb09ce494409d57a67337ceef8
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.ResultInfo;

@@ -479,7 +479,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     public String getOrderId() {
-        return "10";
+        return "";
     }
 
     @Override
