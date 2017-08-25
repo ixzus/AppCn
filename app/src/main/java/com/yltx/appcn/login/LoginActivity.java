@@ -43,8 +43,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
-import static com.yltx.appcn.utils.Consta.SP_PARAMS.LOGIN_ISRE_FALSE;
-import static com.yltx.appcn.utils.Consta.SP_PARAMS.LOGIN_ISRE_TRUE;
+import static com.yltx.appcn.utils.Consta.CONTENT_VALUE.LOGIN_ISRE_FALSE;
+import static com.yltx.appcn.utils.Consta.CONTENT_VALUE.LOGIN_ISRE_TRUE;
+
 
 @Route(path = "/login/loginActivity")
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter>
@@ -90,7 +91,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
 
         cetInputphone.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_NAME));
-        if(Consta.SP_PARAMS.LOGIN_ISRE_TRUE.equals(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_ISRE))){
+        if(LOGIN_ISRE_TRUE.equals(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_ISRE))){
             cbRember.setChecked(true);
             cetInputpwde.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_PWD));
         }

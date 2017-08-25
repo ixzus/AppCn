@@ -27,7 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
-import static com.yltx.appcn.utils.Consta.SP_PARAMS.MESSAGE_BODY;
+
+import static com.yltx.appcn.utils.Consta.INTENT_KEY_PARAMS.MESSAGE_BODY;
 import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType;
 import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_ReSet;
 import static com.yltx.appcn.utils.Consta.sendSmsData.PHONE;

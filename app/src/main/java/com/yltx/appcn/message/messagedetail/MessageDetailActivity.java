@@ -15,6 +15,8 @@ import com.yltx.appcn.utils.Consta;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.yltx.appcn.utils.Consta.INTENT_KEY_PARAMS.MESSAGE_BODY;
+
 /**
  * Author：Wq
  * Date：2017/8/24 14:56
@@ -64,7 +66,7 @@ public class MessageDetailActivity extends BaseActivity<MessageDetailContract.IM
 
     @Override
     protected void initData() {
-        bean = (GetMessagesRsBean.DataBean.MessagesBean) getIntent().getSerializableExtra(Consta.SP_PARAMS.MESSAGE_BODY);
+        bean = (GetMessagesRsBean.DataBean.MessagesBean) getIntent().getSerializableExtra(MESSAGE_BODY);
         setData();
     }
 

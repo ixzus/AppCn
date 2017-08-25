@@ -1,5 +1,7 @@
 package com.yltx.appcn.other;
 
+import android.app.ActivityManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +20,12 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperTextView;
 import com.ixzus.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.R;
+import com.yltx.appcn.base.SplashActivity;
+import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import butterknife.BindView;
@@ -103,14 +108,16 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
                 .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
                     @Override
                     public void convertView(ViewHolder holder, AbsDialog dialog) {
-                        Toast.makeText(SettingActivity.this, "cancel", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 })
                 .setConfirmOkListener(new ConfirmDialog.ConfirmOkListener() {
                     @Override
                     public void convertView(ViewHolder holder, AbsDialog dialog) {
-                        Toasty.normal(SettingActivity.this, "kkkkkkkkk").show();
+                        ARouter.getInstance().build("/login/loginActivity").navigation(SettingActivity.this);
+//                        ActivityManager.getAppManager().finshAcitivityExcept(LoginActivity.class);
+                        finishToClearCache();
+                        finish();
                         dialog.dismiss();
                     }
                 })
@@ -118,6 +125,19 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
                 .setOutCancel(false)
                 .setAnimStyle(R.style.DialogAnimation)
                 .show(getSupportFragmentManager());
+    }
+
+    private void finishToClearCache() {
+
+//        public static final String USERID= "userId";//不可以代缴
+//        public static final String LOGIN_NAME= "login_n";//
+//        public static final String LOGIN_PWD= "login_p";//
+//        public static final String LOGIN_ISRE= "login_re";//
+
+        ACache.get(this).put(Consta.SP_PARAMS.USERID, "");
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_NAME, "");
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_PWD, "");
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_ISRE, "");
     }
 
 
