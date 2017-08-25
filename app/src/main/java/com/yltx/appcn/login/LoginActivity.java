@@ -43,6 +43,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
+import static com.yltx.appcn.utils.Consta.SP_PARAMS.LOGIN_ISRE_FALSE;
+import static com.yltx.appcn.utils.Consta.SP_PARAMS.LOGIN_ISRE_TRUE;
+
 @Route(path = "/login/loginActivity")
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter>
         implements LoginContract.ILoginView, IActivity, IToolbar, ISwipeBack {
@@ -83,9 +86,18 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     @Override
     protected void initView() {
         toolbar("登录", false, null);
-
         showStatus(ViewStatus.STATUS_LOADING);
 
+
+        cetInputphone.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_NAME));
+        if(Consta.SP_PARAMS.LOGIN_ISRE_TRUE.equals(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_ISRE))){
+            cbRember.setChecked(true);
+            cetInputpwde.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_PWD));
+        }
+        initEvent();
+    }
+
+    private void initEvent() {
         RxView.clicks(button)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
@@ -175,6 +187,17 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                 }
             }
         });
+
+        cbRember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    setIsRe(LOGIN_ISRE_TRUE);
+                }else{
+                    setIsRe(LOGIN_ISRE_FALSE);
+                }
+            }
+        });
     }
 
     private void toLogin() {
@@ -248,13 +271,22 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     public void onLoginResult(LoginRsBean mLoginRsBean) {
         Log.d(TAG, "==================onLoginResult::" + new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
-            // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
-            if (null != mLoginRsBean.getData()) {
-                ACache.get(this).put(Consta.SP_PARAMS.USERID, mLoginRsBean.getData().getUserId());
-            }
+
+            setCacheData(mLoginRsBean);
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void setCacheData(LoginRsBean mLoginRsBean) {
+        if (null != mLoginRsBean.getData()) {
+            ACache.get(this).put(Consta.SP_PARAMS.USERID, mLoginRsBean.getData().getUserId());
+        }
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_NAME, getName());//登录成功之后记住手机号码
+        if(cbRember.isChecked()){
+            ACache.get(this).put(Consta.SP_PARAMS.LOGIN_PWD, getPwd());//记住pwd
+            setIsRe(LOGIN_ISRE_TRUE);//保存是否记住密码状态
+        }
     }
 
 
@@ -267,5 +299,10 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+
+    public void setIsRe(String str){
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_ISRE, str);
     }
 }

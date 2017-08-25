@@ -32,6 +32,15 @@ public class Consta {
         public static final String USERID= "userId";//不可以代缴
 
         public static final String MESSAGE_BODY= "message_body";//消息body
+
+        public static final String LOGIN_NAME= "login_n";//登录
+        public static final String LOGIN_PWD= "login_p";//登录密码
+
+        public static final String LOGIN_ISRE= "login_re";//登录密码
+
+        public static final String LOGIN_ISRE_TRUE= "true";//
+
+        public static final String LOGIN_ISRE_FALSE= "false";//
     }
 
 
