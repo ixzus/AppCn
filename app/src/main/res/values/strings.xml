@@ -3,4 +3,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--<li onclick="clickCarType('1','小型汽车')">小型汽车<>-->
+    <!--<li onclick="clickCarType('2','大型客车(A1)')">大型客车(A1)<>-->
+    <!--<li onclick="clickCarType('3','索引货车(A2)')">索引货车(A2)<>-->
+    <!--<li onclick="clickCarType('4','中型客车(B1)')">中型客车(B1)<>-->
+    <!--<li onclick="clickCarType('5','大型货车(B2)')">大型货车(B2)<>-->
+    <!--<li onclick="clickCarType('6','两/三轮摩托车')">两/三轮摩托车<>-->
+
 </resources>

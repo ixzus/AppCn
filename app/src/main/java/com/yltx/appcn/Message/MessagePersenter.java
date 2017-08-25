@@ -3,6 +3,7 @@ package com.yltx.appcn.message;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BasePresenter;
+import com.yltx.appcn.bean.GetMessagesRsBean;
 
 /**
  * Author：Wq
@@ -19,7 +20,9 @@ public class MessagePersenter extends BasePresenter<MessageModel,MessageActivity
     }
 
     @Override
-    public void GetMessagesResult(String resultJson) {
+    public void GetMessagesResult(GetMessagesRsBean.DataBean data) {
+
+        view.onGetMessagesResult(data);
 
     }
 }

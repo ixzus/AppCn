@@ -8,16 +8,11 @@
     tools:context="com.yltx.appcn.login.LoginActivity">
 
     <include layout="@layout/toolbar" />
-    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
-        android:id="@+id/refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
 
 
 

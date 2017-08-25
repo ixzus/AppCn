@@ -3,13 +3,18 @@ package com.yltx.appcn.net;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
 import com.yltx.appcn.bean.CartMemberBean;
 import com.yltx.appcn.bean.GetCarDetailRsBean;
+import com.yltx.appcn.bean.GetMessagesRsBean;
 import com.yltx.appcn.bean.GetUserInfoRsBean;
 import com.yltx.appcn.bean.HandleNum;
 import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
+<<<<<<< HEAD
 import com.yltx.appcn.bean.OrderDetail;
+=======
+import com.yltx.appcn.bean.ModifyPwdBean;
+>>>>>>> 17a96a24fdb406cb09ce494409d57a67337ceef8
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.ResultInfo;
@@ -94,8 +99,8 @@ public interface ApiService {
     //http://192.168.X.X:XX/api/user/updatePassword  修改密码
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("user/updatePassword")
-//    Observable<String> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
-    Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
+   Observable<ResetPwdRsBean> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
+    //Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
 
     //首页
     @GET("carServiceOrder/getToBeHandleNum")
@@ -121,7 +126,9 @@ public interface ApiService {
 
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("message/getMessages")
-    Observable<GetUserInfoRsBean> getMessages(@Query("userId") String userId, @Query("page") String page);
+
+    Observable<GetMessagesRsBean> getMessages(@Query("userId") String userId, @Query("page") String page);
+
 
 
     //http://192.168.X.X:XX/api/message/getMessage

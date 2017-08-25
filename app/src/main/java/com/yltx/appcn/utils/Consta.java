@@ -27,12 +27,36 @@ public class Consta {
     //ACache.get(getActivity()).getAsString("key");
 
     public class SP_PARAMS {
+<<<<<<< HEAD
         public static final String USERID = "userId";
         public static final String USERNAME = "userName";
+=======
+        public static final String USERID= "userId";//不可以代缴
+        public static final String LOGIN_NAME= "login_n";//
+        public static final String LOGIN_PWD= "login_p";//
+        public static final String LOGIN_ISRE= "login_re";//
+
+    }
+
+    public class CONTENT_VALUE{
+        public static final String LOGIN_ISRE_TRUE= "true";//
+        public static final String LOGIN_ISRE_FALSE= "false";//
+>>>>>>> 17a96a24fdb406cb09ce494409d57a67337ceef8
     }
 
 
     public class INTENT_KEY_PARAMS {
+<<<<<<< HEAD
         public static final String CARID = "carId";
+=======
+        public static final String CARID= "carId";//不可以代缴
+
+        public static final String MESSAGE_BODY= "message_body";//消息body
+    }
+
+    public class MESSAGE_TYPE {
+        public static final String MESSAGE_TYPE_ORDER= "order";//订单
+        public static final String MESSAGE_TYPE_SYSTEM= "system";//系统
+>>>>>>> 17a96a24fdb406cb09ce494409d57a67337ceef8
     }
 }

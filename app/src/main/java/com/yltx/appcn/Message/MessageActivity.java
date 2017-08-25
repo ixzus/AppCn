@@ -15,12 +15,24 @@ import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.GetMessagesRsBean;
+import com.yltx.appcn.message.messagedetail.MessageDetailActivity;
+import com.yltx.appcn.pwd.FindPwdActivity;
+import com.yltx.appcn.utils.Consta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
+
+
+import static com.yltx.appcn.utils.Consta.INTENT_KEY_PARAMS.MESSAGE_BODY;
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType;
+import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_ReSet;
+import static com.yltx.appcn.utils.Consta.sendSmsData.PHONE;
+import static com.yltx.appcn.utils.Consta.sendSmsData.Sms_Code;
 
 /**
  * Author：Wq
@@ -46,6 +58,8 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
     private int startPage=1;
 
     private ArrayList<String> mList;
+
+    private List<GetMessagesRsBean.DataBean.MessagesBean> messages=new ArrayList<GetMessagesRsBean.DataBean.MessagesBean>();
 
     @Override
     protected MessagePersenter initPresenter() {
@@ -80,8 +94,16 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toasty.normal(MessageActivity.this, "查看详情：" + position).show();
-                toNext();
+                GetMessagesRsBean.DataBean.MessagesBean bean=messages.get(position);
+                if(Consta.MESSAGE_TYPE.MESSAGE_TYPE_SYSTEM.equals(bean.getMessageType())){
+                    //跳转 订单详情页面
+
+                }else if(Consta.MESSAGE_TYPE.MESSAGE_TYPE_ORDER.equals(bean.getMessageType())){
+                    //系统消息 跳转MessageDetailActivity页面
+                    ARouter.getInstance().build("/message/messagedetail/MessageDetailActivity")
+                            .withSerializable(MESSAGE_BODY,bean)
+                            .navigation(MessageActivity.this);
+                }
             }
         });
     }
@@ -94,23 +116,20 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
     }
 
     private void initRefresh() {
-        presenter.GetMessages(MessageActivity.this, TAG, "");
+        presenter.GetMessages(MessageActivity.this, TAG, startPage+"");
     }
 
     private void initRv() {
 
-        mList = new ArrayList<String>();
-        for (int i = 0; i < 50; i++) {
-            mList.add("哈哈哈哈哈哈" + i);
-        }
+//        mList = new ArrayList<String>();
+//        for (int i = 0; i < 50; i++) {
+//            mList.add("哈哈哈哈哈哈" + i);
+//        }
 
         adapter = new MessageAdapter();
-        adapter.setNewData(mList);
-
+        adapter.setNewData(messages);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-
     }
 
     @Override
@@ -119,10 +138,11 @@ public class MessageActivity extends BaseActivity<MessageContract.IMessageView, 
     }
 
     @Override
-    public void onGetMessagesResult(String code) {
+    public void onGetMessagesResult(GetMessagesRsBean.DataBean data) {
 
         //@// TODO: 2017/8/21  判断是否成功  然后设置Adapter
-
+        messages=data.getMessages();
+        adapter.setNewData(messages);
     }
 
     @Override

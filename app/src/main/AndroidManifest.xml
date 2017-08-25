@@ -43,6 +43,10 @@
             android:name=".main.orderlist.orderdetail.OrderDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"></activity>
 
+        <activity android:name=".message.messagedetail.MessageDetailActivity"></activity>
+
+        <activity android:name=".other.MyIssueActivity"></activity>
+
     </application>
 
 </manifest>

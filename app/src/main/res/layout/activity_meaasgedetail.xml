@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.yltx.appcn.login.LoginActivity">
+    tools:context="com.yltx.appcn.login.LoginActivity"
+    android:background="@color/white"
+    >
 
 
     <include layout="@layout/toolbar" />
@@ -35,19 +37,22 @@
             android:textSize="12sp"
             android:textColor="@color/tv_title_time"
             android:text="2017年08月28日 12: 28: 28"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
 
+            />
+        <View
+            style="@style/HlineViewStyle"
+            android:layout_marginTop="18dp"
             />
 
         <TextView
             android:id="@+id/tv_message_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/tv_title_content"
             android:text="继广州之后，多地陆续出台了类似政策，其中，北京规定北京户籍承租公共租赁住房和直管公房的，可根据备案信息申请办理户口登记和迁移手续。京籍无房家庭子女满足相应条件可租房上学。南京也提出适时研究出台符合条件的承租人享受与本地居民同样的基本公共服务政策措施，建立承租人权利清单，逐步实现购租同权。"
-            android:layout_marginTop="12dp"
-
+            android:layout_marginTop="14dp"
             />
 
 

@@ -1,12 +1,18 @@
 package com.yltx.appcn.other;
 
+import android.app.ActivityManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,27 +20,20 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperTextView;
 import com.ixzus.applibrary.impl.IToolbar;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
-import com.jakewharton.rxbinding2.view.RxView;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
-import com.yltx.appcn.login.LoginActivity;
-import com.yltx.appcn.pwd.FindPwdActivity;
+import com.yltx.appcn.base.SplashActivity;
+import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType;
 import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_Modify;
-import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_ReSet;
 
 /**
  * Author：Wq
@@ -61,6 +60,10 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
     SuperTextView stShock;
     @BindView(R.id.tv_quit)
     TextView tvQuit;
+    @BindView(R.id.tv_msgshock)
+    TextView tvMsgshock;
+    @BindView(R.id.st_toclose)
+    Switch stToclose;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +73,12 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
 
         initView();
         initEvent();
+        initData();
+    }
+
+    private void initData() {
+
+
     }
 
     private void initEvent() {
@@ -79,14 +88,12 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
                 toNext();
             }
         });
-
         tvQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toQuit();
             }
         });
-
         stClose.setRightTvClickListener(new SuperTextView.OnRightTvClickListener() {
             @Override
             public void onClickListener() {
@@ -94,23 +101,23 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
             }
         });
 
-
-
     }
 
     private void toQuit() {
-        ConfirmDialog.newInstance("2")
+        ConfirmDialog.newInstance("3")
                 .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
                     @Override
                     public void convertView(ViewHolder holder, AbsDialog dialog) {
-                        Toast.makeText(SettingActivity.this, "cancel", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 })
                 .setConfirmOkListener(new ConfirmDialog.ConfirmOkListener() {
                     @Override
                     public void convertView(ViewHolder holder, AbsDialog dialog) {
-                        Toasty.normal(SettingActivity.this, "kkkkkkkkk").show();
+                        ARouter.getInstance().build("/login/loginActivity").navigation(SettingActivity.this);
+//                        ActivityManager.getAppManager().finshAcitivityExcept(LoginActivity.class);
+                        finishToClearCache();
+                        finish();
                         dialog.dismiss();
                     }
                 })
@@ -118,6 +125,19 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
                 .setOutCancel(false)
                 .setAnimStyle(R.style.DialogAnimation)
                 .show(getSupportFragmentManager());
+    }
+
+    private void finishToClearCache() {
+
+//        public static final String USERID= "userId";//不可以代缴
+//        public static final String LOGIN_NAME= "login_n";//
+//        public static final String LOGIN_PWD= "login_p";//
+//        public static final String LOGIN_ISRE= "login_re";//
+
+        ACache.get(this).put(Consta.SP_PARAMS.USERID, "");
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_NAME, "");
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_PWD, "");
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_ISRE, "");
     }
 
 
@@ -130,6 +150,18 @@ public class SettingActivity extends AppCompatActivity implements IToolbar {
 
     private void initView() {
         toolbar("首页", true, null);
+
+
+        stToclose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                } else {
+
+                }
+            }
+        });
     }
 
 

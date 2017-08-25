@@ -85,6 +85,14 @@ public class ConfirmDialog extends AbsDialog {
             viewHolder.setText(R.id.ok, "立即修改");
             viewHolder.setText(R.id.cancel, "取消");
         }
+        else if ("3".equals(type)) {
+            //退出登录
+            viewHolder.setText(R.id.title, "提示");
+            viewHolder.setText(R.id.message, "您确定要退出登录吗？");
+            viewHolder.setText(R.id.ok, "确定");
+            viewHolder.setText(R.id.cancel, "取消");
+        }
+
 
         if ("确认订单".equals(type)) {
             String str = "您已选择" + listInfo.get(0) + "辆车,共计" + listInfo.get(1) + "条违章\n罚款总额" + listInfo.get(2) + "元\n您确认接单吗？";

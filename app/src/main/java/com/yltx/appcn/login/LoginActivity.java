@@ -3,9 +3,11 @@ package com.yltx.appcn.login;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +30,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.LoginRsBean;
-import com.yltx.appcn.modifypwd.ModifyPwdActivity;
 import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
@@ -41,6 +42,10 @@ import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+
+import static com.yltx.appcn.utils.Consta.CONTENT_VALUE.LOGIN_ISRE_FALSE;
+import static com.yltx.appcn.utils.Consta.CONTENT_VALUE.LOGIN_ISRE_TRUE;
+
 
 @Route(path = "/login/loginActivity")
 public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginPersenter>
@@ -71,6 +76,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     CheckBox cbRember;
     @BindView(R.id.tv_repwd)
     TextView tvRepwd;
+    @BindView(R.id.cb_tolook)
+    CheckBox cbTolook;
 
     @Override
     protected int initLayout() {
@@ -80,9 +87,18 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     @Override
     protected void initView() {
         toolbar("登录", false, null);
-
         showStatus(ViewStatus.STATUS_LOADING);
 
+
+        cetInputphone.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_NAME));
+        if(LOGIN_ISRE_TRUE.equals(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_ISRE))){
+            cbRember.setChecked(true);
+            cetInputpwde.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_PWD));
+        }
+        initEvent();
+    }
+
+    private void initEvent() {
         RxView.clicks(button)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
@@ -159,6 +175,30 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                         toSetting();
                     }
                 });
+
+        cbTolook.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    cetInputpwde.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    cetInputpwde.setSelection(cetInputpwde.getText().toString().length());
+                } else {
+                    cetInputpwde.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    cetInputpwde.setSelection(cetInputpwde.getText().toString().length());
+                }
+            }
+        });
+
+        cbRember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    setIsRe(LOGIN_ISRE_TRUE);
+                }else{
+                    setIsRe(LOGIN_ISRE_FALSE);
+                }
+            }
+        });
     }
 
     private void toLogin() {
@@ -178,7 +218,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     private void toSetting() {
 
-        ARouter.getInstance().build("/other/SettingActivity").navigation(LoginActivity.this);
+        ARouter.getInstance().build("/cardetail/CarDetailAvtivity").navigation(LoginActivity.this);
         finish();
 
     }
@@ -230,16 +270,32 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
-        Log.d(TAG,"==================onLoginResult::"+new Gson().toJson(mLoginRsBean));
+        Log.d(TAG, "==================onLoginResult::" + new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
+<<<<<<< HEAD
            // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
             if(null!=mLoginRsBean.getData()){
                 ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getData().getUserId());
                 ACache.get(this).put(Consta.SP_PARAMS.USERNAME,mLoginRsBean.getData().getUsername());
             }
+=======
+
+            setCacheData(mLoginRsBean);
+>>>>>>> 17a96a24fdb406cb09ce494409d57a67337ceef8
             toNext();
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void setCacheData(LoginRsBean mLoginRsBean) {
+        if (null != mLoginRsBean.getData()) {
+            ACache.get(this).put(Consta.SP_PARAMS.USERID, mLoginRsBean.getData().getUserId());
+        }
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_NAME, getName());//登录成功之后记住手机号码
+        if(cbRember.isChecked()){
+            ACache.get(this).put(Consta.SP_PARAMS.LOGIN_PWD, getPwd());//记住pwd
+            setIsRe(LOGIN_ISRE_TRUE);//保存是否记住密码状态
+        }
     }
 
 
@@ -252,5 +308,10 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+
+    public void setIsRe(String str){
+        ACache.get(this).put(Consta.SP_PARAMS.LOGIN_ISRE, str);
     }
 }
