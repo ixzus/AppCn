@@ -19,12 +19,13 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
-import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
 import com.yltx.appcn.bean.ResultInfo;
@@ -32,9 +33,13 @@ import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 import static com.yltx.appcn.main.orderlist.OrderListAdapter.TYPE_LEVEL_0;
 
@@ -63,6 +68,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
     private String mParam2;
 
     private View viewNoData;
+    private View viewLoading;
     private OrderListAdapter mAdapter;
 
     private boolean isCheck = false;
@@ -102,7 +108,8 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public void fetchData() {
-
+        mAdapter.setEmptyView(viewLoading);
+        refreshLayout.autoRefresh(200);
     }
 
     @Override
@@ -123,13 +130,11 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
     @Override
     public void onResume() {
         super.onResume();
-        load();
-        refreshLayout.autoRefresh();
     }
 
     @Override
     public void initView() {
-
+        load();
     }
 
     public void load() {
@@ -157,14 +162,25 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
         }
 
         viewNoData = getActivity().getLayoutInflater().inflate(R.layout.view_no_data, (ViewGroup) recyclerView.getParent(), false);
+        viewLoading = getActivity().getLayoutInflater().inflate(R.layout.view_loading, (ViewGroup) recyclerView.getParent(), false);
         viewNoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pageNo = 1;
-                listData.clear();
-                presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
             }
         });
+        RxView.clicks(viewNoData)
+                .throttleFirst(3, TimeUnit.SECONDS)
+                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+                        mAdapter.setEmptyView(viewLoading);
+                        pageNo = 1;
+                        listData.clear();
+                        presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
+                    }
+                });
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -301,9 +317,10 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
             refreshLayout.finishRefresh();
             isRefresh = false;
         }
-        if (null == result || null == result.getData() || null == result.getData().getDispatchList()) {
-            Toast.show("空数据");
+        if (null == result || null == result.getData() || null == result.getData().getDispatchList() || 0 == result.getData().getDispatchList().size()) {
+//            Toast.show("空数据");
             if (1 == pageNo) {
+                mAdapter.setEmptyView(viewNoData);
             } else {
                 mAdapter.loadMoreFail();
             }
@@ -313,8 +330,8 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
             pageTotal = Integer.valueOf(result.getData().getTotalCount());
         } catch (NumberFormatException e) {
         }
-        String addr ;
-        String addrstr ;
+        String addr;
+        String addrstr;
         for (int i = 0; i < result.getData().getDispatchList().size(); ++i) {
             CarServiceOrderRsObj.DataBean.DispatchListBean dispatchListBean = result.getData().getDispatchList().get(i);
             List<CarServiceOrderRsObj.DataBean.DispatchListBean.ListBean> list = dispatchListBean.getList();
