@@ -143,6 +143,7 @@ public abstract class NetObserver<T> implements Observer<T> {
 //            }
 //        }
         onFailure(code, errorMessage);
+        onError(mWhichRequest, t);
     }
 
     @Override
@@ -161,7 +162,7 @@ public abstract class NetObserver<T> implements Observer<T> {
         if (!NetworkUtils.isAvailableByPing()) {
             Toast.show("当前网络不可用，请检查网络情况");
 //            Toast.makeText(App.getApplication(), "当前网络不可用，请检查网络情况", Toast.LENGTH_SHORT).show();
-            NetworkUtils.openWirelessSettings();
+//            NetworkUtils.openWirelessSettings();
 //            ActivityManager.getInstance().getCurrentActivity().startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 //            if (isNeedCahe) {
 //                //无网络已经读取缓存

@@ -109,7 +109,14 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
     @Override
     public void fetchData() {
         mAdapter.setEmptyView(viewLoading);
-        refreshLayout.autoRefresh(200);
+        refreshLayout.setEnableRefresh(false);
+        isRefresh = true;
+        pageNo = 1;
+        listData.clear();
+        presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
+//        refreshLayout.autoRefresh(200);
+
+
     }
 
     @Override
@@ -175,6 +182,8 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
+                        isRefresh = true;
+                        refreshLayout.setEnableRefresh(false);
                         mAdapter.setEmptyView(viewLoading);
                         pageNo = 1;
                         listData.clear();
@@ -313,6 +322,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public void onResult(CarServiceOrderRsObj result) {
+        mAdapter.setEmptyView(viewNoData);
         if (isRefresh) {
             refreshLayout.finishRefresh();
             isRefresh = false;
@@ -320,12 +330,13 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
         if (null == result || null == result.getData() || null == result.getData().getDispatchList() || 0 == result.getData().getDispatchList().size()) {
 //            Toast.show("空数据");
             if (1 == pageNo) {
-                mAdapter.setEmptyView(viewNoData);
             } else {
                 mAdapter.loadMoreFail();
+                refreshLayout.setEnableRefresh(true);
             }
             return;
         }
+        refreshLayout.setEnableRefresh(true);
         try {
             pageTotal = Integer.valueOf(result.getData().getTotalCount());
         } catch (NumberFormatException e) {
@@ -384,6 +395,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
     @Override
     public void onResultErr() {
         if (isRefresh) {
+            mAdapter.setEmptyView(viewNoData);
             refreshLayout.finishRefresh();
             isRefresh = false;
         }
