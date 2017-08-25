@@ -10,6 +10,7 @@ import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
+import com.yltx.appcn.bean.ModifyPwdBean;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.SendSmsRsBean;
@@ -92,8 +93,8 @@ public interface ApiService {
     //http://192.168.X.X:XX/api/user/updatePassword  修改密码
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("user/updatePassword")
-//    Observable<String> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
-    Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
+   Observable<ResetPwdRsBean> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
+    //Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
 
     //首页
     @GET("carServiceOrder/getToBeHandleNum")

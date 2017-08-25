@@ -28,29 +28,12 @@ public class ModifyPwdModel extends BaseModel implements ModifyPwdContract.IModi
     public void doModifyPwd(Context context, String tag, ModifyPwdBean mModifyPwdBean, final ModifyPwdContract.IModifyPwdPresenter mPresenter) {
         //@// TODO: 2017/8/22  修改密码
 
-//        RxRetrofit.getInstance().getApiService().updatePassword(mModifyPwdBean)
-//                .compose(((RxAppCompatActivity)context).<String>bindToLifecycle())
-//                .compose(RxSchedulers.<String>io_main())
-//                .subscribe(new NetObserver<String>(context, tag, 0, true) {
-//                    @Override
-//                    public void onSuccess(int whichRequest, String string) {
-//
-//                        mPresenter.ModifyPwdResult(string);
-//                    }
-//
-//                    @Override
-//                    public void onError(int whichRequest, Throwable e) {
-////                        iLoginPresenter.loginResult(e.toString());
-//                    }
-//                });
-
-        RxRetrofit.getInstance().getApiService().updatePassword(mModifyPwdBean.getUserId(),mModifyPwdBean.getOldPassword(),mModifyPwdBean.getNewPassword())
+        RxRetrofit.getInstance().getApiService().updatePassword(mModifyPwdBean)
                 .compose(((RxAppCompatActivity)context).<ResetPwdRsBean>bindToLifecycle())
                 .compose(RxSchedulers.<ResetPwdRsBean>io_main())
                 .subscribe(new NetObserver<ResetPwdRsBean>(context, tag, 0, true) {
                     @Override
                     public void onSuccess(int whichRequest, ResetPwdRsBean mResetPwdRsBean) {
-                        //mPresenter.ModifyPwdResult(mResetPwdRsBean);
                         if(null!=mResetPwdRsBean&&ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
                             mPresenter.ModifyPwdResult(mResetPwdRsBean);
                         }
@@ -62,6 +45,25 @@ public class ModifyPwdModel extends BaseModel implements ModifyPwdContract.IModi
 //                        iLoginPresenter.loginResult(e.toString());
                     }
                 });
+
+//        RxRetrofit.getInstance().getApiService().updatePassword(mModifyPwdBean.getUserId(),mModifyPwdBean.getOldPassword(),mModifyPwdBean.getNewPassword())
+//                .compose(((RxAppCompatActivity)context).<ResetPwdRsBean>bindToLifecycle())
+//                .compose(RxSchedulers.<ResetPwdRsBean>io_main())
+//                .subscribe(new NetObserver<ResetPwdRsBean>(context, tag, 0, true) {
+//                    @Override
+//                    public void onSuccess(int whichRequest, ResetPwdRsBean mResetPwdRsBean) {
+//                        //mPresenter.ModifyPwdResult(mResetPwdRsBean);
+//                        if(null!=mResetPwdRsBean&&ResultInfoUtils.isSuccess(mResetPwdRsBean.getCode())){
+//                            mPresenter.ModifyPwdResult(mResetPwdRsBean);
+//                        }
+//                        Toast.show(mResetPwdRsBean.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onError(int whichRequest, Throwable e) {
+////                        iLoginPresenter.loginResult(e.toString());
+//                    }
+//                });
 
 
     }

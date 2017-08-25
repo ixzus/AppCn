@@ -163,4 +163,6 @@
     <color name="tv_title_content">#606060</color>
 
     <color name="line_grave">#f4f4f4</color>
+
+    <color name="login_tv_grav">#a3a3a3</color>
 </resources>

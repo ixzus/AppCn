@@ -3,9 +3,11 @@ package com.yltx.appcn.login;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +30,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.LoginRsBean;
-import com.yltx.appcn.modifypwd.ModifyPwdActivity;
 import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
@@ -71,6 +72,8 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     CheckBox cbRember;
     @BindView(R.id.tv_repwd)
     TextView tvRepwd;
+    @BindView(R.id.cb_tolook)
+    CheckBox cbTolook;
 
     @Override
     protected int initLayout() {
@@ -159,6 +162,19 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
                         toSetting();
                     }
                 });
+
+        cbTolook.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    cetInputpwde.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    cetInputpwde.setSelection(cetInputpwde.getText().toString().length());
+                } else {
+                    cetInputpwde.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    cetInputpwde.setSelection(cetInputpwde.getText().toString().length());
+                }
+            }
+        });
     }
 
     private void toLogin() {
@@ -230,11 +246,11 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     @Override
     public void onLoginResult(LoginRsBean mLoginRsBean) {
-        Log.d(TAG,"==================onLoginResult::"+new Gson().toJson(mLoginRsBean));
+        Log.d(TAG, "==================onLoginResult::" + new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
-           // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
-            if(null!=mLoginRsBean.getData()){
-                ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getData().getUserId());
+            // ACache.get(this).put(Consta.SP_PARAMS.USERID,mLoginRsBean.getUserId());
+            if (null != mLoginRsBean.getData()) {
+                ACache.get(this).put(Consta.SP_PARAMS.USERID, mLoginRsBean.getData().getUserId());
             }
             toNext();
         }
