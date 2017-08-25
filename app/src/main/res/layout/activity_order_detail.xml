@@ -60,7 +60,7 @@
         android:layout_alignParentBottom="true">
 
         <com.allen.library.SuperButton
-            android:id="@+id/oneBtn"
+            android:id="@+id/btnRefuse"
             style="@style/DialogButtonStyle"
             android:layout_height="48dp"
             android:text="拒单"
@@ -98,6 +98,17 @@
                 app:sUseSelector="true" />
 
         </LinearLayout>
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btnUpload"
+            style="@style/DialogButtonStyle"
+            android:layout_height="48dp"
+            android:text="上传凭证"
+            android:visibility="gone"
+            app:sSelectorDisableColor="@color/button_no"
+            app:sSelectorNormalColor="@color/button_yes"
+            app:sSelectorPressedColor="@color/button_yes_click"
+            app:sUseSelector="true" />
     </FrameLayout>
 
 </RelativeLayout>

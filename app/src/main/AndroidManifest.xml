@@ -33,7 +33,9 @@
 
         =
         <activity android:name=".MainActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".main.orderlist.OrderListActivity"
             android:launchMode="singleTop" />

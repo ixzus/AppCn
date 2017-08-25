@@ -62,6 +62,20 @@ public class ConfirmDialog extends AbsDialog {
 
     @Override
     public void convertView(final ViewHolder viewHolder, final AbsDialog dialog) {
+        viewHolder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmCancelListener.convertView(viewHolder, dialog);
+            }
+        });
+
+        viewHolder.setOnClickListener(R.id.ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmOkListener.convertView(viewHolder, dialog);
+            }
+        });
+
         if ("1".equals(type)) {
             viewHolder.setText(R.id.title, "提示");
             viewHolder.setText(R.id.message, "您已支付成功！");
@@ -79,19 +93,13 @@ public class ConfirmDialog extends AbsDialog {
             viewHolder.setText(R.id.ok, "确认接单");
             viewHolder.setText(R.id.cancel, "取消");
         }
-        viewHolder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmCancelListener.convertView(viewHolder, dialog);
-            }
-        });
+        if ("上传凭证".equals(type)) {
+            viewHolder.setText(R.id.title, "温馨提示");
+            viewHolder.setText(R.id.message, "确认上传吗！");
+            viewHolder.setText(R.id.ok, "确认");
+            viewHolder.setText(R.id.cancel, "取消");
+        }
 
-        viewHolder.setOnClickListener(R.id.ok, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmOkListener.convertView(viewHolder, dialog);
-            }
-        });
     }
 
     private ConfirmOkListener confirmOkListener;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -245,7 +246,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 listInfo.add("" + count);
                 listInfo.add("" + breakCount);
                 listInfo.add("" + total);
-                ConfirmDialog.newInstance("确认订单",listInfo)
+                ConfirmDialog.newInstance("确认订单", listInfo)
                         .setConfirmCancelListener(new ConfirmDialog.ConfirmCancelListener() {
                             @Override
                             public void convertView(ViewHolder holder, AbsDialog dialog) {
@@ -275,6 +276,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public String getUserName() {
+//        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERNAME);
         return "Android";
     }
 
@@ -311,28 +313,38 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
             pageTotal = Integer.valueOf(result.getData().getTotalCount());
         } catch (NumberFormatException e) {
         }
+        String addr ;
+        String addrstr ;
         for (int i = 0; i < result.getData().getDispatchList().size(); ++i) {
             CarServiceOrderRsObj.DataBean.DispatchListBean dispatchListBean = result.getData().getDispatchList().get(i);
             List<CarServiceOrderRsObj.DataBean.DispatchListBean.ListBean> list = dispatchListBean.getList();
             CarServiceOrderRsObj.DataBean.DispatchListBean.ListBean listBean = list.get(0);
+            addr = "";
+            if (!TextUtils.isEmpty(listBean.getLocation())) {
+                addr += ("[" + listBean.getLocation() + "]");
+            }
             Level0Item lv0 = new Level0Item(listBean.getId(), listBean.getStatus(), listBean.getCarNum(),
                     listBean.getDispatchNo(), listBean.getDispatchDate(), listBean.getDegree(),
                     listBean.getCount(), listBean.getLatefine(),
-                    "[" + listBean.getLocation() + "]" + listBean.getLocationName(), listBean.getReason(),
+                    addr + listBean.getLocationName(), listBean.getReason(),
                     dispatchListBean.getOrderCount(), dispatchListBean.getPayCount(), 1 == list.size());
             for (int j = 0; j < list.size(); ++j) {
                 if (0 == j) {
                     continue;
                 }
                 Level1Item lv1;
+                addrstr = "";
+                if (!TextUtils.isEmpty(list.get(j).getLocation())) {
+                    addrstr += ("[" + list.get(j).getLocation() + "]");
+                }
                 if (j == list.size() - 1) {
                     lv1 = new Level1Item(list.get(j).getId(), list.get(j).getStatus(), list.get(j).getDispatchNo(), list.get(j).getDispatchDate(),
                             list.get(j).getDegree(), list.get(j).getCount(), list.get(j).getLatefine(),
-                            "[" + list.get(j).getLocation() + "]" + list.get(j).getLocationName(), list.get(j).getReason(), true);
+                            addrstr + list.get(j).getLocationName(), list.get(j).getReason(), true);
                 } else {
                     lv1 = new Level1Item(list.get(j).getId(), list.get(j).getStatus(), list.get(j).getDispatchNo(), list.get(j).getDispatchDate(),
                             list.get(j).getDegree(), list.get(j).getCount(), list.get(j).getLatefine(),
-                            "[" + list.get(j).getLocation() + "]" + list.get(j).getLocationName(), list.get(j).getReason(), false);
+                            addrstr + list.get(j).getLocationName(), list.get(j).getReason(), false);
                 }
                 lv0.addSubItem(lv1);
             }

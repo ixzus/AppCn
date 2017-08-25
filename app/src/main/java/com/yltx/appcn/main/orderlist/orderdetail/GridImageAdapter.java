@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.yltx.appcn.R;
+import com.yltx.appcn.bean.PicBean;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
-    private List<String> list = new ArrayList<>();
+    private List<PicBean> list = new ArrayList<>();
     private int selectMax = 9;
     private Context context;
     private boolean isUpdate;
@@ -57,11 +58,11 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
         this.selectMax = selectMax;
     }
 
-    public void setList(List<String> list) {
+    public void setList(List<PicBean> list) {
         this.list = list;
     }
 
-    public void updateList(List<String> list) {
+    public void updateList(List<PicBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -134,7 +135,7 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
             } else {
                 viewHolder.mDel.setVisibility(View.GONE);
             }
-            String imgurl = list.get(position);
+            String imgurl = list.get(position).getUrl();
             if (imgurl.contains("http")) {
                 Glide.with(context).load(imgurl).crossFade().into(viewHolder.mImg);
             } else {

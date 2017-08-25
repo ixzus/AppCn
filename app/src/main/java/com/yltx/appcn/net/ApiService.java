@@ -9,6 +9,7 @@ import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
+import com.yltx.appcn.bean.OrderDetail;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.ResultInfo;
@@ -108,6 +109,13 @@ public interface ApiService {
     @POST("carServiceOrder/processOrder")
     Observable<ResultInfo> processOrder(@Body TakeOrder takeOrder);
 
+    //订单详情
+    @GET("carServiceOrder/getCarServiceOrderDetail")
+    Observable<OrderDetail> getOrderDetail(@Query("carServiceOrderId") String orderId);
+
+    //上传凭证
+    @POST("carServiceOrder/uploadDrivLicensePic")
+    Observable<String> uploadPic(@Query("carServiceOrderId") String orderId);
 
     //http://192.168.X.X:XX/api/message/getMessages
 
