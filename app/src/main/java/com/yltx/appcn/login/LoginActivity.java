@@ -23,7 +23,7 @@ import com.ixzus.applibrary.impl.IActivity;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.util.ACache;
-import com.ixzus.applibrary.widget.AbsDialog;
+import android.support.v4.app.AbsDialog;
 import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;

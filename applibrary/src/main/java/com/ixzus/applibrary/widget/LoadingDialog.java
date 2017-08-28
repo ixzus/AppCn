@@ -1,5 +1,6 @@
 package com.ixzus.applibrary.widget;
 
+import android.support.v4.app.AbsDialog;
 import android.support.v4.app.FragmentManager;
 
 import com.ixzus.applibrary.R;

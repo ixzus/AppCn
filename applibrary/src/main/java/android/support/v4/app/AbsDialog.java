@@ -1,11 +1,9 @@
-package com.ixzus.applibrary.widget;
+package android.support.v4.app;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.ixzus.applibrary.R;
+import com.ixzus.applibrary.widget.DialogWHUtil;
+import com.ixzus.applibrary.widget.ViewHolder;
 
 
 /**
@@ -163,7 +163,18 @@ public abstract class AbsDialog extends DialogFragment {
     }
 
     public AbsDialog show(FragmentManager manager) {
-        super.show(manager, String.valueOf(System.currentTimeMillis()));
+//        super.show(manager, String.valueOf(System.currentTimeMillis()));
+        show(manager, String.valueOf(System.currentTimeMillis()));
         return this;
     }
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        mDismissed = false;
+        mShownByMe = true;
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.add(this, tag);
+        ft.commitAllowingStateLoss();
+    }
+
 }

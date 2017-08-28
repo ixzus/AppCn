@@ -1,14 +1,10 @@
 package com.yltx.appcn.other;
 
-import android.app.ActivityManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -21,16 +17,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperTextView;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.util.ACache;
-import com.ixzus.applibrary.widget.AbsDialog;
+import android.support.v4.app.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.R;
-import com.yltx.appcn.base.SplashActivity;
 import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.dmoral.toasty.Toasty;
 
 import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType;
 import static com.yltx.appcn.utils.Consta.sendSmsData.ModifyType_Modify;

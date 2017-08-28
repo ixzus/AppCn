@@ -20,11 +20,9 @@ import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.util.Toast;
-import com.ixzus.applibrary.widget.AbsDialog;
+import android.support.v4.app.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxAdapter;
-import com.jakewharton.rxbinding2.widget.RxAdapterView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -44,7 +42,6 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.rx_cache2.ActionsList;
 
 import static com.yltx.appcn.main.orderlist.OrderListAdapter.TYPE_LEVEL_0;
 

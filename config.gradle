@@ -59,6 +59,8 @@ ext {
 
             banner                       : 'cn.bingoogolapple:bga-banner:2.1.7@aar',
 
+            rxdownload                  : 'zlc.season:rxdownload2:2.0.4',
+
 
     ]
 }

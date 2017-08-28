@@ -110,7 +110,7 @@ public interface ApiService {
     Observable<ResponseBody> downLoadFile(@NonNull @Url String url);
 
     //升级
-    @GET("http://192.168.3.49:11012/mdm-rs/carOrder/findUpgrade")
+    @GET("/carServiceOrder/findUpgrade")
     Observable<UpGrade> findUpgrade(@Query("dqVersioncode") String dqVersioncode, @Query("versionSource") String versionSource, @Query("appname") String appname);
 
     //首页
