@@ -3,18 +3,22 @@ package com.yltx.appcn.base;
 import android.app.ProgressDialog;
 import android.os.Environment;
 import android.support.v4.app.AbsDialog;
+import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.AppUtils;
 import com.google.gson.Gson;
+import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.net.NetObserver;
 import com.ixzus.applibrary.net.RxSchedulers;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.bean.UpGrade;
 import com.yltx.appcn.net.RxRetrofit;
+import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.io.File;
@@ -101,7 +105,7 @@ public class SplashActivity extends RxAppCompatActivity {
     }
 
     private void loadData(String versionCode) {
-        RxRetrofit.getInstance().getApiService().findUpgrade(versionCode, "app", "cheguanjia")
+        RxRetrofit.getInstance().getApiService().findUpgrade(versionCode, "APP", "cheguanjia")
                 .compose(this.<UpGrade>bindToLifecycle())
                 .compose(RxSchedulers.<UpGrade>io_main())
                 .subscribe(new NetObserver<UpGrade>(this, TAG, 0, true) {
@@ -121,6 +125,14 @@ public class SplashActivity extends RxAppCompatActivity {
                                             dialog.dismiss();
                                             if ("Y".equals(result.getBean().getIsforceupgrade())) {
                                                 finish();
+                                            } else {
+                                                if (!TextUtils.isEmpty(ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID))) {
+                                                    ARouter.getInstance().build("/app/MainActivity").navigation(SplashActivity.this);
+                                                    finish();
+                                                } else {
+                                                    ARouter.getInstance().build("/login/loginActivity").navigation(SplashActivity.this);
+                                                    finish();
+                                                }
                                             }
                                         }
                                     })

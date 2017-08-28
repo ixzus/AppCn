@@ -110,7 +110,7 @@ public interface ApiService {
     Observable<ResponseBody> downLoadFile(@NonNull @Url String url);
 
     //升级
-    @GET("/carServiceOrder/findUpgrade")
+    @GET("carServiceOrder/findUpgrade")
     Observable<UpGrade> findUpgrade(@Query("dqVersioncode") String dqVersioncode, @Query("versionSource") String versionSource, @Query("appname") String appname);
 
     //首页

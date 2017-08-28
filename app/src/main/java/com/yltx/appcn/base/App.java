@@ -1,5 +1,7 @@
 package com.yltx.appcn.base;
 
+import android.support.multidex.MultiDex;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ixzus.applibrary.base.BaseApplication;
 
@@ -15,6 +17,7 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+        MultiDex.install(this);
         initRouter();
 //        initLeakCanary();
     }
