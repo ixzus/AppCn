@@ -3,6 +3,7 @@ package com.yltx.appcn;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -126,4 +127,12 @@ public class MainActivity extends RxAppCompatActivity {
         finish();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

@@ -189,6 +189,7 @@ public class SplashActivity extends RxAppCompatActivity {
                         //下载失败
                         Logger.e("下载失败");
                         progressDialog.dismiss();
+                        Toast.show("下载失败!");
                     }
                 }, new Action() {
                     @Override
