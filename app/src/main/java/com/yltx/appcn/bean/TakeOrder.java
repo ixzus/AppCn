@@ -1,23 +1,26 @@
 package com.yltx.appcn.bean;
 
+import java.util.List;
+
 /**
  * 功能描述:
  * Created by ixzus on 2017/8/24.
  */
 
 public class TakeOrder {
-    String id;
+    String ids;
     String status;
     String handlePersonNo;
     String handlePersonName;
     String remark;
+    List<UpLoadPic> fileList;
 
-    public String getId() {
-        return id;
+    public String getIds() {
+        return ids;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIds(String ids) {
+        this.ids = ids;
     }
 
     public String getStatus() {
@@ -50,5 +53,13 @@ public class TakeOrder {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<UpLoadPic> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<UpLoadPic> fileList) {
+        this.fileList = fileList;
     }
 }

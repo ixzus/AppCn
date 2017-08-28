@@ -41,7 +41,7 @@ public class OrderListModel extends BaseModel implements OrderListContract.IMode
     @Override
     public void doTakeOrder(Context context, String TAG, String ids, String status, String personNo, String personName, final OrderListContract.IPresenter iPresenter) {
         TakeOrder takeOrder = new TakeOrder();
-        takeOrder.setId(ids);
+        takeOrder.setIds(ids);
         takeOrder.setStatus("0703");
         takeOrder.setHandlePersonNo(personNo);
         takeOrder.setHandlePersonName(personName);

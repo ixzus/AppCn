@@ -3,18 +3,19 @@ package com.yltx.appcn.base;
 import android.content.Context;
 
 import com.ixzus.applibrary.base.BaseContract;
+import com.yltx.appcn.bean.UpGrade;
 
 /**
  * 功能描述:
  * Created by ixzus on 2017/8/3.
  */
 
-public class Contract {
+public class SplashContract {
     interface IView extends BaseContract.IBaseView {
 
-        String getJson();
+        String getVersionCode();
 
-        void onResult(String code);
+        void onResult(UpGrade result);
     }
 
     interface IPresenter extends BaseContract.IBasePresenter {
@@ -24,6 +25,6 @@ public class Contract {
     }
 
     interface IModel extends BaseContract.IBaseModel {
-        void doLoadData(Context context, String tag, String postJson, IPresenter iLoginPresenter);
+        void doLoadData(Context context, String tag, String versionCode, IPresenter iLoginPresenter);
     }
 }

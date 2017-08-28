@@ -16,9 +16,9 @@ import com.yltx.appcn.net.RxRetrofit;
  * Created by ixzus on 2017/8/3.
  */
 
-public class Model extends BaseModel implements Contract.IModel {
+public class SplashModel extends BaseModel implements SplashContract.IModel {
     @Override
-    public void doLoadData(Context context, final String TAG, final String json, final Contract.IPresenter iLoginPresenter) {
+    public void doLoadData(Context context, final String TAG, final String json, final SplashContract.IPresenter iLoginPresenter) {
         LoginInfo loginInfo = new Gson().fromJson(json, LoginInfo.class);
         RxRetrofit.getInstance().getApiService().login(loginInfo)
                 .compose(((RxAppCompatActivity)context).<Member>bindToLifecycle())

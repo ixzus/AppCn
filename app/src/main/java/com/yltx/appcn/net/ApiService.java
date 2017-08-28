@@ -10,23 +10,28 @@ import com.yltx.appcn.bean.LoginBean;
 import com.yltx.appcn.bean.LoginInfo;
 import com.yltx.appcn.bean.LoginRsBean;
 import com.yltx.appcn.bean.Member;
-import com.yltx.appcn.bean.OrderDetail;
 import com.yltx.appcn.bean.ModifyPwdBean;
+import com.yltx.appcn.bean.OrderDetail;
 import com.yltx.appcn.bean.ResetPwdBean;
 import com.yltx.appcn.bean.ResetPwdRsBean;
 import com.yltx.appcn.bean.ResultInfo;
 import com.yltx.appcn.bean.SendSmsRsBean;
 import com.yltx.appcn.bean.TakeOrder;
+import com.yltx.appcn.bean.UpGrade;
 import com.yltx.appcn.bean.WeatherInfo;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
 import io.rx_cache2.LifeCache;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 
 /**
@@ -96,8 +101,17 @@ public interface ApiService {
     //http://192.168.X.X:XX/api/user/updatePassword  修改密码
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @POST("user/updatePassword")
-   Observable<ResetPwdRsBean> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
+    Observable<ResetPwdRsBean> updatePassword(@Body ModifyPwdBean mModifyPwdBean);
     //Observable<ResetPwdRsBean> updatePassword(@Query("userId") String userId, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);
+
+    //下载
+    @Streaming
+    @GET
+    Observable<ResponseBody> downLoadFile(@NonNull @Url String url);
+
+    //升级
+    @GET("http://192.168.3.49:11012/mdm-rs/carOrder/findUpgrade")
+    Observable<UpGrade> findUpgrade(@Query("dqVersioncode") String dqVersioncode, @Query("versionSource") String versionSource, @Query("appname") String appname);
 
     //首页
     @GET("carServiceOrder/getToBeHandleNum")
@@ -123,9 +137,7 @@ public interface ApiService {
 
     @LifeCache(duration = 5, timeUnit = TimeUnit.MINUTES)
     @GET("message/getMessages")
-
     Observable<GetMessagesRsBean> getMessages(@Query("userId") String userId, @Query("page") String page);
-
 
 
     //http://192.168.X.X:XX/api/message/getMessage

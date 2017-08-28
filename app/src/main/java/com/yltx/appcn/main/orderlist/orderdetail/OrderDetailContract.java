@@ -5,6 +5,7 @@ import android.content.Context;
 import com.ixzus.applibrary.base.BaseContract;
 import com.yltx.appcn.bean.OrderDetail;
 import com.yltx.appcn.bean.ResultInfo;
+import com.yltx.appcn.bean.UpLoadPic;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class OrderDetailContract {
 
         String getRemark();
 
+        List<UpLoadPic> getFileList();
+
         List<String> getImgList();
 
         void onLoadOrderResult(OrderDetail result);
@@ -39,7 +42,7 @@ public class OrderDetailContract {
 
         void loadOrder(Context context, String TAG, String orderId, IPresenter iPresenter);
 
-        void dealOrder(Context context, String TAG, String id, String status, String personNo, String personName, String remark,IPresenter iPresenter);
+        void dealOrder(Context context, String TAG, String id, String status, String personNo, String personName, String remark,List<UpLoadPic> fileList,IPresenter iPresenter);
 
         void uploadPic(Context context, String TAG, IPresenter iPresenter);
     }

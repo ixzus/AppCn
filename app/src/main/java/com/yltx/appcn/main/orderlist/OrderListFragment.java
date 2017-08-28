@@ -1,6 +1,7 @@
 package com.yltx.appcn.main.orderlist;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,16 +13,18 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.SuperButton;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxAdapter;
+import com.jakewharton.rxbinding2.widget.RxAdapterView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -29,6 +32,7 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
 import com.yltx.appcn.bean.ResultInfo;
+import com.yltx.appcn.main.orderlist.orderdetail.OrderDetailActivity;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
 import java.util.ArrayList;
@@ -40,6 +44,7 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.rx_cache2.ActionsList;
 
 import static com.yltx.appcn.main.orderlist.OrderListAdapter.TYPE_LEVEL_0;
 
@@ -108,12 +113,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public void fetchData() {
-        mAdapter.setEmptyView(viewLoading);
-        refreshLayout.setEnableRefresh(false);
-        isRefresh = true;
-        pageNo = 1;
-        listData.clear();
-        presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
+        reLoadData();
 //        refreshLayout.autoRefresh(200);
 
 
@@ -137,6 +137,23 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666 && resultCode == 666) {
+            reLoadData();
+        }
+    }
+
+    private void reLoadData() {
+        mAdapter.setEmptyView(viewLoading);
+        refreshLayout.setEnableRefresh(false);
+        isRefresh = true;
+        pageNo = 1;
+        listData.clear();
+        presenter.loadData(ActivityManager.getInstance().getCurrentActivity(), TAG);
     }
 
     @Override
@@ -218,7 +235,11 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 } else {
                     orderId = ((Level1Item) adapter.getData().get(position)).orderId;
                 }
-                ARouter.getInstance().build("/order/OrderDetailActivity").withString("orderId", orderId).navigation(ActivityManager.getInstance().getCurrentActivity());
+                Toast.show("click");
+//                ARouter.getInstance().build("/order/OrderDetailActivity").withString("orderId", orderId).navigation(ActivityManager.getInstance().getCurrentActivity(), 666);
+                Intent intent = new Intent(ActivityManager.getInstance().getCurrentActivity(), OrderDetailActivity.class);
+                intent.putExtra("orderId", orderId);
+                startActivityForResult(intent, 666);
             }
         });
 
@@ -267,6 +288,10 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 doSelect();
                 break;
             case R.id.btnTakeOrder:
+                if (count < 1) {
+                    Toast.show("请选择车辆");
+                    return;
+                }
                 ArrayList<String> listInfo = new ArrayList<>();
                 listInfo.add("" + count);
                 listInfo.add("" + breakCount);
@@ -330,6 +355,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
         if (null == result || null == result.getData() || null == result.getData().getDispatchList() || 0 == result.getData().getDispatchList().size()) {
 //            Toast.show("空数据");
             if (1 == pageNo) {
+                mAdapter.setNewData(null);
             } else {
                 mAdapter.loadMoreFail();
                 refreshLayout.setEnableRefresh(true);
@@ -434,7 +460,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public void onTakeOrderResult(ResultInfo resultInfo) {
-
+        reLoadData();
     }
 
     private void doSelect() {

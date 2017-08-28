@@ -19,7 +19,7 @@ public class OrderDetailPresenter extends BasePresenter<OrderDetailModel, OrderD
 
     @Override
     public void dealOrder(Context context, String TAG) {
-        model.dealOrder(context, TAG, view.getOrderId(), view.getOrderStatus(), view.getUserId(), view.getUserName(), view.getRemark(), this);
+        model.dealOrder(context, TAG, view.getOrderId(), view.getOrderStatus(), view.getUserId(), view.getUserName(), view.getRemark(),view.getFileList(), this);
     }
 
     @Override

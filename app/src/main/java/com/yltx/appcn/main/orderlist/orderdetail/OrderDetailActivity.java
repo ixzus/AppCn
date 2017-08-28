@@ -40,8 +40,10 @@ import com.yltx.appcn.bean.PicBean;
 import com.yltx.appcn.bean.ResultInfo;
 import com.yltx.appcn.bean.UpLoadPic;
 import com.yltx.appcn.main.orderlist.OrderViewType;
+import com.yltx.appcn.utils.FileUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,6 +152,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
     protected void onCreate(Bundle savedInstanceState) {
         getTakePhoto().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+        orderId = getIntent().getStringExtra("orderId");
 
     }
 
@@ -279,6 +282,11 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
     @Override
     public String getRemark() {
         return remark;
+    }
+
+    @Override
+    public List<UpLoadPic> getFileList() {
+        return listUpLoadPic;
     }
 
     @Override
@@ -436,6 +444,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
                 uploadPic.setEntityType("SUCCESSCERT");
                 uploadPic.setFileName(listData.get(i).getUrl());
                 uploadPic.setUploadType("1");//新增
+                uploadPic.setData(fileToData(listData.get(i).getUrl()));
                 listUpLoadPic.add(uploadPic);
             }
         }
@@ -444,6 +453,16 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
             listUpLoadPic.get(i).setStatus("" + i);
         }
 
+    }
+
+    private String fileToData(String path) {
+        File file = new File(path);
+        String imgBaseString = null;
+        if (file.exists()) {
+            imgBaseString = FileUtils.fileToBase64(file);
+
+        }
+        return imgBaseString;
     }
 
 
@@ -479,7 +498,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     public String getOrderId() {
-        return "";
+        return orderId;
+//        return "10";
     }
 
     @Override
@@ -499,12 +519,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     public void onDealOrderResult(ResultInfo result) {
-
+        setResult(666);
+        finish();
     }
 
     @Override
     public void onUploadPicResult() {
-
     }
 
     @Override
