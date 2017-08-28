@@ -5,6 +5,8 @@ import android.support.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ixzus.applibrary.base.BaseApplication;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * 功能描述:
  * Created by ixzus on 2017/8/4.
@@ -20,6 +22,12 @@ public class App extends BaseApplication {
         MultiDex.install(this);
         initRouter();
 //        initLeakCanary();
+        initJPush();
+    }
+
+    private void initJPush() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     public static App getApplication() {
