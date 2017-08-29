@@ -133,9 +133,9 @@ public class MyInfoFragment extends BaseFragment<MyContract.IMyView, MyPersenter
     }
 
     private void toSetting() {
-//        ARouter.getInstance().build("/other/SettingActivity").navigation(getActivity());
+        ARouter.getInstance().build("/other/SettingActivity").navigation(getActivity());
 
-        ARouter.getInstance().build("/query/QueryActivity").navigation(getActivity());
+//        ARouter.getInstance().build("/query/QueryActivity").navigation(getActivity());
 
     }
 
