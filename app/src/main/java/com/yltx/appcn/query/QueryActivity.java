@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,6 +27,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.CarServiceOrderRsObj;
+
+import org.w3c.dom.Text;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -129,10 +132,8 @@ public class QueryActivity extends BaseActivity<QueryContract.IQueryView, QueryP
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        if(getInput().length()<9&&getInput().length()>=7){
+                        if(isVirual()){
                             toLoadData();
-                        }else{
-                            Toast.show("输入车牌号错误");
                         }
                     }
                 });
@@ -282,7 +283,9 @@ public class QueryActivity extends BaseActivity<QueryContract.IQueryView, QueryP
     }
 
     public void toLoadData() {
-        presenter.loadData(QueryActivity.this, TAG);
+        if(isVirual()){
+            presenter.loadData(QueryActivity.this, TAG);
+        }
     }
 
     @Override
@@ -290,6 +293,18 @@ public class QueryActivity extends BaseActivity<QueryContract.IQueryView, QueryP
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    public boolean isVirual(){
+        if(TextUtils.isEmpty(getInput())){
+            Toast.show("输入车牌号不能为空!");
+            return false;
+        }else if (getInput().length()<7||getInput().length()>9){
+            Toast.show("输入车牌号错误!");
+
+            return false;
+        }
+        return true;
     }
 
 
