@@ -150,6 +150,22 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 
     }
 
+    protected void toolbar(String centerText, boolean isBack, String backText, boolean isSearch) {
+        if (isBack) {
+            findViewById(R.id.toolbar_back).setVisibility(View.VISIBLE);
+        }
+        if (isSearch) {
+            findViewById(R.id.toolbar_search).setVisibility(View.VISIBLE);
+        }
+        if (!TextUtils.isEmpty(backText)) {
+            ((TextView) findViewById(R.id.toolbar_back_text)).setText(backText);
+        }
+        if (!TextUtils.isEmpty(centerText)) {
+            ((TextView) findViewById(R.id.toolbar_title)).setText(centerText);
+        }
+
+    }
+
     protected void toolbar(String centerText, boolean isBack, String backText, @ColorRes int bgColor, @ColorRes int tvColor) {
         if (0 != bgColor) {
             findViewById(R.id.toolbar).setBackgroundColor(ContextCompat.getColor(this, bgColor));

@@ -1,6 +1,7 @@
 package com.yltx.appcn.main.orderlist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.R;
+import com.yltx.appcn.query.QueryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class OrderListActivity extends RxAppCompatActivity {
         setContentView(R.layout.activity_order_list);
         ButterKnife.bind(this);
         initToolbar(this);
-        toolbar("待接单", true, null);
+        toolbar("待接单", true, null, true);
         initFragment();
         try {
             curIndex = getIntent().getIntExtra("orderType", 0);
@@ -107,7 +109,7 @@ public class OrderListActivity extends RxAppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                toolbar(titleList.get(position), true, null);
+                toolbar(titleList.get(position), true, null,true);
             }
 
             @Override
@@ -143,9 +145,18 @@ public class OrderListActivity extends RxAppCompatActivity {
 
     }
 
-    protected void toolbar(String centerText, boolean isBack, String backText) {
+    protected void toolbar(String centerText, boolean isBack, String backText, boolean isSearch) {
         if (isBack) {
             findViewById(com.ixzus.applibrary.R.id.toolbar_back).setVisibility(View.VISIBLE);
+        }
+        if (isSearch) {
+            findViewById(com.ixzus.applibrary.R.id.toolbar_search).setVisibility(View.VISIBLE);
+            findViewById(com.ixzus.applibrary.R.id.toolbar_search).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(OrderListActivity.this, QueryActivity.class));
+                }
+            });
         }
         if (!TextUtils.isEmpty(backText)) {
             ((TextView) findViewById(com.ixzus.applibrary.R.id.toolbar_back_text)).setText(backText);
