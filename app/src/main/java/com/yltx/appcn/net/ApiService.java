@@ -140,4 +140,11 @@ public interface ApiService {
     Observable<GetCarDetailRsBean> getCarInfoById(@Query("carId") String carId);
 
 
+
+    //派单列表
+    @GET("carServiceOrder/dispatchList")
+    Observable<CarServiceOrderRsObj> getDispatchListQuery(@Query("memberId") String memberId, @Query("pageNumber") int pageNumber, @Query("pageSize") int pageSize,@Query("carNum") String carNum);
+
+
+
 }

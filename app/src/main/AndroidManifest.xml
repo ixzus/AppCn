@@ -31,7 +31,7 @@
 
         <activity android:name=".other.SettingActivity"></activity>
 
-        =
+
         <activity android:name=".MainActivity" />
         <activity
             android:name=".login.LoginActivity"
@@ -46,6 +46,8 @@
         <activity android:name=".message.messagedetail.MessageDetailActivity"></activity>
 
         <activity android:name=".other.MyIssueActivity"></activity>
+
+        <activity android:name=".query.QueryActivity"></activity>
 
     </application>
 

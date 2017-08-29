@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_white"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+
+    <include layout="@layout/toolbar"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="搜索"
+            android:background="@mipmap/ic_back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:text="搜索"
+            android:textColor="#508cee"
+            android:textSize="14sp"
+            />
+        <com.ixzus.applibrary.widget.ClearEditTextView
+            style="@style/InputStyle"
+            android:id="@+id/cet_input"
+            android:layout_width="240dp"
+            android:layout_height="30dp"
+            android:drawableLeft="@mipmap/iv_et_search"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/iv_back"
+            android:layout_marginRight="20dp"
+            android:layout_centerInParent="true"
+            android:hint="请输入"
+            android:background="@drawable/shape_input_bg"
+            />
+    </RelativeLayout>
+
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/loding_view" />
+    </FrameLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rlBottom"
+        app:srlDisableContentWhenRefresh="true"
+        app:srlDisableContentWhenLoading="true"
+        app:srlEnablePreviewInEditMode="true"
+        android:layout_marginTop="10dp"
+        >
+
+        <!--<com.scwang.smartrefresh.header.MaterialHeader-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp" />-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_query"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/bg_white"
+            android:dividerHeight="10dp"
+            />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

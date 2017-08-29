@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycleView_item_height">10dip</dimen>
+
+
+
+</resources>
