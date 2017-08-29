@@ -223,8 +223,11 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
     private void toSetting() {
 
-        ARouter.getInstance().build("/cardetail/CarDetailAvtivity").navigation(LoginActivity.this);
-        finish();
+//        ARouter.getInstance().build("/cardetail/CarDetailAvtivity").navigation(LoginActivity.this);
+//        finish();
+
+//        ARouter.getInstance().build("/query/QueryActivity").navigation(LoginActivity.this);
+//        finish();
 
     }
 

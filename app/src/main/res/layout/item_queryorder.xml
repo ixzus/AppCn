@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.yltx.appcn.login.LoginActivity">
+    <!--<View-->
+        <!--style="@style/HlineViewStyle_dc" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_white_round_corner_bg"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+        android:layout_marginLeft="16dp"
+
+        >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+
+                >
+
+                <TextView
+                    android:id="@+id/tv_order_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="派单号 123456789"
+                    android:textSize="16sp"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_order_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/ic_over"
+                    android:layout_gravity="center_vertical"
+                    android:text="已完成"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="派单时间："
+                android:textSize="12sp"
+                android:textColor="#7f7f7f"
+                />
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                >
+                <TextView
+                    android:id="@+id/tv_kf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_query_black"
+                    android:textSize="16sp"
+                    android:text="扣分 "
+                    />
+
+                <TextView
+                    android:id="@+id/tv_kf_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_query_org"
+                    android:text="0分"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="6dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_fk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_query_black"
+                    android:textSize="16sp"
+                    android:text="罚款 "
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_fk_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_query_org"
+                    android:text="0元"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="6dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_znj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_query_black"
+                    android:textSize="16sp"
+                    android:text="滞纳金 "
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_znj_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_query_org"
+                    android:text="0元"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="6dp"
+                    />
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="比赛进行到第四回合，麦格雷戈起初进行猛攻，把梅威瑟逼到护栏，在剩下1分51秒的时候，梅威瑟开始反击了，几记重拳都打击到麦格雷戈面部。也正是这种类似于“绝地反击”的状态，让全场的观众为其鼓掌呐喊"
+                android:textColor="@color/tv_query_gravy"
+                android:layout_marginTop="14dp"
+                android:maxLines="2"
+                android:maxLength="45"
+                android:layout_marginBottom="26dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
