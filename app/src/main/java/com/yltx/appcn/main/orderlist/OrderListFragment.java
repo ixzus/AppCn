@@ -3,10 +3,12 @@ package com.yltx.appcn.main.orderlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.AbsDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -21,7 +23,6 @@ import com.ixzus.applibrary.base.BaseFragment;
 import com.ixzus.applibrary.base.BaseModel;
 import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
-import android.support.v4.app.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -228,13 +229,19 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (position == RecyclerView.NO_POSITION) {
+                    return;
+                }
+                if (adapter.getData().size() == 0) {
+                    mAdapter.setNewData(null);
+                    return;
+                }
                 String orderId;
                 if (TYPE_LEVEL_0 == adapter.getItemViewType(position)) {
                     orderId = ((Level0Item) adapter.getData().get(position)).orderId;
                 } else {
                     orderId = ((Level1Item) adapter.getData().get(position)).orderId;
                 }
-                Toast.show("click");
 //                ARouter.getInstance().build("/order/OrderDetailActivity").withString("orderId", orderId).navigation(ActivityManager.getInstance().getCurrentActivity(), 666);
                 Intent intent = new Intent(ActivityManager.getInstance().getCurrentActivity(), OrderDetailActivity.class);
                 intent.putExtra("orderId", orderId);
@@ -258,15 +265,21 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view.getId() == R.id.radio) {
-                    if (((Level0Item) adapter.getItem(position)).isCheck) {
-                        ((Level0Item) adapter.getItem(position)).isCheck = false;
-                        isCheck = false;
-                        radioAll.setChecked(isCheck);
-                    } else {
-                        ((Level0Item) adapter.getItem(position)).isCheck = true;
-                    }
+//                    if (((Level0Item) adapter.getItem(position)).isCheck) {
+//                        ((Level0Item) adapter.getItem(position)).isCheck = false;
+//                        isCheck = false;
+//                        radioAll.setChecked(isCheck);
+//                    } else {
+//                        ((Level0Item) adapter.getItem(position)).isCheck = true;
+//                    }
+//                    adapter.notifyDataSetChanged();
+//                    itemSelect();
+                    ((Level0Item) adapter.getItem(position)).isCheck = !((Level0Item) adapter.getItem(position)).isCheck;
                     adapter.notifyDataSetChanged();
                     itemSelect();
+                }
+                for (MultiItemEntity multiItemEntity : mAdapter.getData()) {
+                    Log.e("TAG:", position + ">>:" + (((Level0Item) multiItemEntity).isCheck));
                 }
             }
         });
@@ -368,6 +381,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
         }
         String addr;
         String addrstr;
+//        listData.clear();
         for (int i = 0; i < result.getData().getDispatchList().size(); ++i) {
             CarServiceOrderRsObj.DataBean.DispatchListBean dispatchListBean = result.getData().getDispatchList().get(i);
             List<CarServiceOrderRsObj.DataBean.DispatchListBean.ListBean> list = dispatchListBean.getList();
@@ -403,17 +417,21 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
             }
             listData.add(lv0);
         }
-        if (1 == pageNo) {
-            mAdapter.setNewData(listData);
-        } else {
-            mAdapter.addData(listData);
-        }
+        mAdapter.setNewData(listData);
+//        if (1 == pageNo) {
+//            mAdapter.setNewData(listData);
+//        } else {
+//            mAdapter.addData(listData);
+//        }
         if (pageNo * pageSize < pageTotal) {
             mAdapter.loadMoreComplete();
         } else {
             mAdapter.loadMoreEnd();
         }
-        itemSelect();
+        if (isCheck) {
+            doSelect();
+        }
+//        itemSelect();
 
     }
 
@@ -459,6 +477,14 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
 
     @Override
     public void onTakeOrderResult(ResultInfo resultInfo) {
+        count = 0;
+        breakCount = 0;
+        total = 0.0;
+        carCount.setText("0");
+        carBreakCount.setText("0");
+        moneyTotal.setText("0");
+        isCheck = false;
+        radioAll.setChecked(isCheck);
         reLoadData();
     }
 
@@ -488,9 +514,6 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 if (TYPE_LEVEL_0 == multiItemEntity.getItemType()) {
                     Level0Item lv0 = (Level0Item) multiItemEntity;
                     lv0.isCheck = false;
-                    count = 0;
-                    breakCount = 0;
-                    total = 0.0;
                 }
             }
         }
@@ -520,7 +543,7 @@ public class OrderListFragment extends BaseFragment<OrderListContract.IView, Ord
                 }
             }
         }
-        if (listData.size() == count) {
+        if (mAdapter.getData().size() == count) {
             isCheck = true;
             radioAll.setChecked(isCheck);
         }

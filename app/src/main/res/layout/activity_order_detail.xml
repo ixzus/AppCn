@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.yltx.appcn.main.orderlist.orderdetail.OrderDetailActivity">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar_base" />
 
     <View
         android:id="@+id/line"

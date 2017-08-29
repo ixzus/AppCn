@@ -21,6 +21,7 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
 import com.ixzus.applibrary.widget.BaseDialog;
@@ -56,7 +57,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = "/order/OrderDetailActivity")
-public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView, OrderDetailPresenter> implements OrderDetailContract.IView, TakePhoto.TakeResultListener, InvokeListener {
+public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView, OrderDetailPresenter>
+        implements IToolbar, OrderDetailContract.IView, TakePhoto.TakeResultListener, InvokeListener {
 
     @BindView(R.id.btnRefuse)
     SuperButton btnRefuse;
@@ -178,7 +180,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     protected void initView() {
-
+        toolbar("订单详情", true, null);
     }
 
     @Override
@@ -431,6 +433,23 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
     }
 
     private void fitPic() {
+        for (int i = 0, l = listData.size(); i < l; ++i) {
+            UpLoadPic uploadPic = new UpLoadPic();
+            uploadPic.setEntityId(orderId);
+            uploadPic.setEntityType("SUCCESSCERT");
+            uploadPic.setFileName(listData.get(i).getUrl());
+            if (listData.get(i).getUrl().contains("http")) {
+                uploadPic.setUploadType("2");
+            } else {
+                uploadPic.setUploadType("1");
+                uploadPic.setData(fileToData(listData.get(i).getUrl()));
+            }
+            listUpLoadPic.add(uploadPic);
+        }
+
+    }
+
+    private void fitPic1() {
         //原有凭证
         for (int i = 0, l = listFile.size(); i < l; ++i) {
             UpLoadPic uploadPic = new UpLoadPic();

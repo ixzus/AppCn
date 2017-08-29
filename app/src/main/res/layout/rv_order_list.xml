@@ -15,15 +15,16 @@
             android:id="@+id/radio"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_marginLeft="10dp"
-            android:button="@drawable/selector_item"
-            android:paddingRight="10dp" />
+            android:button="@drawable/selector_item" />
 
         <TextView
             android:id="@+id/carNo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/radio"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:textColor="@color/text_black"
             android:textSize="16sp"

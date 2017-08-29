@@ -1,7 +1,8 @@
 package com.yltx.appcn.main.orderlist;
 
-import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.RadioButton;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,28 +21,8 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
     public static final int TYPE_LEVEL_0 = 0;
     public static final int TYPE_LEVEL_1 = 1;
     private int pos;
-    private ArrayMap array = new ArrayMap();
-
     private String orderViewType;
 
-    public void setItemCheck(String key, boolean isCheck) {
-        array.put(key, isCheck);
-        notifyDataSetChanged();
-    }
-
-    public boolean isItemCheck(String key) {
-        if (array.get(key) == null) {
-            return false;
-        }
-        return Boolean.valueOf(array.get(key).toString());
-    }
-
-    public void allCheck(boolean isCheck) {
-        for (int i = 0, l = mData.size(); i < l; ++i) {
-            array.put(((Level0Item) mData.get(i)).carNo, isCheck);
-        }
-        notifyDataSetChanged();
-    }
 
     public OrderListAdapter(List<MultiItemEntity> data) {
         super(data);
@@ -59,9 +40,9 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 holder.setText(R.id.carNo, lv0.carNo);
                 holder.setText(R.id.orderNum, lv0.orderNo);
                 holder.setText(R.id.orderTime, lv0.orderTime);
-                holder.setText(R.id.orderPoint, lv0.point + "分");
-                holder.setText(R.id.orderFine, lv0.fine + "元");
-                holder.setText(R.id.orderOverdueFine, lv0.overduefine + "元");
+                holder.setText(R.id.orderPoint, (TextUtils.isEmpty(lv0.point) ? 0 : lv0.point) + "分");
+                holder.setText(R.id.orderFine, (TextUtils.isEmpty(lv0.fine) ? 0 : lv0.fine) + "元");
+                holder.setText(R.id.orderOverdueFine, (TextUtils.isEmpty(lv0.overduefine) ? 0 : lv0.overduefine) + "元");
                 holder.setText(R.id.orderAddr, lv0.addr);
                 holder.setText(R.id.orderReson, lv0.reson);
 
@@ -69,6 +50,7 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 switch (lv0.status) {
                     case "0702":
                         orderViewType = OrderViewType.WAIT;
+                        holder.setVisible(R.id.radio, true);
                         break;
                     case "0703":
                         orderViewType = OrderViewType.DEAL;
@@ -155,9 +137,9 @@ public class OrderListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,
                 final Level1Item lv1 = (Level1Item) item;
                 holder.setText(R.id.orderNum, lv1.orderNo);
                 holder.setText(R.id.orderTime, lv1.orderTime);
-                holder.setText(R.id.orderPoint, lv1.point + "分");
-                holder.setText(R.id.orderFine, lv1.fine + "元");
-                holder.setText(R.id.orderOverdueFine, lv1.overduefine + "元");
+                holder.setText(R.id.orderPoint, (TextUtils.isEmpty(lv1.point) ? 0 : lv1.point) + "分");
+                holder.setText(R.id.orderFine, (TextUtils.isEmpty(lv1.fine) ? 0 : lv1.fine) + "元");
+                holder.setText(R.id.orderOverdueFine, (TextUtils.isEmpty(lv1.overduefine) ? 0 : lv1.overduefine) + "元");
                 holder.setText(R.id.orderAddr, lv1.addr);
                 holder.setText(R.id.orderReson, lv1.reson);
                 /*****************/

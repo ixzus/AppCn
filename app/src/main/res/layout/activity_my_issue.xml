@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.yltx.appcn.login.LoginActivity">
 
-    <include layout="@layout/toolbar"
+    <include layout="@layout/toolbar_base"
         />
 
 
