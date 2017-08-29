@@ -2,6 +2,7 @@ package com.yltx.appcn.main.orderlist.orderdetail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.AbsDialog;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +18,11 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.SuperButton;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.ixzus.applibrary.base.ActivityManager;
 import com.ixzus.applibrary.base.BaseActivity;
 import com.ixzus.applibrary.base.BaseModel;
+import com.ixzus.applibrary.util.ACache;
 import com.ixzus.applibrary.util.Toast;
-import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.BaseDialog;
 import com.ixzus.applibrary.widget.ViewConvertListener;
 import com.ixzus.applibrary.widget.ViewHolder;
@@ -40,10 +42,15 @@ import com.yltx.appcn.bean.PicBean;
 import com.yltx.appcn.bean.ResultInfo;
 import com.yltx.appcn.bean.UpLoadPic;
 import com.yltx.appcn.main.orderlist.OrderViewType;
+import com.yltx.appcn.utils.Consta;
+import com.yltx.appcn.utils.FileUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -150,6 +157,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
     protected void onCreate(Bundle savedInstanceState) {
         getTakePhoto().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+        orderId = getIntent().getStringExtra("orderId");
 
     }
 
@@ -175,7 +183,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     protected void initData() {
-
+//        presenter.loadOrder(this, TAG);
     }
 
     @Override
@@ -273,7 +281,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     public String getUserId() {
-        return "15900";
+        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERID);
+//        return "15900";
     }
 
     @Override
@@ -282,8 +291,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
     }
 
     @Override
+    public List<UpLoadPic> getFileList() {
+        return listUpLoadPic;
+    }
+
+    @Override
     public String getUserName() {
-        return "Android";
+        return ACache.get(ActivityManager.getInstance().getCurrentActivity()).getAsString(Consta.SP_PARAMS.USERNAME);
+//        return "Android";
     }
 
     @OnClick({R.id.update, R.id.btnRefuse, R.id.ok, R.id.cancel, R.id.btnUpload})
@@ -296,7 +311,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
                 }
                 break;
             case R.id.btnRefuse:
-                KeyboardUtils.showSoftInput(OrderDetailActivity.this);
                 BaseDialog.init()
                         .setLayoutId(R.layout.orderdetail_input)
                         .setConvertListener(new ViewConvertListener() {
@@ -331,6 +345,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
                         .setOutCancel(false)
                         .setAnimStyle(R.style.DialogBottomAnimation)
                         .show(getSupportFragmentManager());
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                                   public void run() {
+                                       KeyboardUtils.showSoftInput(OrderDetailActivity.this);
+                                   }
+
+                               },
+                        998);
                 break;
             case R.id.cancel:
                 KeyboardUtils.showSoftInput(OrderDetailActivity.this);
@@ -416,7 +438,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
             uploadPic.setEntityType(listFile.get(i).getEntityType());
             uploadPic.setFileName(listFile.get(i).getFilename());
             uploadPic.setId(listFile.get(i).getId());
-            uploadPic.setUploadType("" + 2);//删除
+            uploadPic.setUploadType("0");//删除
             listUpLoadPic.add(uploadPic);
 
         }
@@ -436,6 +458,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
                 uploadPic.setEntityType("SUCCESSCERT");
                 uploadPic.setFileName(listData.get(i).getUrl());
                 uploadPic.setUploadType("1");//新增
+                uploadPic.setData(fileToData(listData.get(i).getUrl()));
                 listUpLoadPic.add(uploadPic);
             }
         }
@@ -444,6 +467,16 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
             listUpLoadPic.get(i).setStatus("" + i);
         }
 
+    }
+
+    private String fileToData(String path) {
+        File file = new File(path);
+        String imgBaseString = null;
+        if (file.exists()) {
+            imgBaseString = FileUtils.fileToBase64(file);
+
+        }
+        return imgBaseString;
     }
 
 
@@ -479,7 +512,8 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     public String getOrderId() {
-        return "";
+        return orderId;
+//        return "10";
     }
 
     @Override
@@ -494,17 +528,20 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
 
     @Override
     public void onLoadOrderResult(OrderDetail result) {
+        if (null == result) {
+            return;
+        }
         refreshUI(result.getData());
     }
 
     @Override
     public void onDealOrderResult(ResultInfo result) {
-
+        setResult(666);
+        finish();
     }
 
     @Override
     public void onUploadPicResult() {
-
     }
 
     @Override
@@ -513,7 +550,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailContract.IView,
     }
 
     private void refreshUI(OrderDetail.DataBean dataBean) {
-        orderId = dataBean.getId();
+        if (null == dataBean) {
+            return;
+        }
+//        orderId = dataBean.getId();
         money.setText((TextUtils.isEmpty(dataBean.getTotalPayAmount()) ? 0 : dataBean.getTotalPayAmount()) + "元");
         point.setText((TextUtils.isEmpty(dataBean.getDegree()) ? 0 : dataBean.getDegree()) + "分");
         lateFees.setText((TextUtils.isEmpty(dataBean.getLatefine()) ? 0 : dataBean.getLatefine()) + "元");

@@ -10,7 +10,10 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yltx.appcn.bean.OrderDetail;
 import com.yltx.appcn.bean.ResultInfo;
 import com.yltx.appcn.bean.TakeOrder;
+import com.yltx.appcn.bean.UpLoadPic;
 import com.yltx.appcn.net.RxRetrofit;
+
+import java.util.List;
 
 /**
  * 功能描述:
@@ -39,13 +42,14 @@ public class OrderDetailModel extends BaseModel implements OrderDetailContract.I
     }
 
     @Override
-    public void dealOrder(Context context, String TAG, String id, String status, String personNo, String personName,String remark, final OrderDetailContract.IPresenter iPresenter) {
+    public void dealOrder(Context context, String TAG, String id, String status, String personNo, String personName, String remark, List<UpLoadPic> fileList,final OrderDetailContract.IPresenter iPresenter) {
         TakeOrder takeOrder = new TakeOrder();
-        takeOrder.setId(id);
+        takeOrder.setIds(id);
         takeOrder.setStatus(status);
         takeOrder.setHandlePersonNo(personNo);
         takeOrder.setHandlePersonName(personName);
         takeOrder.setRemark(remark);
+        takeOrder.setFileList(fileList);
         RxRetrofit.getInstance().getApiService().processOrder(takeOrder)
                 .compose(((RxAppCompatActivity) context).<ResultInfo>bindToLifecycle())
                 .compose(RxSchedulers.<ResultInfo>io_main())

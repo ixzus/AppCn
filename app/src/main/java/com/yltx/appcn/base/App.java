@@ -1,7 +1,11 @@
 package com.yltx.appcn.base;
 
+import android.support.multidex.MultiDex;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ixzus.applibrary.base.BaseApplication;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 功能描述:
@@ -15,8 +19,15 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+        MultiDex.install(this);
         initRouter();
 //        initLeakCanary();
+        initJPush();
+    }
+
+    private void initJPush() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     public static App getApplication() {

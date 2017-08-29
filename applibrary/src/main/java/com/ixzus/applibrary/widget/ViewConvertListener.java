@@ -1,5 +1,7 @@
 package com.ixzus.applibrary.widget;
 
+import android.support.v4.app.AbsDialog;
+
 import java.io.Serializable;
 
 public interface ViewConvertListener extends Serializable {

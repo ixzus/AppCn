@@ -7,7 +7,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ixzus.applibrary.R;
 import com.ixzus.applibrary.util.Toast;
-import com.ixzus.applibrary.widget.AbsDialog;
+import android.support.v4.app.AbsDialog;
 import com.ixzus.applibrary.widget.LoadingDialog;
 
 import java.io.IOException;

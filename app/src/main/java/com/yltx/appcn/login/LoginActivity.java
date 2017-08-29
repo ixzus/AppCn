@@ -1,6 +1,7 @@
 package com.yltx.appcn.login;
 
 import android.os.Bundle;
+import android.support.v4.app.AbsDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -23,10 +24,10 @@ import com.ixzus.applibrary.impl.IActivity;
 import com.ixzus.applibrary.impl.ISwipeBack;
 import com.ixzus.applibrary.impl.IToolbar;
 import com.ixzus.applibrary.util.ACache;
-import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ClearEditTextView;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.yltx.appcn.R;
 import com.yltx.appcn.bean.LoginRsBean;
@@ -34,10 +35,14 @@ import com.yltx.appcn.utils.Consta;
 import com.yltx.appcn.utils.ResultInfoUtils;
 import com.yltx.appcn.widget.dialog.ConfirmDialog;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -91,7 +96,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
 
 
         cetInputphone.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_NAME));
-        if(LOGIN_ISRE_TRUE.equals(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_ISRE))){
+        if (LOGIN_ISRE_TRUE.equals(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_ISRE))) {
             cbRember.setChecked(true);
             cetInputpwde.setText(ACache.get(this).getAsString(Consta.SP_PARAMS.LOGIN_PWD));
         }
@@ -192,9 +197,9 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
         cbRember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+                if (b) {
                     setIsRe(LOGIN_ISRE_TRUE);
-                }else{
+                } else {
                     setIsRe(LOGIN_ISRE_FALSE);
                 }
             }
@@ -266,7 +271,18 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     }
 
 
-    private void toNext() {
+    private void toNext(String userId) {
+        String alias = userId;
+        Set<String> tags = new HashSet<>();
+        tags.add("Android");
+        tags.add("Android" + alias);
+        tags.add(alias);
+        JPushInterface.setAliasAndTags(this, alias, tags, new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                Logger.e("推送设置" + i + s);
+            }
+        });
         ARouter.getInstance().build("/app/MainActivity").navigation(LoginActivity.this);
         finish();
     }
@@ -276,7 +292,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
         Log.d(TAG, "==================onLoginResult::" + new Gson().toJson(mLoginRsBean));
         if (ResultInfoUtils.isSuccess(mLoginRsBean.getCode())) {
             setCacheData(mLoginRsBean);
-            toNext();
+            toNext(mLoginRsBean.getData().getUserId());
         }
         Toast.makeText(LoginActivity.this, mLoginRsBean.getMessage(), Toast.LENGTH_SHORT).show();
     }
@@ -286,7 +302,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
             ACache.get(this).put(Consta.SP_PARAMS.USERID, mLoginRsBean.getData().getUserId());
         }
         ACache.get(this).put(Consta.SP_PARAMS.LOGIN_NAME, getName());//登录成功之后记住手机号码
-        if(cbRember.isChecked()){
+        if (cbRember.isChecked()) {
             ACache.get(this).put(Consta.SP_PARAMS.LOGIN_PWD, getPwd());//记住pwd
             setIsRe(LOGIN_ISRE_TRUE);//保存是否记住密码状态
         }
@@ -305,7 +321,7 @@ public class LoginActivity extends BaseActivity<LoginContract.ILoginView, LoginP
     }
 
 
-    public void setIsRe(String str){
+    public void setIsRe(String str) {
         ACache.get(this).put(Consta.SP_PARAMS.LOGIN_ISRE, str);
     }
 }

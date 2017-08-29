@@ -2,9 +2,9 @@ package com.yltx.appcn.widget.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.AbsDialog;
 import android.view.View;
 
-import com.ixzus.applibrary.widget.AbsDialog;
 import com.ixzus.applibrary.widget.ViewHolder;
 import com.yltx.appcn.R;
 
@@ -84,8 +84,7 @@ public class ConfirmDialog extends AbsDialog {
             viewHolder.setText(R.id.message, "您的账号已被冻结！");
             viewHolder.setText(R.id.ok, "立即修改");
             viewHolder.setText(R.id.cancel, "取消");
-        }
-        else if ("3".equals(type)) {
+        } else if ("3".equals(type)) {
             //退出登录
             viewHolder.setText(R.id.title, "提示");
             viewHolder.setText(R.id.message, "您确定要退出登录吗？");
@@ -106,6 +105,13 @@ public class ConfirmDialog extends AbsDialog {
             viewHolder.setText(R.id.message, "确认上传吗！");
             viewHolder.setText(R.id.ok, "确认");
             viewHolder.setText(R.id.cancel, "取消");
+        }
+
+        if ("版本更新".equals(type)) {
+            viewHolder.setText(R.id.title, "温馨提示");
+            viewHolder.setText(R.id.message, listInfo.get(1));
+            viewHolder.setText(R.id.ok, "升级");
+            viewHolder.setText(R.id.cancel, listInfo.get(0));
         }
 
     }

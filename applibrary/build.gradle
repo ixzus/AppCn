@@ -73,6 +73,7 @@ dependencies {
     compile librarys.androidanimationslibrary
     compile librarys.androidanimations
     compile librarys.banner
+    compile librarys.rxdownload
 
 //    compile librarys.okgo
 //    compile librarys.okrx2
