@@ -9,7 +9,7 @@
     android:background="@color/bg_white"
     tools:context="com.yltx.appcn.login.LoginActivity">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar_base" />
 
 
     <com.ixzus.applibrary.widget.ClearEditTextView

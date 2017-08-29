@@ -65,8 +65,8 @@ public abstract class BaseActivity<V extends BaseContract.IBaseView, P extends B
 
 //        mImmersionBar = ImmersionBar.with(this);
 //        if (null != mImmersionBar) {
-////            if (null != findViewById(R.id.toolbar)) {
-////                mImmersionBar.titleBar(findViewById(R.id.toolbar));
+////            if (null != findViewById(R.id.toolbar_base)) {
+////                mImmersionBar.titleBar(findViewById(R.id.toolbar_base));
 ////            }
 //            mImmersionBar.fitsSystemWindows(true);  //使用该属性,必须指定状态栏颜色
 //            mImmersionBar.statusBarColor(R.color.white);
